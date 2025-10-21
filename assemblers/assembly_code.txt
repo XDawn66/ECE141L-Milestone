@@ -1,0 +1,37 @@
+//17:
+//A : [$r1, $r0]
+//B : $r_branch
+//Product : [$r3, $r2]
+//
+set 2            // select B from mem
+ld0 $rb          // loads B to $r_branch
+set 1            // select A mem B
+ld0 $r0          // loads A to $r0
+//sub $ra        // zeroes out $r_acc
+//st1 $r3        // zeroes out $r3
+//st1 $r2        // zeroes out $r2
+// MULT:
+bev p07          // if B is even ($r_branch % 2 == 0) then jmp forward 7 else continue
+// begin adding A to Product
+ld1 $r2          // grabs lower bits of product
+add $r0          // +$overflow but $overflow = 0 initially or is zero because of shiftLb from prev iteration
+st1 $r2          // stores lower bits of product back
+ld1 $r3          // loads higher bits of product
+add $r1          // +$overflow
+st1 $r3          // stores higher bits of product back
+// DO_SHIFT:     // shift A by 1 to the left
+ld1 $r0          // loads lower bits of A
+shL $ra          // shift A left by 1
+st1 $r0          // store back lower bits of A
+ld1 $r1          // load high bits of A
+sL0 $ra          // shift A left by 1, shifting in $overflow
+st1 $r1          // store high bits of A
+shR $rb          // shifts B ($r_branch) right by 1
+bnz n14          // if B is not 0 ($r_branch != 0) then jmp backwards 14 instructions else continue
+//
+// repeat for *C
+//
+set 4
+stm $r2          // stores low bits to position 4
+set 5
+stm $r3          // stores high bits to position 5
