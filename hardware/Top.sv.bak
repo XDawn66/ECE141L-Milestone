@@ -99,7 +99,7 @@ DMem data_mem(
 
 //register flags from alu
 always_ff @(posedge clk) begin
-	//pair flag and zero flags for later
+	//pair flag and zero flags
 	pairQ <= pair;
 	zeroQ <= zero;
 	if(carry_clr)

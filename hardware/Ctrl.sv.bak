@@ -69,10 +69,7 @@ module Ctrl(
         4'b0010: begin
             Aluop = SUB_OP;
         end
-        4'b0110: begin //load
-            Aluop = XOR_OP;
-        end
-        4'b0110: begin //store
+        4'b0011: begin
             Aluop = XOR_OP;
         end
        	4'b0100: begin
@@ -105,30 +102,30 @@ module Ctrl(
 	ALU_IMM = 0'b1;
 	ALU_IMM_VAL = mach_code[4:0];
 	case (mach_code[7:5])
-        4'b000: begin
+        4'b0000: begin
             Aluop = AND_OP;
         end
-        4'b001: begin
+        4'b0001: begin
             Aluop = ADD_OP;
         end
-        4'b010: begin
+        4'b0010: begin
             Aluop = SUB_OP;
         end
-        4'b011: begin
+        4'b0011: begin
             Aluop = XOR_OP;
         end
-       	4'b100: begin
+       	4'b0100: begin
             Aluop = OR_OP;
         end
-        4'b101: begin
+        4'b0101: begin
             Aluop = NOT_OP;
         end
         4'b1100: begin
             Aluop = SHL_OP;
         end
-        4'b110: begin
+        4'b1101: begin
             Aluop = SHR_OP;
-        end
+        endv
 	end
   end
 
