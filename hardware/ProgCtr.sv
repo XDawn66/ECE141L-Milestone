@@ -3,7 +3,7 @@ module ProgCtr(
   input  logic      Reset,
   input	 logic      Jen,
   input  logic[1:0] cond,
-  input  logic[7:0] acc
+	input  logic[7:0] acc,
   input  logic[5:0] Jump,
   output logic[5:0] PC);
 );
