@@ -1,8 +1,8 @@
 module DMem(
-  input Clk,
-        Wen,
+  input      Clk,
+  input      Wen,
   input[7:0] WDat,
-             Addr,
+  input[3:0] Addr,
   output logic[7:0] Rdat);
 
   logic[7:0] Core[256];
@@ -13,8 +13,4 @@ module DMem(
   assign Rdat = Core[Addr];
 
 endmodule
-
-
-
-
 
