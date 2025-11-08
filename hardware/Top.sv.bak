@@ -1,15 +1,15 @@
 module Top(
-  input        Clk,
+  input   		Clk,
 		       Reset,
-  output logic Done);
+output logic [8:0] Done);
 
   wire[5:0] Jump,
 	        PC;
-  wire[1:0] Aluop,
-            Ra,
+  wire[3:0]		Aluop,
+            		Ra,
 			Rb,
-			Wd,
-			Jptr;
+			Wd;
+  wire[7:0]		Jptr;
   wire[8:0] mach_code;
   wire[7:0] DatA,	     // ALU data in
             DatB,
@@ -27,7 +27,14 @@ module Top(
 			WenR,		 // RF write enable
 			WenD,		 // DM write enable
 			Ldr,		 // LOAD
-			Str;		 // STORE
+			Str, //store
+			Zero2,
+			Greater2,
+			Less2;		
+
+logic pairQ, zeroQ, carry_in;
+logic pair, zero, sc_0;
+logic carry_clr, carry_en;
 
 assign  DatA = RdatA;
 assign  DatB = RdatB; 
@@ -49,17 +56,23 @@ InstROM Instr_mem(
   .PC,
   .mach_code);
 
-Ctrl control_unit(
-  .mach_code,
-  .Aluop,
-  .Jptr,
-  .Ra,
-  .Rb,
-  .Wd,
-  .WenR,
-  .WenD,
-  .Ldr,
-  .Str);
+Ctrl control_unit (
+    .mach_code    (mach_code),
+    .Aluop        (Aluop),
+    .Jptr         (Jptr),
+    .Cond         (Cond),
+    .Ra           (Ra),
+    .Rb           (Rb),
+    .Wd           (Wd),
+    .WenR         (WenR),
+    .WenImm       (WenImm),
+    .WenD         (WenD),
+    .Ldr          (Ldr),
+    .Str          (Str),
+    .ALU_IMM      (ALU_IMM),
+    .EnAlu2       (EnAlu2),
+    .ALU_IMM_VAL  (ALU_IMM_VAL)
+);
 
 RegFile register_file(
   .Clk,
@@ -72,23 +85,23 @@ RegFile register_file(
   .RdatB
 );
 
-ALU alu_one(
-  .Aluop,
-  .DatA,
-  .DatB,
-  .Rslt,
-  .Zero,
-  .Par,
-  .SCo);
+ALU alu_one (
+    .Aluop   (Aluop),
+    .acc     (DatA),   // ACC value
+    .inputReg(DatB),
+    .Rslt    (Rslt),
+    .Zero    (Zero),
+    .Par     (Par),
+    .SCo     (SCo)
+);
 
-ALU alue_two(  
-  .Aluop,
-  .DatA,
-  .DatB,
-  .Rslt,
-  .Zero,
-  .Par,
-  .SCo);
+ALU2 alu_two (
+    .acc     (DatA),       // ACC value
+    .inputReg(DatB),       // input register
+    .Zero    (Zero2),      // Zero flag output
+    .Greater (Greater2),   // Greater flag output
+    .Less    (Less2)       // Less flag output
+);
 
 DMem data_mem(
   .Clk,
@@ -98,8 +111,8 @@ DMem data_mem(
   .Rdat);
 
 //register flags from alu
-always_ff @(posedge clk) begin
-	//pair flag and zero flags
+always_ff @(posedge Clk) begin
+	//pair flag and zero flags for later
 	pairQ <= pair;
 	zeroQ <= zero;
 	if(carry_clr)

@@ -1,21 +1,26 @@
 module Ctrl(
   input        [8:0] mach_code,
   output logic [3:0] Aluop,
-  output logic [7:0] Jptr //jump pointer to JLUT,
-   output logic [1:0]	     Cond //branch condition
-  output logic [3:0] 	Ra  //acc address,
-			Rb //input reg address,
-			Wd //writing address,
-  
+  output logic [3:0] Alu2op,
+  output logic [7:0] Jptr,           // jump pointer to JLUT
+  output logic [1:0] Cond,           // branch condition
+  output logic [3:0] Ra,             // acc address
+                Rb,                  // input reg address
+                Wd,                  // writing address
+					 Ra2,
+					 Rb2,
 
-  output logic       	WenR //data mem write enable,
-			WenImm //data mem write imm enable
-			WenD //data mem load enable,
-			Ldr //load dir,
-			Str //string output
-			ALU_IMM //ALU imm enabel
-  output logic [4:0]    ALU_IMM_VAL //ALU imm value
+  output logic       WenR,           // data mem write enable
+                     WenImm,         // data mem write imm enable
+                     WenD,           // data mem load enable
+                     Ldr,            // load dir
+                     Str,            // string output
+                     ALU_IMM,        // ALU imm enable
+                     EnAlu2,         // enable secondary ALU
+
+  output logic [4:0] ALU_IMM_VAL     // ALU imm value
 );
+
 
   //acc address
   localparam acc_add = 4'b0000;
@@ -44,7 +49,11 @@ module Ctrl(
     	Str	  = acc_add;		// store placeholder
 	ALU_IMM = 1'b0;
 	ALU_IMM_VAL = 5'b00000;  //ALU imm value = 0
-	if(mach_code == 
+	Alu2op = 4'b0000;
+	EnAlu2 = 1'b0; //not using alu2 by default
+	Ra2    = acc_add;
+	Rb2    = acc_add;
+	Cond        = 2'b00;
 
 	if(mach_code[8:7] == 2'b00) begin// if j type
 	Ra = acc_add;
@@ -70,15 +79,19 @@ module Ctrl(
             Aluop = SUB_OP;
         end
         4'b0110: begin //load
-            Aluop = XOR_OP;
+            Aluop = ADD_OP;
+	    WenR = 1'b1;//enable load
+	    Ldr = mach_code[3:0];
         end
-        4'b0110: begin //store
-            Aluop = XOR_OP;
+        4'b0101: begin //store
+            Aluop = ADD_OP;
+	    WenD = 1'b1;//enable store
+	    Str = mach_code[3:0];
         end
-       	4'b0100: begin
+       	4'b1010: begin
             Aluop = OR_OP;
         end
-        4'b0101: begin
+        4'b1011: begin
             Aluop = NOT_OP;
         end
         4'b1100: begin
@@ -99,37 +112,49 @@ module Ctrl(
     	ALU_IMM = 1'b1;    // use immediate value (since we?re writing constant 0)
     	ALU_IMM_VAL = 4'b1111; // value = 0
 	end
+        4'b0111: begin //TST
+            Aluop = AND_OP;
+    	    EnAlu2 = 1'b1;     // enable ALU2
+    	    Ra2    = acc_add;  // ACC as input A
+    	    Rb2    = mach_code[3:0]; // operand register
+        end
+        4'b1110: begin //MOV
+            Aluop = ADD_OP;
+	    WenR = 1'b1;//enable load
+	    Ldr = mach_code[3:0];
+        end
     	endcase
    end
 	else if (mach_code[8] == 1'b1) begin //if i type
-	ALU_IMM = 0'b1;
+	ALU_IMM = 1'b1;
 	ALU_IMM_VAL = mach_code[4:0];
 	case (mach_code[7:5])
-        4'b000: begin
+        3'b000: begin
             Aluop = AND_OP;
         end
-        4'b001: begin
+        3'b001: begin
             Aluop = ADD_OP;
         end
-        4'b010: begin
+        3'b010: begin
             Aluop = SUB_OP;
         end
-        4'b011: begin
-            Aluop = XOR_OP;
+        3'b011: begin //MOVI
+            Aluop = ADD_OP;
+	    WenR = 1'b1;//enable load
         end
-       	4'b100: begin
-            Aluop = OR_OP;
-        end
-        4'b101: begin
-            Aluop = NOT_OP;
-        end
-        4'b1100: begin
+       	3'b100: begin //LSLI
             Aluop = SHL_OP;
         end
-        4'b110: begin
+       	3'b100: begin //RSLI
             Aluop = SHR_OP;
         end
-	end
+        3'b101: begin //ORI
+            Aluop = OR_OP;
+        end
+        3'b1100: begin
+            Aluop = SHL_OP;
+        end
+	endcase
   end
-
+ end
 endmodule

@@ -5,33 +5,34 @@ module ALU(
   output logic[7:0] Rslt,
   output logic      Zero,
                     Par,
-		    SCo //carry out);
+						  SCo 
+			 );//carry out
 
 always_comb begin
   Rslt = 8'b0;
-  SCo  = 8'b0;
+  SCo  = 1'b0;
   case(Aluop)
  	4'b0000:  begin
 	Rslt = acc & inputReg;   // and
-	SCo = 0;
+	SCo = 1'b0;
 	end
-    	4'b0001: {SCo,Rslt} = acc + inputReg;   // add
+    4'b0001: {SCo,Rslt} = acc + inputReg;   // add
 	4'b0010: {SCo,Rslt} = acc - inputReg;   // sub
 	4'b1010: begin
 	Rslt= acc | inputReg;   // or
-	Sco = 0;
+	SCo = 1'b0;
 	end
 	4'b0110: begin
 	Rslt = acc ^ inputReg;   // xor
-	Sco = 0;
+	SCo = 1'b0;
 	end
 	4'b0111: begin 
 	Rslt = acc - inputReg;   // condtional check for A >= B
-	Sco = 0;
+	SCo = 1'b0;
 	end
 	4'b1011: begin
     	Rslt = ~acc;  //not
-    	SCo  = 0;     
+    	SCo = 1'b0;     
 	end
     	4'b1100: {SCo,Rslt} = acc<<1'b1;    // left shift
     	4'b1101: {SCo,Rslt} = acc>>1'b1;    // right shift
