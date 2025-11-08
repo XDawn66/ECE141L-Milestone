@@ -3,9 +3,9 @@ module ProgCtr(
   input  logic      Reset,
   input	 logic      Jen,
   input  logic[1:0] cond,
-	input  logic[7:0] acc,
+  input  logic[7:0] acc,
   input  logic[5:0] Jump,
-  output logic[5:0] PC);
+  output logic[5:0] PC
 );
 
 
@@ -27,9 +27,9 @@ module ProgCtr(
 
   always_comb begin
     if (branch) 
-    	PCnext = Jump
+    	PCnext = Jump;
     else 
-	PCnext = PC + 1'b1
+	PCnext = PC + 1'b1;
     end
   
   always_ff @(posedge Clk)
@@ -40,6 +40,5 @@ module ProgCtr(
     end else begin
         PC <= PC + 6'd1;
     end
-   end
 
 endmodule
