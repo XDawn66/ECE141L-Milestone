@@ -1,5 +1,6 @@
 module RegFile(
   input  logic       Clk,	 // clock
+  input  logic       Rst,
   input  logic       Wen,    // write enable
   input  logic [3:0] Ra,     // read address pointer A
   input  logic [3:0] Rb,     //                      B
@@ -13,7 +14,7 @@ module RegFile(
   always_ff @(posedge Clk or posedge Rst) begin
       if (Rst) begin
           integer i;
-          for (i = 0; i < REG_DEPTH; i++) begin
+          for (i = 0; i < 15; i++) begin
                 Core[i] <= '0;        // clear registers on reset
           end
       end else if (Wen) begin
