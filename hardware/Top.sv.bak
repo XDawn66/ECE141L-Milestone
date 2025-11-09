@@ -35,6 +35,10 @@ output logic [8:0] Done);
 logic pairQ, zeroQ, carry_in;
 logic pair, zero, sc_0;
 logic carry_clr, carry_en;
+logic [8:0] mux_in0;
+logic [8:0] mux_in1;
+logic       mux_sel;
+logic [8:0] mux_out;
 
 assign  DatA = RdatA;
 assign  DatB = RdatB; 
@@ -42,15 +46,18 @@ assign  WdatR = Rslt;
 
 // jump lookup table
 JLUT lookup_table(
-  .Jptr,
-  .Jump);
+  .Jptr(Jptr[1:0]),
+  .Jump(Jump));
 
 ProgCtr PC(
-  .Clk,
-  .Reset,
-  .Jen,
-  .Jump,
-  .PC);
+    .Clk   (Clk),
+    .Reset (Reset),
+    .Jen   (Jen),
+    .Cond  (Cond),
+    .acc   (DatA),   // ACC from ALU
+    .Jump  (Jump),
+    .PC    (PC)
+);
 
 InstROM Instr_mem(
   .PC,
@@ -109,6 +116,12 @@ DMem data_mem(
   .WDat(WdatD),
   .Addr,
   .Rdat);
+
+Mux mux_inst (
+    .in0(mux_in0),  
+    .in1(mux_in1),   
+    .S(mux_sel),    
+    .out(mux_out)   
 
 //register flags from alu
 always_ff @(posedge Clk) begin

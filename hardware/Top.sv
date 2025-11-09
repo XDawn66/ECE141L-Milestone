@@ -35,7 +35,7 @@ output logic [8:0] Done);
 logic pairQ, zeroQ, carry_in;
 logic pair, zero, sc_0;
 logic carry_clr, carry_en;
-
+logic [8:0] WdatR_mux; 
 assign  DatA = RdatA;
 assign  DatB = RdatB; 
 assign  WdatR = Rslt; 
@@ -45,12 +45,14 @@ JLUT lookup_table(
   .Jptr(Jptr[1:0]),
   .Jump(Jump));
 
-ProgCtr PC(
-  .Clk,
-  .Reset,
-  .Jen,
-  .Jump,
-  .PC);
+ProgCtr Porgram_counter(
+    .Clk      (Clk),
+    .Reset    (Reset),
+    .ALUCondT (Zero),      
+    .MCcurr   (mach_code), 
+    .Jump     (Jump),    
+    .PC       (PC)
+);
 
 InstROM Instr_mem(
   .PC,
@@ -80,7 +82,7 @@ RegFile register_file(
   .Ra,
   .Rb,
   .Wd,
-  .Wdat(WdatR),
+  .Wdat(WdatR_mux),
   .RdatA,
   .RdatB
 );
@@ -104,11 +106,15 @@ ALU2 alu_two (
 );
 
 DMem data_mem(
-  .Clk,
-  .Wen (WenD),
-  .WDat(WdatD),
-  .Addr,
-  .Rdat);
+  .Clk  (Clk),
+  .Wen  (WenD),
+  .WDat (WdatD),
+  .Addr (Addr),
+  .Rdat (Rdat)
+);
+
+
+Mux alu_to_reg (.in0(Rslt), .in1(RdatA), .S(WenD), .out(WdatR_mux));
 
 //register flags from alu
 always_ff @(posedge Clk) begin
@@ -121,6 +127,6 @@ always_ff @(posedge Clk) begin
 		carry_in <= sc_0;
 end
 
-//done when all bit are set to 1
-assign done = 9'b111111111;
+  // DONE signal
+ assign Done = (mach_code == 9'b111111111);
 endmodule

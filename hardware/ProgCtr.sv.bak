@@ -25,17 +25,26 @@ module ProgCtr( // Program Counter
     (MCcurr[8:7] == 2'b00) && (MCcurr[6:5] == 2'b00); // J (unconditional)
 
   assign CondT = BranchCond ? ALUCondT : 1'b0;
-  assign BranchUn   = (MCcurr[8:7] == 2'b00) && (MCcurr[6:5] == 2'b00);
-  
-  // sequential PC update
+
+
+  always_comb begin
+    if (BranchUn) begin // Unconditional jump
+      PCnext = Jump;
+    end 
+    else if (BranchCond) begin // Conditional jump: skip next instruction if condition met
+      if (CondT)
+        PCnext = Jump;
+      else
+        PCnext = PC + 6'd1;
+    end
+  end
+
+
   always_ff @(posedge Clk or posedge Reset) begin
     if (Reset)
-      PC <= 6'd0;
-    else if (BranchUn)
-      PC <= Jump;
-    else if (BranchCond && CondT)
-      PC <= Jump;
+      PC <= 6'd0;       // Reset PC to 0
     else
-      PC <= PC + 6'd1;
+      PC <= PCnext;    // Load next PC
   end
+
 endmodule
