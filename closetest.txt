@@ -1,0 +1,88 @@
+MOVI 0
+STORE R0 //current_val
+STORE R1 //current_diff
+STORE R3 //max
+STORE R4 //i
+MOVI 8
+STORE R2 //min
+MOVI 1
+STORE R5 //j
+STORE R7 //hold_1
+MOVI array_base_address
+STORE R6 //array
+
+outer_loop:
+    MOV R4
+    SUBI 15 //When i < 16
+    JG done_outer
+    LOAD R6 //current_val = array[i] or acc = array[R6]
+    STORE R0 //current_val = array[i]
+    MOV R5
+    ADDI 1 //j = i + 1
+    STORE R5  //j = i + 1
+
+inner_loop:
+    MOV R5
+    SUBI 15 //When j < 16
+    JG done_inner
+
+    LOAD R5
+    XOR R0 //current_val XOR array[j]
+    STORE R0  //current_val = current_val XOR array[j]
+    RESET R1 //current_diff = 0
+
+count_bit_loop:
+    MOV R0
+    SUBI 1
+    JL update_min_max //when current_val = 0, means done counting
+
+    ADDI 1 //add the test value back
+    ANDI 1 //AND current_val with 1 (EX 001101 AND 000001 = 000001)
+    MOV R1
+    ADDI 1
+    STORE R1 //current_diff++;
+    MOV R0
+    RSL //shift 1 bit to the right
+    STORE R0
+    J count_bit_loop
+
+update_min_max:
+    MOV R1 //current_diff
+    SUB R2 //min
+    JG update_max //if current_diff > min
+    MOV R1 //if current_diff < min
+    STORE R2 // min = current_diff
+    J update_max
+
+update_max:
+    MOV R1 //current_diff
+    SUB R3 //max
+    JL inner_loop //if current_diff < max, skip
+    MOV R1
+    STORE R3 //max = current_diff
+    
+    MOV R5
+    ADDI 1
+    STORE R5 //j++
+    J inner_loop
+
+done_inner:
+    MOV R4
+    ADDI 1
+    STORE R4 //i++
+
+    MOV R6
+    ADD R4 //array[base_address + i]
+    STORE R6
+    J outer_loop
+
+done_outer:
+    MOV R2 // min = array[15]
+    STORE_M R6 //at this point R6 = base_address + i(15), location 16
+    
+    MOV R6
+    ADDI 1 //base_address + i(16),location 17
+    STORE R6
+    MOV R3
+    STORE_M R6 
+    FILL //done indication, set acc to all 1s
