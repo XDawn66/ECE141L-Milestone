@@ -24,6 +24,9 @@ def convert(inFile, outFile1, outFile2):
         'J':'00','JE':'01','JG':'10','JL':'11'
     }
 
+    R_no_operand = {"RESET", "FILL", "NOT", "LSL", "RSL"}
+
+
     # registers R0–R15
     registers = {f'R{i}': format(i,'04b') for i in range(16)}
 
@@ -42,6 +45,7 @@ def convert(inFile, outFile1, outFile2):
     
     # convert assembly to machine code
     for line in assembly:
+        line = line.split("//")[0].strip()
         instr = line.split()
         if len(instr) == 0:
             continue
@@ -59,8 +63,14 @@ def convert(inFile, outFile1, outFile2):
         if mnemonic in R_ops:
             output += "0"                     # R header
             output += R_ops[mnemonic]         # 4-bit opcode
-            reg = args[0].replace(",", "")
-            output += registers[reg]          # 4-bit operand
+            if mnemonic in R_no_operand:
+                # No operand → emit 0000
+                output += "0000"
+            else:
+                if len(args) == 0:
+                    raise ValueError(f"Missing register for instruction: {mnemonic}")
+                reg = args[0].replace(",", "")
+                output += registers[reg]
 
         # ---------- I-TYPE ----------
         elif mnemonic in I_ops:
@@ -74,9 +84,17 @@ def convert(inFile, outFile1, outFile2):
         elif mnemonic in J_ops:
             output += "11"                    # J header
             output += J_ops[mnemonic]         # 2-bit opcode
-            imm = int(args[0])
+            arg = args[0]
+            if arg.isdigit() or (arg[0] == '-' and arg[1:].isdigit()):
+                imm = int(arg)
+            else:
+                # label case
+                if arg not in lut:
+                    raise ValueError(f"Unknown label: {arg}")
+                imm = lut[arg]
+
             imm_bin = format(imm & 0x1F, '05b')
-            output += imm_bin                 # 5-bit immediate
+            output += imm_bin               # 5-bit immediate
 
         else:
             continue  # ignore unknown lines or blanks
@@ -88,6 +106,7 @@ def convert(inFile, outFile1, outFile2):
 
 
 # convert("assembly.txt", "machine.txt", "lut.txt")
-convert("stringmatch.txt", "sm_machine.txt", "sm_lut.txt")
-convert("cordic.txt", "c_machine.txt", "c_lut.txt")
-convert("division.txt", "d_machine.txt", "d_lut.txt")
+# convert("stringmatch.txt", "sm_machine.txt", "sm_lut.txt")
+# convert("cordic.txt", "c_machine.txt", "c_lut.txt")
+# convert("division.txt", "d_machine.txt", "d_lut.txt")
+convert("closetest.txt", "d_machine_p1.txt", "d_lut_p1.txt")
