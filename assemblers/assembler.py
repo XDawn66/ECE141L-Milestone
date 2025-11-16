@@ -1,77 +1,93 @@
 def convert(inFile, outFile1, outFile2):
-	assembly_file = open(inFile, 'r')
-	machine_file = open(outFile1, 'w')
-	lut_file = open(outFile2, 'w')
-	assembly = list(assembly_file.read().split('\n'))
+    assembly_file = open(inFile, 'r')
+    machine_file = open(outFile1, 'w')
+    lut_file = open(outFile2, 'w')
+    assembly = list(assembly_file.read().split('\n'))
 
-	#keep track of index and file line number
-	lineNum = 0;
-	labelsNum = 0;
+    # keep track of index and file line number
+    lineNum = 0
+    labelsNum = 0
 
-	#dictionaries to ease conversion of opcodes/operands to binary
-	opcodes = {'ADR' : '000', 'ADI' : '001', 'STR' : '010', 'LDR' : '011',
-	'MOV' : '100', 'CMP' : '101', 'BR' : '110', 'HT' : '111'}
-	registers = {'r0' : '000', 'r1' : '001', 'r2' : '010', 'r3' : '011',
-	'r4' : '100', 'r5' : '101', 'r6' : '110', 'r7' : '111'}
-	
-	#reads through assembly and collects labels to populate lookup table
-	lut = {}
-	for line in assembly:
-		instr = line.split();
-		lineNum += 1
-		#check if it is a label or not
-		if instr[0] not in opcodes:
-			lut[instr[0].replace(':', '')] = labelsNum
-			lut_file.write(str(lineNum) + '\n')
-			labelsNum += 1
-	
-	#reads through file to convert instructions to machine code
-	for line in assembly:
-		output = ""
-		instr = line.split(); #split to get instruction and different operands
-		#make sure it is an instruction, skip over labels
-		if instr[0] in opcodes:
-			output += opcodes[instr[0]]
-			del instr[0]
-			if output is '111':
-				output += '000000'
-			elif output is '100':
-				#MOV
-				imm = bin(int(instr[0]))[2:]
-				#pad to 6 bits for the immediate
-				for i in range(0, 6-len(imm)):
-					imm = '0'+imm
-				output += imm
-			else:
-				#remove commas from register operand names and check
-				instr[0] = instr[0].replace(',', '');
-				if instr[0] in registers:
-					#ADR OR ADI
-					output += registers[instr[0]]
-					if instr[1] in registers:
-						#ADR
-						output += registers[instr[1]]
-					else:
-						#ADI
-						imm = bin(int(instr[1]))[2:] #convert to binary
-						#pad to 3 bits for immediate
-						for i in range(0, 3-len(imm)):
-							imm = '0'+imm
-						output += imm
-				else:
-					#BR
-					output += instr[0]
-					imm = bin(int(lut[instr[1]]))[2:] #convert to binary
-					for i in range(0, 5-len(imm)):
-						imm = '0'+imm
-					output += imm
-			#write binary to machine code output file
-			machine_file.write(str(output) + '\t// ' + line + '\n')
+    R_ops = {
+        'AND':'0000','ADD':'0001','SUB':'0010','LOAD':'0011',
+        'STORE':'0100','STORE_M':'0101','XOR':'0110','TST':'0111',
+        'FILL':'1000','RESET':'1001','OR':'1010','NOT':'1011',
+        'LSL':'1100','RSL':'1101','MOV':'1110'
+    }
 
-	assembly_file.close()
-	machine_file.close()
+    I_ops = {
+        'ANDI':'000','ADDI':'001','SUBI':'010','MOVI':'011',
+        'LSLI':'100','ORI':'101','RSLI':'110','ADDNE':'111'
+    }
 
-#convert("assembly.txt", "machine.txt", "lut.txt")
+    J_ops = {
+        'J':'00','JE':'01','JG':'10','JL':'11'
+    }
+
+    # registers R0–R15
+    registers = {f'R{i}': format(i,'04b') for i in range(16)}
+
+    # collect labels
+    lut = {}
+    for line in assembly:
+        instr = line.split()
+        if len(instr) == 0:
+            continue
+        lineNum += 1
+        if instr[0].endswith(":"):
+            label = instr[0].replace(":", "")
+            lut[label] = labelsNum
+            lut_file.write(str(lineNum) + "\n")
+            labelsNum += 1
+    
+    # convert assembly to machine code
+    for line in assembly:
+        instr = line.split()
+        if len(instr) == 0:
+            continue
+
+        # skip labels
+        if instr[0].endswith(":"):
+            continue
+        
+        mnemonic = instr[0]
+        args = instr[1:] if len(instr) > 1 else []
+
+        output = ""
+
+        # ---------- R-TYPE ----------
+        if mnemonic in R_ops:
+            output += "0"                     # R header
+            output += R_ops[mnemonic]         # 4-bit opcode
+            reg = args[0].replace(",", "")
+            output += registers[reg]          # 4-bit operand
+
+        # ---------- I-TYPE ----------
+        elif mnemonic in I_ops:
+            output += "10"                    # I header
+            output += I_ops[mnemonic]         # 3-bit opcode
+            imm = int(args[0].replace(",", ""))
+            imm_bin = format(imm & 0xF, '04b')
+            output += imm_bin                 # 4-bit immediate
+
+        # ---------- J-TYPE ----------
+        elif mnemonic in J_ops:
+            output += "11"                    # J header
+            output += J_ops[mnemonic]         # 2-bit opcode
+            imm = int(args[0])
+            imm_bin = format(imm & 0x1F, '05b')
+            output += imm_bin                 # 5-bit immediate
+
+        else:
+            continue  # ignore unknown lines or blanks
+
+        machine_file.write(output + "\t// " + line + "\n")
+
+    assembly_file.close()
+    machine_file.close()
+
+
+# convert("assembly.txt", "machine.txt", "lut.txt")
 convert("stringmatch.txt", "sm_machine.txt", "sm_lut.txt")
 convert("cordic.txt", "c_machine.txt", "c_lut.txt")
 convert("division.txt", "d_machine.txt", "d_lut.txt")
