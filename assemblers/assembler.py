@@ -17,7 +17,7 @@ def convert(inFile, outFile1, outFile2):
 
     I_ops = {
         'ANDI':'000','ADDI':'001','SUBI':'010','MOVI':'011',
-        'LSLI':'100','ORI':'101','RSLI':'110'
+        'LSLI':'100','ORI':'101','RSLI':'110' 
     }
 
     J_ops = {
