@@ -1,5 +1,6 @@
 module Ctrl(
   input        [8:0] mach_code,
+  input           Sco,
   output logic [3:0] Aluop,
   output logic [3:0] Alu2op,
   output logic [7:0] Jptr,           // jump pointer to JLUT
@@ -10,7 +11,7 @@ module Ctrl(
 					 Ra2,
 					 Rb2,
 
-  output logic       WenR,           // data mem write enable
+  output logic       WenR,           // data register write enable
                      WenImm,         // data mem write imm enable
                      WenD,           // data mem load enable
                      Ldr,            // load dir
@@ -55,7 +56,7 @@ module Ctrl(
 	Rb2    = acc_add;
 	Cond        = 2'b00;
 
-	if(mach_code[8:7] == 2'b00) begin// if j type
+	if(mach_code[8:7] == 2'b11) begin// if j type
 	Ra = acc_add;
 	Aluop = SUB_OP;
 	Jptr = {3'b000, mach_code[4:0]}; //zero extend to 8 bit to match PC
@@ -79,14 +80,18 @@ module Ctrl(
             Aluop = SUB_OP;
         end
         4'b0110: begin //load
-            Aluop = ADD_OP;
+	    Rb   = mach_code[3:0];   // Rn holds memory address
 	    WenR = 1'b1;//enable load
-	    Ldr = mach_code[3:0];
+	    Wd   = acc_add;          // ACC is destination register
+	    WenD = 1'b0;             // NOT a store
         end
         4'b0101: begin //store
-            Aluop = ADD_OP;
-	    WenD = 1'b1;//enable store
-	    Str = mach_code[3:0];
+  	    WenR = 1'b1;//enable store to reg
+	    Wd = mach_code[3:0];
+        end
+        4'b0011: begin //store_m
+	    WenD = 1'b1;//enable store to mem
+	    Rb =  mach_code[3:0];
         end
        	4'b1010: begin
             Aluop = OR_OP;
@@ -120,8 +125,12 @@ module Ctrl(
         end
         4'b1110: begin //MOV
             Aluop = ADD_OP;
-	    WenR = 1'b1;//enable load
+	    WenR = 1'b1;//enable write to register
 	    Ldr = mach_code[3:0];
+        end
+	4'b1111: begin //ADDNE
+            Aluop = ADD_OP;
+	    WenR = SCo; // write only if carry = 1
         end
     	endcase
    end

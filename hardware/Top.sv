@@ -33,7 +33,6 @@ output logic [8:0] Done);
 			Less2;		
 
 logic pairQ, zeroQ, carry_in;
-logic pair, zero, sc_0;
 logic carry_clr, carry_en;
 logic [8:0] WdatR_mux; 
 assign  DatA = RdatA;
@@ -60,6 +59,7 @@ InstROM Instr_mem(
 
 Ctrl control_unit (
     .mach_code    (mach_code),
+    .Sco (carry_in)
     .Aluop        (Aluop),
     .Jptr         (Jptr),
     .Cond         (Cond),
@@ -73,7 +73,7 @@ Ctrl control_unit (
     .Str          (Str),
     .ALU_IMM      (ALU_IMM),
     .EnAlu2       (EnAlu2),
-    .ALU_IMM_VAL  (ALU_IMM_VAL)
+    .ALU_IMM_VAL  (ALU_IMM_VAL) 
 );
 
 RegFile register_file(
