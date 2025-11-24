@@ -12,12 +12,12 @@ def convert(inFile, outFile1, outFile2):
         'AND':'0000','ADD':'0001','SUB':'0010','LOAD':'0011',
         'STORE':'0100','STORE_M':'0101','XOR':'0110','TST':'0111',
         'FILL':'1000','RESET':'1001','OR':'1010','NOT':'1011',
-        'LSL':'1100','RSL':'1101','MOV':'1110'
+        'LSL':'1100','RSL':'1101','MOV':'1110', 'ADDNE':'1111'
     }
 
     I_ops = {
         'ANDI':'000','ADDI':'001','SUBI':'010','MOVI':'011',
-        'LSLI':'100','ORI':'101','RSLI':'110','ADDNE':'111'
+        'LSLI':'100','ORI':'101','RSLI':'110'
     }
 
     J_ops = {
