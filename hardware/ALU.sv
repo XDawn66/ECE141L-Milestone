@@ -2,12 +2,10 @@ module ALU(
   input [3:0] Aluop,
   input [7:0] acc,
               inputReg,
-  output logic[7:0] Rslt,
+  output logic[7:0] Rslt, 
   output logic      Zero,
                     Par,
-						  SCo 
-			 );//carry out
-
+		    SCo );//carry out
 always_comb begin
   Rslt = 8'b0;
   SCo  = 1'b0;
@@ -26,9 +24,9 @@ always_comb begin
 	Rslt = acc ^ inputReg;   // xor
 	SCo = 1'b0;
 	end
-	4'b0111: begin 
-	Rslt = acc - inputReg;   // condtional check for A >= B
-	SCo = 1'b0;
+	4'b0111: begin //TST
+	// condtional check for A >= B, c = 1 when that is true
+	SCo = (acc > inputReg);
 	end
 	4'b1011: begin
     	Rslt = ~acc;  //not
@@ -39,7 +37,7 @@ always_comb begin
   endcase
 end
 
-  assign Zero = !Rslt;
-  assign Par  = ^Rslt;
+assign Zero = ~|Rslt;
+assign Par  = ^Rslt;
 
 endmodule

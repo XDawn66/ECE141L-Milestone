@@ -1,0 +1,87 @@
+module ALU_tb;
+
+  logic [3:0] Aluop;
+  logic [7:0] dataA;
+  logic [7:0] dataB;
+
+  logic [7:0] Rslt;
+  logic       Zero;
+  logic       Par;
+  logic       SCo;
+
+  // DUT
+  ALU dut (
+    .Aluop(Aluop),
+    .acc(dataA),
+    .inputReg(dataB),
+    .Rslt(Rslt),
+    .Zero(Zero),
+    .Par(Par),
+    .SCo(SCo)
+  );
+
+  task run_test(
+    input [3:0] op,
+    input [7:0] input_a,
+    input [7:0] input_b,
+    input string op_name
+  );
+    Aluop = op;
+    dataA = input_a;
+    dataB = input_b;
+    #2;
+
+    $display("| %4b | %-10s | %02h | %02h | %02h | Z=%b P=%b C=%b |",
+             Aluop, op_name, dataA, dataB, Rslt, Zero, Par, SCo);
+  endtask
+
+  initial begin
+    $timeformat(-9, 1, " ns", 6);
+
+    $display("\n================ ALU FUNCTIONAL TEST ================");
+    $display("------------------------------------------------------");
+
+    // AND
+    run_test(4'b0000, 8'h3C, 8'hF0, "AND"); // expect 0x30
+    run_test(4'b0000, 8'hA5, 8'hA5, "AND"); // expect 0xa5
+
+    // OR
+    run_test(4'b1010, 8'h0F, 8'hF0, "OR"); // expect 0xff
+    run_test(4'b1010, 8'h00, 8'h99, "OR"); // expect 0x99
+
+    // XOR
+    run_test(4'b0110, 8'h5A, 8'hFF, "XOR"); // expect 0xa5
+    run_test(4'b0110, 8'h12, 8'h12, "XOR"); // expect 0x00
+
+    // ADD
+    run_test(4'b0001, 8'h7E, 8'h01, "ADD"); // expect 0x7f
+    run_test(4'b0001, 8'hFF, 8'h02, "ADD"); // expect 0x01 + carry
+
+    // SUB
+    run_test(4'b0010, 8'h10, 8'h01, "SUB"); // expect 0x0f
+    run_test(4'b0010, 8'h00, 8'h01, "SUB"); // expect 0xff + borrow
+
+    // SHIFT LEFT
+    run_test(4'b1100, 8'h81, 8'd1, "SHIFT LEFT"); // expect 0x02 carray 1
+    run_test(4'b1100, 8'h04, 8'd3, "SHIFT LEFT"); // expect 0x08 
+
+    // SHIFT RIGHT
+    run_test(4'b1101, 8'h80, 8'd1, "SHIFT RIGHT"); // expect 0x40, Z=0, P=1, C=0
+    run_test(4'b1101, 8'h05, 8'd2, "SHIFT RIGHT"); // expect 0x2, P = 1
+
+    // NOT
+    run_test(4'b1011, 8'h00, 8'h12, "NOT"); // expect 0xff
+    run_test(4'b1011, 8'hFF, 8'h34, "NOT"); // expect 0x00
+
+    // TST
+    run_test(4'b0111, 8'hFF, 8'h12, "TST"); // expect 0xff
+    run_test(4'b0111, 8'hC3, 8'hC4, "TST"); // expect 0xc3
+
+    $display("------------------------------------------------------");
+    $display("ALU TEST COMPLETE");
+    $display("======================================================\n");
+    $finish;
+  end
+
+endmodule
+

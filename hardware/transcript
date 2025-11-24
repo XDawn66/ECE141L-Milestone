@@ -1,2 +1,44 @@
 # Reading C:/intelFPGA/18.1/modelsim_ase/tcl/vsim/pref.tcl
-# OpenFile {C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Mux.sv}
+# OpenFile {C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/ALU.sv}
+# Loading project alu_test
+# Compile of ALU_tb.sv was successful.
+# Compile of ALU.sv was successful.
+# 2 compiles, 0 failed with no errors.
+vsim -gui work.ALU_tb
+# vsim -gui work.ALU_tb 
+# Start time: 17:24:07 on Nov 23,2025
+# Loading sv_std.std
+# Loading work.ALU_tb
+# Loading work.ALU
+run -all
+# 
+# ================ ALU FUNCTIONAL TEST ================
+# ------------------------------------------------------
+# | 0000 | AND        | 3c | f0 | 30 | Z=0 P=0 C=0 |
+# | 0000 | AND        | a5 | a5 | a5 | Z=0 P=0 C=0 |
+# | 1010 | OR         | 0f | f0 | ff | Z=0 P=0 C=0 |
+# | 1010 | OR         | 00 | 99 | 99 | Z=0 P=0 C=0 |
+# | 0110 | XOR        | 5a | ff | a5 | Z=0 P=0 C=0 |
+# | 0110 | XOR        | 12 | 12 | 00 | Z=1 P=0 C=0 |
+# | 0001 | ADD        | 7e | 01 | 7f | Z=0 P=1 C=0 |
+# | 0001 | ADD        | ff | 02 | 01 | Z=0 P=1 C=1 |
+# | 0010 | SUB        | 10 | 01 | 0f | Z=0 P=0 C=0 |
+# | 0010 | SUB        | 00 | 01 | ff | Z=0 P=0 C=1 |
+# | 1100 | SHIFT LEFT | 81 | 01 | 02 | Z=0 P=1 C=1 |
+# | 1100 | SHIFT LEFT | 04 | 03 | 08 | Z=0 P=1 C=0 |
+# | 1101 | SHIFT RIGHT | 80 | 01 | 40 | Z=0 P=1 C=0 |
+# | 1101 | SHIFT RIGHT | 05 | 02 | 02 | Z=0 P=1 C=0 |
+# | 1011 | NOT        | 00 | 12 | ff | Z=0 P=0 C=0 |
+# | 1011 | NOT        | ff | 34 | 00 | Z=1 P=0 C=0 |
+# | 0111 | TST        | ff | 12 | 00 | Z=1 P=0 C=1 |
+# | 0111 | TST        | c3 | c4 | 00 | Z=1 P=0 C=0 |
+# ------------------------------------------------------
+# ALU TEST COMPLETE
+# ======================================================
+# 
+# ** Note: $finish    : C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/ALU_tb.sv(83)
+#    Time: 36 ps  Iteration: 0  Instance: /ALU_tb
+# 1
+# Break in Module ALU_tb at C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/ALU_tb.sv line 83
+# End time: 17:26:00 on Nov 23,2025, Elapsed time: 0:01:53
+# Errors: 0, Warnings: 0
