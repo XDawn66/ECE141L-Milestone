@@ -1,169 +1,102 @@
-module Ctrl(
-  input        [8:0] mach_code,
-  input              Sco,
-  input              Zero,
-  output logic [3:0] Aluop,
-  output logic [3:0] Alu2op,
-  output logic [7:0] Jptr,           // jump pointer to JLUT
-  output logic [1:0] Cond,           // branch condition
-  output logic [3:0] Ra,             // acc address
-                     Rb,             // input reg address
-                     Wd,             // writing address
-		     Ra2,
-		     Rb2,
-  output logic       WenR,           // data register write enable
-                     WenImm,         // data mem write imm enable
-                     WenD,           // data mem load enable
-                     Ldr,            // load dir
-                     Str,            // string output
-                     ALU_IMM,        // ALU imm enable
-                     EnAlu2,         // enable secondary ALU
+`timescale 1ns/1ps
 
-  output logic [4:0] ALU_IMM_VAL     // ALU imm value
-);
+module tb_Ctrl;
 
+    logic [8:0] mach_code;
+    logic Sco;
+    logic Zero;
 
-  //acc address
-  localparam acc_add = 4'b0000;
+    // DUT outputs
+    logic [3:0] Aluop, Alu2op, Ra, Rb, Wd, Ra2, Rb2;
+    logic [7:0] Jptr;
+    logic [1:0] Cond;
+    logic WenR, WenImm, WenD, Ldr, Str, ALU_IMM, EnAlu2;
+    logic [4:0] ALU_IMM_VAL;
 
-   // ALU operation codes
-   localparam AND_OP  = 4'b0000;
-   localparam ADD_OP  = 4'b0001;
-   localparam SUB_OP  = 4'b0010;
-   localparam XOR_OP  = 4'b0110;
-   localparam COND_OP = 4'b0111;
-   localparam OR_OP   = 4'b1010;
-   localparam NOT_OP  = 4'b1011;
-   localparam SHL_OP  = 4'b1100;
-   localparam SHR_OP  = 4'b1101;
+    // Instantiate DUT
+    Ctrl dut(
+        .mach_code(mach_code),
+        .Sco(Sco),
+        .Zero(Zero),
+        .Aluop(Aluop),
+        .Alu2op(Alu2op),
+        .Jptr(Jptr),
+        .Cond(Cond),
+        .Ra(Ra), .Rb(Rb), .Wd(Wd),
+        .Ra2(Ra2), .Rb2(Rb2),
+        .WenR(WenR), .WenImm(WenImm),
+        .WenD(WenD), .Ldr(Ldr), .Str(Str),
+        .ALU_IMM(ALU_IMM), .EnAlu2(EnAlu2),
+        .ALU_IMM_VAL(ALU_IMM_VAL)
+    );
 
-  always_comb begin
-	Aluop = 4'b1100;		// ddefault ALU operaion (LSH)
-	Jptr  = 8'b0;		// jump pointer
-	Ra    = acc_add;		// accumlator as default
-	Rb    = acc_add;		//placeholder    
-	Wd    = acc_add;		//placeholder
-	WenR  = 1'b0;		// no reg file load enable by default
-	WenD  = 1'b0;		// no data mem write enable by default
-	WenImm = 1'b0;		// no imm op by default
-	Ldr   =	acc_add;		// load placeholder
-    	Str	  = acc_add;		// store placeholder
-	ALU_IMM = 1'b0;
-	ALU_IMM_VAL = 5'b00000;  //ALU imm value = 0
-	Alu2op = 4'b0000;
-	EnAlu2 = 1'b0; //not using alu2 by default
-	Ra2    = acc_add;
-	Rb2    = acc_add;
-	Cond        = 2'b00;
+    // Procedure
+    initial begin
+        $display("Starting Ctrl testbench...");
 
-	if(mach_code[8:7] == 2'b11) begin// if j type
-	Ra = acc_add;
-	Aluop = SUB_OP;
-	Jptr = {3'b000, mach_code[4:0]}; //zero extend to 8 bit to match PC
-		case (mach_code[6:5])
-            	2'b00: Cond = 2'b00; // J  
-            	2'b01: Cond = 2'b01; // JE - ACC == 0
-            	2'b10: Cond = 2'b10; // JG - ACC > 0
-            	2'b11: Cond = 2'b11; // JL - ACC < 0
-        	endcase
-	end
-	else if (mach_code[8] == 1'b0) begin // if R-type
-    	Rb = mach_code[3:0];
-    	case (mach_code[7:4])
-        4'b0000: begin
-            Aluop = AND_OP;
+        Sco  = 0;
+        Zero = 0;
+
+        // Test all major instruction categories 
+
+        // R-type AND R3
+        mach_code = 9'b0_0000_0011; #20;
+
+        // R-type ADD R7
+        mach_code = 9'b0_0001_0111; #20;
+
+        // R-type LOAD from R5
+        mach_code = 9'b0_0110_0101; #20;
+
+        // R-type STORE into R2
+        mach_code = 9'b0_0101_0010; #20;
+
+        // R-type STORE_M (write to memory)
+        mach_code = 9'b0_0011_0100; #20;
+
+        // R-type TST on R1
+        mach_code = 9'b0_0111_0001; #20;
+
+        // R-type MOV from R4
+        mach_code = 9'b0_1110_0100; #20;
+
+        // R-type ADDNE (depends on Zero flag)
+        Zero = 0;
+        mach_code = 9'b0_1111_0000; #20;
+        Zero = 1;
+        mach_code = 9'b0_1111_0000; #20;
+
+        // I-type MOVI with immediate = 0x0F
+        mach_code = 9'b1_011_01111; #20;
+
+        // I-type ADDI imm=4
+        mach_code = 9'b1_001_00100; #20;
+
+        // I-type ORI imm=12
+        mach_code = 9'b1_101_01100; #20;
+
+        // J-type unconditional
+        mach_code = 9'b11_00_00010; #20;
+
+        // J-type JE (JE ACC==0)
+        mach_code = 9'b11_01_00101; #20;
+
+        // J-type JG
+        mach_code = 9'b11_10_01000; #20;
+
+        // J-type JL
+        mach_code = 9'b11_11_11100; #20;
+
+        // Randomized testing
+        repeat (40) begin
+            mach_code = $urandom_range(0, 511); // full 9-bit range
+            Sco  = $urandom_range(0, 1);
+            Zero = $urandom_range(0, 1);
+            #20;
         end
-        4'b0001: begin
-            Aluop = ADD_OP;
-        end
-        4'b0010: begin
-            Aluop = SUB_OP;
-        end
-        4'b0110: begin //load
-	    Rb   = mach_code[3:0];   // Rn holds memory address
-	    WenR = 1'b1;//enable load
-	    Wd   = acc_add;          // ACC is destination register
-	    WenD = 1'b0;             // NOT a store
-        end
-        4'b0101: begin //store
-  	    WenR = 1'b1;//enable store to reg
-	    Wd = mach_code[3:0];
-        end
-        4'b0011: begin //store_m
-	    WenD = 1'b1;//enable store to mem
-	    Rb =  mach_code[3:0];
-        end
-       	4'b1010: begin
-            Aluop = OR_OP;
-        end
-        4'b1011: begin
-            Aluop = NOT_OP;
-        end
-        4'b1100: begin
-            Aluop = SHL_OP;
-        end
-        4'b1101: begin
-            Aluop = SHR_OP;
-        end
-	4'b1001: begin // RESET
-    	Wd    = acc_add;   // destination is accumulator
-    	WenR  = 1'b1;      // enable register write
-    	ALU_IMM = 1'b1;    // use immediate value (since we?re writing constant 0)
-    	ALU_IMM_VAL = 4'b0000; // value = 0
-	end
-	4'b1000: begin // FILL
-    	Wd    = acc_add;   // destination is accumulator
-    	WenR  = 1'b1;      // enable register write
-    	ALU_IMM = 1'b1;    // use immediate value (since we?re writing constant 0)
-    	ALU_IMM_VAL = 4'b1111; // value = 0
-	end
-        4'b0111: begin //TST
-            Aluop = AND_OP;
-    	    EnAlu2 = 1'b1;     // enable ALU2
-    	    Ra2    = acc_add;  // ACC as input A
-    	    Rb2    = mach_code[3:0]; // operand register
-        end
-        4'b1110: begin //MOV
-            Aluop = ADD_OP;
-	    WenR = 1'b1;//enable write to register
-	    Ldr = mach_code[3:0];
-        end
-	4'b1111: begin //ADDNE
-            Aluop = ADD_OP;
-	    WenR = Zero; // write only if Zero flag is set to 1 
-        end
-    	endcase
-   end
-	else if (mach_code[8] == 1'b1) begin //if i type
-	ALU_IMM = 1'b1;
-	ALU_IMM_VAL = mach_code[4:0];
-	case (mach_code[7:5])
-        3'b000: begin
-            Aluop = AND_OP;
-        end
-        3'b001: begin
-            Aluop = ADD_OP;
-        end
-        3'b010: begin
-            Aluop = SUB_OP;
-        end
-        3'b011: begin //MOVI
-            Aluop = ADD_OP;
-	    WenR = 1'b1;//enable load
-        end
-       	3'b100: begin //LSLI
-            Aluop = SHL_OP;
-        end
-       	3'b100: begin //RSLI
-            Aluop = SHR_OP;
-        end
-        3'b101: begin //ORI
-            Aluop = OR_OP;
-        end
-        3'b110: begin
-            Aluop = SHL_OP;
-        end
-	endcase
-  end
- end
+
+        $display("Finished.");
+        $stop;
+    end
+
 endmodule
