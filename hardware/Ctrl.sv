@@ -1,16 +1,16 @@
 module Ctrl(
   input        [8:0] mach_code,
-  input           Sco,
+  input              Sco,
+  input              Zero,
   output logic [3:0] Aluop,
   output logic [3:0] Alu2op,
   output logic [7:0] Jptr,           // jump pointer to JLUT
   output logic [1:0] Cond,           // branch condition
   output logic [3:0] Ra,             // acc address
-                Rb,                  // input reg address
-                Wd,                  // writing address
-					 Ra2,
-					 Rb2,
-
+                     Rb,             // input reg address
+                     Wd,             // writing address
+		     Ra2,
+		     Rb2,
   output logic       WenR,           // data register write enable
                      WenImm,         // data mem write imm enable
                      WenD,           // data mem load enable
@@ -130,7 +130,7 @@ module Ctrl(
         end
 	4'b1111: begin //ADDNE
             Aluop = ADD_OP;
-	    WenR = SCo; // write only if carry = 1
+	    WenR = Zero; // write only if Zero flag is set to 1 
         end
     	endcase
    end
@@ -160,7 +160,7 @@ module Ctrl(
         3'b101: begin //ORI
             Aluop = OR_OP;
         end
-        3'b1100: begin
+        3'b110: begin
             Aluop = SHL_OP;
         end
 	endcase
