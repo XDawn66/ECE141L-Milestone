@@ -1,2 +1,35 @@
 # Reading C:/intelFPGA/18.1/modelsim_ase/tcl/vsim/pref.tcl
-# OpenFile {C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/ALU2.sv}
+# OpenFile {C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv}
+# Loading project ece141l
+# Compile of Top_tb.sv was successful.
+# Compile of ALU.sv was successful.
+# Compile of Ctrl.sv was successful.
+# Compile of DMem.sv was successful.
+# Compile of InstROM.sv was successful.
+# Compile of JLUT.sv was successful.
+# Compile of ProgCtr.sv was successful.
+# Compile of RegFile.sv was successful.
+# Compile of ALU2.sv was successful.
+# Compile of Top.sv failed.
+# Compile of Top_tb.sv was successful.
+# Compile of ALU.sv was successful.
+# Compile of Ctrl.sv was successful.
+# Compile of DMem.sv was successful.
+# Compile of InstROM.sv was successful.
+# Compile of JLUT.sv was successful.
+# Compile of ProgCtr.sv was successful.
+# Compile of RegFile.sv was successful.
+# Compile of ALU2.sv was successful.
+# Compile of Top.sv failed with 1 errors.
+# 10 compiles, 1 failed with 1 error.
+# Compile of Top_tb.sv was successful.
+# Compile of ALU.sv was successful.
+# Compile of Ctrl.sv was successful.
+# Compile of DMem.sv was successful.
+# Compile of InstROM.sv was successful.
+# Compile of JLUT.sv was successful.
+# Compile of ProgCtr.sv was successful.
+# Compile of RegFile.sv was successful.
+# Compile of ALU2.sv was successful.
+# Compile of Top.sv was successful.
+# 10 compiles, 0 failed with no errors.
