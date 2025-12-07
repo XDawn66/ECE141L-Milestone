@@ -1,7 +1,7 @@
 module Top(
   input   		Clk,
 		       Reset,
-output logic [8:0] Done);
+output logic Done);
 
   wire[5:0] Jump,
 	        PC;
@@ -35,10 +35,15 @@ output logic [8:0] Done);
 logic pair, zero, sc_0;
 logic pairQ, zeroQ, carry_in;
 logic carry_clr, carry_en;
-logic [8:0] WdatR_mux; 
+logic [7:0] WdatR_mux; 
 assign  DatA = RdatA;
 assign  DatB = RdatB; 
 assign  WdatR = Rslt; 
+
+wire [1:0] Cond;
+wire [4:0] ALU_IMM_VAL;
+wire       WenImm, ALU_IMM, EnAlu2;
+wire [3:0] Alu2op, Ra2, Rb2;
 
 // jump lookup table
 JLUT lookup_table(

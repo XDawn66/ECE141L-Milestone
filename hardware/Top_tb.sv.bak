@@ -16,7 +16,7 @@ module Top_tb;
 
   initial begin
     for(int i=0; i<4; i++)
-      t1.register_file.Core[i] = i; 
+      t1.RF1.Core[i] = i; 
     #10ns reset = 1;
 	#10ns reset = 0;
 	#2000ns $stop;

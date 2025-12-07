@@ -10,7 +10,7 @@ cModel Technology
 Z0 dC:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware
 vALU
 Z1 DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
-Z2 !s110 1764814077
+Z2 !s110 1765143425
 !i10b 1
 !s100 mhIJ1V5hdWUV8]^_Lh:F<0
 IlVa15[F6Odb^YnQ4aZ6Eh3
@@ -26,7 +26,7 @@ Z4 OV;L;10.5b;63
 r1
 !s85 0
 31
-Z5 !s108 1764814077.000000
+Z5 !s108 1765143425.000000
 !s107 C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/ALU.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/ALU.sv|
 !i113 1
@@ -35,7 +35,7 @@ Z7 tCvgOpt 0
 n@a@l@u
 vALU2
 R1
-R2
+Z8 !s110 1765143426
 !i10b 1
 !s100 mR:h6k<UY^W9fL^N9T[L72
 ImbF8FS?DIiKd>MafDIW?M2
@@ -51,7 +51,7 @@ R4
 r1
 !s85 0
 31
-R5
+Z9 !s108 1765143426.000000
 !s107 C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/ALU2.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/ALU2.sv|
 !i113 1
@@ -85,7 +85,7 @@ R7
 n@a@l@u_tb
 vCtrl
 R1
-R2
+R8
 !i10b 1
 !s100 74IN:InU71eMHg:S^4Bd`2
 I`M3[Che]jVW294NS[jKF31
@@ -110,7 +110,7 @@ R7
 n@ctrl
 vDMem
 R1
-R2
+R8
 !i10b 1
 !s100 TBBmZzK]KZ3lb:2DKbohe1
 I2M8I7WK15gJUI3l8>Ak3<0
@@ -118,7 +118,7 @@ R3
 !s105 DMem_sv_unit
 S1
 R0
-Z8 w1762656322
+Z10 w1762656322
 8C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/DMem.sv
 FC:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/DMem.sv
 L0 1
@@ -126,7 +126,7 @@ R4
 r1
 !s85 0
 31
-R5
+R9
 !s107 C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/DMem.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/DMem.sv|
 !i113 1
@@ -135,7 +135,7 @@ R7
 n@d@mem
 vInstROM
 R1
-R2
+R8
 !i10b 1
 !s100 OAKZDk<hlXLa0[^<_0SQi3
 IR5mmkZ@7]laYaa^<JgEeE0
@@ -143,7 +143,7 @@ R3
 !s105 InstROM_sv_unit
 S1
 R0
-R8
+R10
 8C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/InstROM.sv
 FC:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/InstROM.sv
 L0 1
@@ -151,7 +151,7 @@ R4
 r1
 !s85 0
 31
-R5
+R9
 !s107 C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/InstROM.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/InstROM.sv|
 !i113 1
@@ -160,7 +160,7 @@ R7
 n@inst@r@o@m
 vJLUT
 R1
-R2
+R8
 !i10b 1
 !s100 zD44:b9f90YFR_Az27l[10
 Im7^MiZ?mzIJ9KUn2U_F0@1
@@ -176,16 +176,41 @@ R4
 r1
 !s85 0
 31
-R5
+R9
 !s107 C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/JLUT.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/JLUT.sv|
 !i113 1
 R6
 R7
 n@j@l@u@t
+vMux
+R1
+R8
+!i10b 1
+!s100 cRAUC>LjgFjR?Z0JM5U^K2
+I[;8E1oz;hQCNnHaamGG>81
+R3
+!s105 Mux_sv_unit
+S1
+R0
+w1762657903
+8C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Mux.sv
+FC:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Mux.sv
+L0 1
+R4
+r1
+!s85 0
+31
+R9
+!s107 C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Mux.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Mux.sv|
+!i113 1
+R6
+R7
+n@mux
 vProgCtr
 R1
-R2
+R8
 !i10b 1
 !s100 lS?@6M[63]kjXY2QEGJLf1
 I7eVK3;iMSoLJU:NTo[2BD1
@@ -201,7 +226,7 @@ R4
 r1
 !s85 0
 31
-R5
+R9
 !s107 C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/ProgCtr.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/ProgCtr.sv|
 !i113 1
@@ -210,7 +235,7 @@ R7
 n@prog@ctr
 vRegFile
 R1
-R2
+R8
 !i10b 1
 !s100 _GJYD9TAnlU7^WgmVa1=m0
 I7>^gGd:>T>3XbL;zLY=A@3
@@ -218,7 +243,7 @@ R3
 !s105 RegFile_sv_unit
 S1
 R0
-R8
+R10
 8C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/RegFile.sv
 FC:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/RegFile.sv
 L0 1
@@ -226,7 +251,7 @@ R4
 r1
 !s85 0
 31
-R5
+R9
 !s107 C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/RegFile.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/RegFile.sv|
 !i113 1
@@ -235,15 +260,15 @@ R7
 n@reg@file
 vTop
 R1
-R2
+R8
 !i10b 1
-!s100 2J_ZlnY<8]e^77F]Ge:eX3
-IHz^bm2nU6_AM1=N^GB_[B1
+!s100 Y>K35D>d4JiaaGgXYIKN50
+I:lGhngf8[ghN_Rj=k;g]`0
 R3
 !s105 Top_sv_unit
 S1
 R0
-w1764814072
+w1765143403
 8C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv
 FC:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv
 L0 1
@@ -251,7 +276,7 @@ R4
 r1
 !s85 0
 31
-R5
+R9
 !s107 C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv|
 !i113 1
@@ -262,13 +287,13 @@ vTop_tb
 R1
 R2
 !i10b 1
-!s100 lgfTNUShZU<P@VfNl>c@O3
-I<2UNLFAPTLo<o>G]_GR=:0
+!s100 c;G0_]F9916:MlVZ4Nhkn2
+IMSZW`5ccZG7@44H6PAC=I3
 R3
 !s105 Top_tb_sv_unit
 S1
 R0
-w1761006570
+w1765143289
 8C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top_tb.sv
 FC:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top_tb.sv
 L0 1

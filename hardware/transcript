@@ -1,5 +1,5 @@
 # Reading C:/intelFPGA/18.1/modelsim_ase/tcl/vsim/pref.tcl
-# OpenFile {C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv}
+# OpenFile {C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top_tb.sv}
 # Loading project ece141l
 # Compile of Top_tb.sv was successful.
 # Compile of ALU.sv was successful.
@@ -10,18 +10,53 @@
 # Compile of ProgCtr.sv was successful.
 # Compile of RegFile.sv was successful.
 # Compile of ALU2.sv was successful.
-# Compile of Top.sv failed.
-# Compile of Top_tb.sv was successful.
-# Compile of ALU.sv was successful.
-# Compile of Ctrl.sv was successful.
-# Compile of DMem.sv was successful.
-# Compile of InstROM.sv was successful.
-# Compile of JLUT.sv was successful.
-# Compile of ProgCtr.sv was successful.
-# Compile of RegFile.sv was successful.
-# Compile of ALU2.sv was successful.
-# Compile of Top.sv failed with 1 errors.
-# 10 compiles, 1 failed with 1 error.
+# Compile of Top.sv was successful.
+# Compile of Mux.sv was successful.
+vsim -gui work.Top_tb
+# vsim -gui work.Top_tb 
+# Start time: 13:22:16 on Dec 07,2025
+# Loading sv_std.std
+# Loading work.Top_tb
+# Loading work.Top
+# Loading work.JLUT
+# Loading work.ProgCtr
+# Loading work.InstROM
+# Loading work.Ctrl
+# Loading work.RegFile
+# Loading work.ALU
+# Loading work.ALU2
+# Loading work.DMem
+# Loading work.Mux
+# ** Warning: (vsim-3008) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top_tb.sv(19): [CNNODP] - Component name (RF1) is not on a downward path.
+#    Time: 0 ps  Iteration: 0  Instance: /Top_tb File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top_tb.sv
+# ** Error: (vsim-3043) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top_tb.sv(19): Unresolved reference to 'RF1' in t1.RF1.
+#    Time: 0 ps  Iteration: 0  Instance: /Top_tb File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top_tb.sv
+# ** Warning: (vsim-3015) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top_tb.sv(7): [PCDPC] - Port size (9) does not match connection size (1) for port 'Done'. The port definition is at: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(4).
+#    Time: 0 ps  Iteration: 0  Instance: /Top_tb/t1 File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv
+# ** Warning: (vsim-3017) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(61): [TFMPC] - Too few port connections. Expected 20, found 17.
+#    Time: 0 ps  Iteration: 0  Instance: /Top_tb/t1/control_unit File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Ctrl.sv
+# ** Warning: (vsim-3015) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(61): [PCDPC] - Port size (2) does not match connection size (1) for port 'Cond'. The port definition is at: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Ctrl.sv(8).
+#    Time: 0 ps  Iteration: 0  Instance: /Top_tb/t1/control_unit File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Ctrl.sv
+# ** Warning: (vsim-3015) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(61): [PCDPC] - Port size (5) does not match connection size (1) for port 'ALU_IMM_VAL'. The port definition is at: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Ctrl.sv(22).
+#    Time: 0 ps  Iteration: 0  Instance: /Top_tb/t1/control_unit File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Ctrl.sv
+# ** Warning: (vsim-3722) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(61): [TFMPC] - Missing connection for port 'Alu2op'.
+# ** Warning: (vsim-3722) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(61): [TFMPC] - Missing connection for port 'Ra2'.
+# ** Warning: (vsim-3722) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(61): [TFMPC] - Missing connection for port 'Rb2'.
+# ** Warning: (vsim-3017) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(81): [TFMPC] - Too few port connections. Expected 9, found 8.
+#    Time: 0 ps  Iteration: 0  Instance: /Top_tb/t1/register_file File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/RegFile.sv
+# ** Warning: (vsim-3015) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(81): [PCDPC] - Port size (8) does not match connection size (9) for port 'Wdat'. The port definition is at: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/RegFile.sv(8).
+#    Time: 0 ps  Iteration: 0  Instance: /Top_tb/t1/register_file File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/RegFile.sv
+# ** Warning: (vsim-3722) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(81): [TFMPC] - Missing connection for port 'Rst'.
+# ** Warning: (vsim-3015) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(110): [PCDPC] - Port size (4) does not match connection size (8) for port 'Addr'. The port definition is at: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/DMem.sv(5).
+#    Time: 0 ps  Iteration: 0  Instance: /Top_tb/t1/data_mem File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/DMem.sv
+# ** Warning: (vsim-3015) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(119): [PCDPC] - Port size (9) does not match connection size (8) for port 'in0'. The port definition is at: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Mux.sv(2).
+#    Time: 0 ps  Iteration: 0  Instance: /Top_tb/t1/alu_to_reg File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Mux.sv
+# ** Warning: (vsim-3015) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(119): [PCDPC] - Port size (9) does not match connection size (8) for port 'in1'. The port definition is at: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Mux.sv(3).
+#    Time: 0 ps  Iteration: 0  Instance: /Top_tb/t1/alu_to_reg File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Mux.sv
+# Error loading design
+# End time: 13:22:16 on Dec 07,2025, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 14
+# Error attempted to pushdown all children on .main_pane.cs.7 mode is tabbed children are paneframes 1
 # Compile of Top_tb.sv was successful.
 # Compile of ALU.sv was successful.
 # Compile of Ctrl.sv was successful.
@@ -32,4 +67,119 @@
 # Compile of RegFile.sv was successful.
 # Compile of ALU2.sv was successful.
 # Compile of Top.sv was successful.
-# 10 compiles, 0 failed with no errors.
+# Compile of Mux.sv was successful.
+# 11 compiles, 0 failed with no errors.
+vsim -gui work.Top_tb
+# vsim -gui work.Top_tb 
+# Start time: 13:28:37 on Dec 07,2025
+# Loading sv_std.std
+# Loading work.Top_tb
+# Loading work.Top
+# Loading work.JLUT
+# Loading work.ProgCtr
+# Loading work.InstROM
+# Loading work.Ctrl
+# Loading work.RegFile
+# Loading work.ALU
+# Loading work.ALU2
+# Loading work.DMem
+# Loading work.Mux
+# ** Warning: (vsim-3008) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top_tb.sv(19): [CNNODP] - Component name (RF1) is not on a downward path.
+#    Time: 0 ps  Iteration: 0  Instance: /Top_tb File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top_tb.sv
+# ** Error: (vsim-3043) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top_tb.sv(19): Unresolved reference to 'RF1' in t1.RF1.
+#    Time: 0 ps  Iteration: 0  Instance: /Top_tb File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top_tb.sv
+# ** Warning: (vsim-3015) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top_tb.sv(7): [PCDPC] - Port size (9) does not match connection size (1) for port 'Done'. The port definition is at: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(4).
+#    Time: 0 ps  Iteration: 0  Instance: /Top_tb/t1 File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv
+# ** Warning: (vsim-3017) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(61): [TFMPC] - Too few port connections. Expected 20, found 17.
+#    Time: 0 ps  Iteration: 0  Instance: /Top_tb/t1/control_unit File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Ctrl.sv
+# ** Warning: (vsim-3015) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(61): [PCDPC] - Port size (2) does not match connection size (1) for port 'Cond'. The port definition is at: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Ctrl.sv(8).
+#    Time: 0 ps  Iteration: 0  Instance: /Top_tb/t1/control_unit File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Ctrl.sv
+# ** Warning: (vsim-3015) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(61): [PCDPC] - Port size (5) does not match connection size (1) for port 'ALU_IMM_VAL'. The port definition is at: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Ctrl.sv(22).
+#    Time: 0 ps  Iteration: 0  Instance: /Top_tb/t1/control_unit File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Ctrl.sv
+# ** Warning: (vsim-3722) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(61): [TFMPC] - Missing connection for port 'Alu2op'.
+# ** Warning: (vsim-3722) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(61): [TFMPC] - Missing connection for port 'Ra2'.
+# ** Warning: (vsim-3722) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(61): [TFMPC] - Missing connection for port 'Rb2'.
+# ** Warning: (vsim-3017) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(81): [TFMPC] - Too few port connections. Expected 9, found 8.
+#    Time: 0 ps  Iteration: 0  Instance: /Top_tb/t1/register_file File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/RegFile.sv
+# ** Warning: (vsim-3015) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(81): [PCDPC] - Port size (8) does not match connection size (9) for port 'Wdat'. The port definition is at: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/RegFile.sv(8).
+#    Time: 0 ps  Iteration: 0  Instance: /Top_tb/t1/register_file File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/RegFile.sv
+# ** Error: (vsim-8378) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(81): Port size (8) does not match connection size (9) for implicit .name connection port 'RdatA'. The port definition is at: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/RegFile.sv(9).
+#    Time: 0 ps  Iteration: 0  Instance: /Top_tb/t1/register_file File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/RegFile.sv
+# ** Error: (vsim-8378) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(81): Port size (8) does not match connection size (9) for implicit .name connection port 'RdatB'. The port definition is at: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/RegFile.sv(10).
+#    Time: 0 ps  Iteration: 0  Instance: /Top_tb/t1/register_file File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/RegFile.sv
+# ** Warning: (vsim-3722) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(81): [TFMPC] - Missing connection for port 'Rst'.
+# ** Warning: (vsim-3015) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(92): [PCDPC] - Port size (8) does not match connection size (9) for port 'acc'. The port definition is at: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/ALU.sv(3).
+#    Time: 0 ps  Iteration: 0  Instance: /Top_tb/t1/alu_one File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/ALU.sv
+# ** Warning: (vsim-3015) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(92): [PCDPC] - Port size (8) does not match connection size (9) for port 'inputReg'. The port definition is at: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/ALU.sv(4).
+#    Time: 0 ps  Iteration: 0  Instance: /Top_tb/t1/alu_one File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/ALU.sv
+# ** Warning: (vsim-3015) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(92): [PCDPC] - Port size (8) does not match connection size (9) for port 'Rslt'. The port definition is at: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/ALU.sv(5).
+#    Time: 0 ps  Iteration: 0  Instance: /Top_tb/t1/alu_one File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/ALU.sv
+# ** Warning: (vsim-3015) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(102): [PCDPC] - Port size (8) does not match connection size (9) for port 'acc'. The port definition is at: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/ALU2.sv(2).
+#    Time: 0 ps  Iteration: 0  Instance: /Top_tb/t1/alu_two File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/ALU2.sv
+# ** Warning: (vsim-3015) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(102): [PCDPC] - Port size (8) does not match connection size (9) for port 'inputReg'. The port definition is at: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/ALU2.sv(3).
+#    Time: 0 ps  Iteration: 0  Instance: /Top_tb/t1/alu_two File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/ALU2.sv
+# ** Warning: (vsim-3015) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(110): [PCDPC] - Port size (8) does not match connection size (9) for port 'WDat'. The port definition is at: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/DMem.sv(4).
+#    Time: 0 ps  Iteration: 0  Instance: /Top_tb/t1/data_mem File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/DMem.sv
+# ** Warning: (vsim-3015) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(110): [PCDPC] - Port size (4) does not match connection size (9) for port 'Addr'. The port definition is at: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/DMem.sv(5).
+#    Time: 0 ps  Iteration: 0  Instance: /Top_tb/t1/data_mem File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/DMem.sv
+# ** Warning: (vsim-3015) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(110): [PCDPC] - Port size (8) does not match connection size (9) for port 'Rdat'. The port definition is at: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/DMem.sv(6).
+#    Time: 0 ps  Iteration: 0  Instance: /Top_tb/t1/data_mem File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/DMem.sv
+# Error loading design
+# End time: 13:28:37 on Dec 07,2025, Elapsed time: 0:00:00
+# Errors: 3, Warnings: 19
+# Compile of Top_tb.sv was successful.
+# Compile of ALU.sv was successful.
+# Compile of Ctrl.sv was successful.
+# Compile of DMem.sv was successful.
+# Compile of InstROM.sv was successful.
+# Compile of JLUT.sv was successful.
+# Compile of ProgCtr.sv was successful.
+# Compile of RegFile.sv was successful.
+# Compile of ALU2.sv was successful.
+# Compile of Top.sv was successful.
+# Compile of Mux.sv was successful.
+# 11 compiles, 0 failed with no errors.
+vsim -gui work.Top_tb
+# vsim -gui work.Top_tb 
+# Start time: 13:37:19 on Dec 07,2025
+# Loading sv_std.std
+# Loading work.Top_tb
+# Loading work.Top
+# Loading work.JLUT
+# Loading work.ProgCtr
+# Loading work.InstROM
+# Loading work.Ctrl
+# Loading work.RegFile
+# Loading work.ALU
+# Loading work.ALU2
+# Loading work.DMem
+# Loading work.Mux
+# ** Warning: (vsim-3017) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(66): [TFMPC] - Too few port connections. Expected 20, found 17.
+#    Time: 0 ps  Iteration: 0  Instance: /Top_tb/t1/control_unit File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Ctrl.sv
+# ** Warning: (vsim-3722) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(66): [TFMPC] - Missing connection for port 'Alu2op'.
+# ** Warning: (vsim-3722) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(66): [TFMPC] - Missing connection for port 'Ra2'.
+# ** Warning: (vsim-3722) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(66): [TFMPC] - Missing connection for port 'Rb2'.
+# ** Warning: (vsim-3017) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(86): [TFMPC] - Too few port connections. Expected 9, found 8.
+#    Time: 0 ps  Iteration: 0  Instance: /Top_tb/t1/register_file File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/RegFile.sv
+# ** Warning: (vsim-3722) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(86): [TFMPC] - Missing connection for port 'Rst'.
+# ** Warning: (vsim-3015) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(115): [PCDPC] - Port size (4) does not match connection size (8) for port 'Addr'. The port definition is at: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/DMem.sv(5).
+#    Time: 0 ps  Iteration: 0  Instance: /Top_tb/t1/data_mem File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/DMem.sv
+# ** Warning: (vsim-3015) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(124): [PCDPC] - Port size (9) does not match connection size (8) for port 'in0'. The port definition is at: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Mux.sv(2).
+#    Time: 0 ps  Iteration: 0  Instance: /Top_tb/t1/alu_to_reg File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Mux.sv
+# ** Warning: (vsim-3015) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(124): [PCDPC] - Port size (9) does not match connection size (8) for port 'in1'. The port definition is at: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Mux.sv(3).
+#    Time: 0 ps  Iteration: 0  Instance: /Top_tb/t1/alu_to_reg File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Mux.sv
+# ** Warning: (vsim-3015) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(124): [PCDPC] - Port size (9) does not match connection size (8) for port 'out'. The port definition is at: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Mux.sv(5).
+#    Time: 0 ps  Iteration: 0  Instance: /Top_tb/t1/alu_to_reg File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Mux.sv
+add wave -position insertpoint sim:/Top_tb/t1/*
+run
+run
+run
+run
+run
+run
+run
+run
+run -all
+# ** Note: $stop    : C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top_tb.sv(22)
+#    Time: 2020 ns  Iteration: 0  Instance: /Top_tb
+# Break in Module Top_tb at C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top_tb.sv line 22
