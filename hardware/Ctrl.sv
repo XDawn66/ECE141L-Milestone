@@ -68,16 +68,21 @@ module Ctrl(
         	endcase
 	end
 	else if (mach_code[8] == 1'b0) begin // if R-type
-    	Rb = mach_code[3:0];
     	case (mach_code[7:4])
         4'b0000: begin
             Aluop = AND_OP;
+	    Wd   = acc_add;
+	    WenR  = 1'b1; 
         end
         4'b0001: begin
             Aluop = ADD_OP;
+            Wd   = acc_add;
+            WenR  = 1'b1; 
         end
         4'b0010: begin
             Aluop = SUB_OP;
+            Wd   = acc_add;
+	    WenR  = 1'b1; 
         end
         4'b0110: begin //load
 	    Rb   = mach_code[3:0];   // Rn holds memory address
@@ -95,26 +100,34 @@ module Ctrl(
         end
        	4'b1010: begin
             Aluop = OR_OP;
+            Wd   = acc_add;
+	    WenR  = 1'b1; 
         end
         4'b1011: begin
             Aluop = NOT_OP;
+	    Wd   = acc_add;
+	    WenR  = 1'b1; 
         end
         4'b1100: begin
             Aluop = SHL_OP;
+	    Wd   = acc_add;
+	    WenR  = 1'b1; 
         end
         4'b1101: begin
             Aluop = SHR_OP;
+            Wd   = acc_add;
+	    WenR  = 1'b1; 
         end
 	4'b1001: begin // RESET
     	Wd    = acc_add;   // destination is accumulator
     	WenR  = 1'b1;      // enable register write
-    	ALU_IMM = 1'b1;    // use immediate value (since we?re writing constant 0)
+    	ALU_IMM = 1'b1;    // use immediate value (since we're writing constant 0)
     	ALU_IMM_VAL = 4'b0000; // value = 0
 	end
 	4'b1000: begin // FILL
     	Wd    = acc_add;   // destination is accumulator
     	WenR  = 1'b1;      // enable register write
-    	ALU_IMM = 1'b1;    // use immediate value (since we?re writing constant 0)
+    	ALU_IMM = 1'b1;    // use immediate value (since we're writing constant 0)
     	ALU_IMM_VAL = 4'b1111; // value = 0
 	end
         4'b0111: begin //TST
@@ -125,11 +138,13 @@ module Ctrl(
         end
         4'b1110: begin //MOV
             Aluop = ADD_OP;
+	    Wd   = acc_add;
 	    WenR = 1'b1;//enable write to register
 	    Ldr = mach_code[3:0];
         end
 	4'b1111: begin //ADDNE
             Aluop = ADD_OP;
+	    Wd   = acc_add;
 	    WenR = Zero; // write only if Zero flag is set to 1 
         end
     	endcase
@@ -140,29 +155,42 @@ module Ctrl(
 	case (mach_code[7:5])
         3'b000: begin
             Aluop = AND_OP;
+	    Wd   = acc_add;
+	    WenR = 1'b1;
         end
         3'b001: begin
             Aluop = ADD_OP;
+	    Wd   = acc_add;
+	    WenR = 1'b1;
         end
         3'b010: begin
             Aluop = SUB_OP;
+	    Wd   = acc_add;
+	    WenR = 1'b1;
         end
         3'b011: begin //MOVI
             Aluop = ADD_OP;
+	    Wd   = acc_add;
 	    WenR = 1'b1;//enable load
         end
        	3'b100: begin //LSLI
             Aluop = SHL_OP;
+	    Wd   = acc_add;
+	    WenR = 1'b1;
         end
-       	3'b100: begin //RSLI
+       	3'b110: begin //RSLI
             Aluop = SHR_OP;
+	    Wd   = acc_add;
+	    WenR = 1'b1;
         end
         3'b101: begin //ORI
             Aluop = OR_OP;
+	    ALU_IMM = 1'b1;
+	    Wd   = acc_add;
+	    WenR = 1'b1;
+	    ALU_IMM_VAL = mach_code[4:0];
         end
-        3'b110: begin
-            Aluop = SHL_OP;
-        end
+
 	endcase
   end
  end
