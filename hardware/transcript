@@ -1,22 +1,44 @@
 # Reading C:/intelFPGA/18.1/modelsim_ase/tcl/vsim/pref.tcl
-# OpenFile {C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top_tb.sv}
-# Loading project ece141l
+# OpenFile {C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/ALU.sv}
+# Loading project p1demo
+# Compile of dat_mem.sv was successful.
+# Compile of DUT.sv was successful.
+# Compile of test_bench_hamming.sv was successful.
+# Compile of test_bench_hamming.sv.bak failed with 3 errors.
 # Compile of Top_tb.sv was successful.
 # Compile of ALU.sv was successful.
+# Compile of ALU_tb.sv was successful.
+# Compile of ALU2.sv was successful.
 # Compile of Ctrl.sv was successful.
+# Compile of ctrl_tb.sv was successful.
 # Compile of DMem.sv was successful.
 # Compile of InstROM.sv was successful.
 # Compile of JLUT.sv was successful.
+# Compile of Mux.sv was successful.
 # Compile of ProgCtr.sv was successful.
 # Compile of RegFile.sv was successful.
-# Compile of ALU2.sv was successful.
 # Compile of Top.sv was successful.
+# 17 compiles, 1 failed with 3 errors.
+# Compile of dat_mem.sv was successful.
+# Compile of DUT.sv was successful.
+# Compile of test_bench_hamming.sv was successful.
+# Compile of Top_tb.sv was successful.
+# Compile of ALU.sv was successful.
+# Compile of ALU_tb.sv was successful.
+# Compile of ALU2.sv was successful.
+# Compile of Ctrl.sv was successful.
+# Compile of ctrl_tb.sv was successful.
+# Compile of DMem.sv was successful.
+# Compile of InstROM.sv was successful.
+# Compile of JLUT.sv was successful.
 # Compile of Mux.sv was successful.
-vsim -gui work.Top_tb
-# vsim -gui work.Top_tb 
-# Start time: 13:22:16 on Dec 07,2025
+# Compile of ProgCtr.sv was successful.
+# Compile of RegFile.sv was successful.
+vsim -gui work.test_bench
+# vsim -gui work.test_bench 
+# Start time: 00:54:59 on Dec 08,2025
 # Loading sv_std.std
-# Loading work.Top_tb
+# Loading work.test_bench
 # Loading work.Top
 # Loading work.JLUT
 # Loading work.ProgCtr
@@ -27,159 +49,320 @@ vsim -gui work.Top_tb
 # Loading work.ALU2
 # Loading work.DMem
 # Loading work.Mux
-# ** Warning: (vsim-3008) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top_tb.sv(19): [CNNODP] - Component name (RF1) is not on a downward path.
-#    Time: 0 ps  Iteration: 0  Instance: /Top_tb File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top_tb.sv
-# ** Error: (vsim-3043) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top_tb.sv(19): Unresolved reference to 'RF1' in t1.RF1.
-#    Time: 0 ps  Iteration: 0  Instance: /Top_tb File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top_tb.sv
-# ** Warning: (vsim-3015) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top_tb.sv(7): [PCDPC] - Port size (9) does not match connection size (1) for port 'Done'. The port definition is at: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(4).
-#    Time: 0 ps  Iteration: 0  Instance: /Top_tb/t1 File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv
-# ** Warning: (vsim-3017) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(61): [TFMPC] - Too few port connections. Expected 20, found 17.
-#    Time: 0 ps  Iteration: 0  Instance: /Top_tb/t1/control_unit File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Ctrl.sv
-# ** Warning: (vsim-3015) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(61): [PCDPC] - Port size (2) does not match connection size (1) for port 'Cond'. The port definition is at: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Ctrl.sv(8).
-#    Time: 0 ps  Iteration: 0  Instance: /Top_tb/t1/control_unit File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Ctrl.sv
-# ** Warning: (vsim-3015) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(61): [PCDPC] - Port size (5) does not match connection size (1) for port 'ALU_IMM_VAL'. The port definition is at: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Ctrl.sv(22).
-#    Time: 0 ps  Iteration: 0  Instance: /Top_tb/t1/control_unit File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Ctrl.sv
-# ** Warning: (vsim-3722) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(61): [TFMPC] - Missing connection for port 'Alu2op'.
-# ** Warning: (vsim-3722) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(61): [TFMPC] - Missing connection for port 'Ra2'.
-# ** Warning: (vsim-3722) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(61): [TFMPC] - Missing connection for port 'Rb2'.
-# ** Warning: (vsim-3017) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(81): [TFMPC] - Too few port connections. Expected 9, found 8.
-#    Time: 0 ps  Iteration: 0  Instance: /Top_tb/t1/register_file File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/RegFile.sv
-# ** Warning: (vsim-3015) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(81): [PCDPC] - Port size (8) does not match connection size (9) for port 'Wdat'. The port definition is at: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/RegFile.sv(8).
-#    Time: 0 ps  Iteration: 0  Instance: /Top_tb/t1/register_file File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/RegFile.sv
-# ** Warning: (vsim-3722) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(81): [TFMPC] - Missing connection for port 'Rst'.
-# ** Warning: (vsim-3015) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(110): [PCDPC] - Port size (4) does not match connection size (8) for port 'Addr'. The port definition is at: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/DMem.sv(5).
-#    Time: 0 ps  Iteration: 0  Instance: /Top_tb/t1/data_mem File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/DMem.sv
-# ** Warning: (vsim-3015) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(119): [PCDPC] - Port size (9) does not match connection size (8) for port 'in0'. The port definition is at: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Mux.sv(2).
-#    Time: 0 ps  Iteration: 0  Instance: /Top_tb/t1/alu_to_reg File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Mux.sv
-# ** Warning: (vsim-3015) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(119): [PCDPC] - Port size (9) does not match connection size (8) for port 'in1'. The port definition is at: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Mux.sv(3).
-#    Time: 0 ps  Iteration: 0  Instance: /Top_tb/t1/alu_to_reg File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Mux.sv
-# Error loading design
-# End time: 13:22:16 on Dec 07,2025, Elapsed time: 0:00:00
-# Errors: 1, Warnings: 14
-# Error attempted to pushdown all children on .main_pane.cs.7 mode is tabbed children are paneframes 1
-# Compile of Top_tb.sv was successful.
-# Compile of ALU.sv was successful.
-# Compile of Ctrl.sv was successful.
-# Compile of DMem.sv was successful.
-# Compile of InstROM.sv was successful.
-# Compile of JLUT.sv was successful.
-# Compile of ProgCtr.sv was successful.
-# Compile of RegFile.sv was successful.
-# Compile of ALU2.sv was successful.
+# ** Warning: (vsim-3017) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(67): [TFMPC] - Too few port connections. Expected 20, found 17.
+#    Time: 0 ps  Iteration: 0  Instance: /test_bench/D1/control_unit File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Ctrl.sv
+# ** Warning: (vsim-3722) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(67): [TFMPC] - Missing connection for port 'Alu2op'.
+# ** Warning: (vsim-3722) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(67): [TFMPC] - Missing connection for port 'Ra2'.
+# ** Warning: (vsim-3722) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(67): [TFMPC] - Missing connection for port 'Rb2'.
+# ** Warning: (vsim-3017) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(87): [TFMPC] - Too few port connections. Expected 9, found 8.
+#    Time: 0 ps  Iteration: 0  Instance: /test_bench/D1/register_file File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/RegFile.sv
+# ** Warning: (vsim-3722) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(87): [TFMPC] - Missing connection for port 'Rst'.
+# ** Warning: (vsim-3015) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(116): [PCDPC] - Port size (4) does not match connection size (8) for port 'Addr'. The port definition is at: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/DMem.sv(5).
+#    Time: 0 ps  Iteration: 0  Instance: /test_bench/D1/data_mem File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/DMem.sv
+# ** Warning: (vsim-3015) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(125): [PCDPC] - Port size (9) does not match connection size (8) for port 'in0'. The port definition is at: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Mux.sv(2).
+#    Time: 0 ps  Iteration: 0  Instance: /test_bench/D1/alu_to_reg File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Mux.sv
+# ** Warning: (vsim-3015) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(125): [PCDPC] - Port size (9) does not match connection size (8) for port 'in1'. The port definition is at: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Mux.sv(3).
+#    Time: 0 ps  Iteration: 0  Instance: /test_bench/D1/alu_to_reg File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Mux.sv
+# ** Warning: (vsim-3015) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(125): [PCDPC] - Port size (9) does not match connection size (8) for port 'out'. The port definition is at: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Mux.sv(5).
+#    Time: 0 ps  Iteration: 0  Instance: /test_bench/D1/alu_to_reg File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Mux.sv
 # Compile of Top.sv was successful.
-# Compile of Mux.sv was successful.
-# 11 compiles, 0 failed with no errors.
-vsim -gui work.Top_tb
-# vsim -gui work.Top_tb 
-# Start time: 13:28:37 on Dec 07,2025
-# Loading sv_std.std
-# Loading work.Top_tb
-# Loading work.Top
-# Loading work.JLUT
-# Loading work.ProgCtr
-# Loading work.InstROM
-# Loading work.Ctrl
-# Loading work.RegFile
-# Loading work.ALU
-# Loading work.ALU2
-# Loading work.DMem
-# Loading work.Mux
-# ** Warning: (vsim-3008) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top_tb.sv(19): [CNNODP] - Component name (RF1) is not on a downward path.
-#    Time: 0 ps  Iteration: 0  Instance: /Top_tb File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top_tb.sv
-# ** Error: (vsim-3043) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top_tb.sv(19): Unresolved reference to 'RF1' in t1.RF1.
-#    Time: 0 ps  Iteration: 0  Instance: /Top_tb File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top_tb.sv
-# ** Warning: (vsim-3015) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top_tb.sv(7): [PCDPC] - Port size (9) does not match connection size (1) for port 'Done'. The port definition is at: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(4).
-#    Time: 0 ps  Iteration: 0  Instance: /Top_tb/t1 File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv
-# ** Warning: (vsim-3017) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(61): [TFMPC] - Too few port connections. Expected 20, found 17.
-#    Time: 0 ps  Iteration: 0  Instance: /Top_tb/t1/control_unit File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Ctrl.sv
-# ** Warning: (vsim-3015) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(61): [PCDPC] - Port size (2) does not match connection size (1) for port 'Cond'. The port definition is at: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Ctrl.sv(8).
-#    Time: 0 ps  Iteration: 0  Instance: /Top_tb/t1/control_unit File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Ctrl.sv
-# ** Warning: (vsim-3015) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(61): [PCDPC] - Port size (5) does not match connection size (1) for port 'ALU_IMM_VAL'. The port definition is at: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Ctrl.sv(22).
-#    Time: 0 ps  Iteration: 0  Instance: /Top_tb/t1/control_unit File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Ctrl.sv
-# ** Warning: (vsim-3722) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(61): [TFMPC] - Missing connection for port 'Alu2op'.
-# ** Warning: (vsim-3722) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(61): [TFMPC] - Missing connection for port 'Ra2'.
-# ** Warning: (vsim-3722) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(61): [TFMPC] - Missing connection for port 'Rb2'.
-# ** Warning: (vsim-3017) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(81): [TFMPC] - Too few port connections. Expected 9, found 8.
-#    Time: 0 ps  Iteration: 0  Instance: /Top_tb/t1/register_file File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/RegFile.sv
-# ** Warning: (vsim-3015) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(81): [PCDPC] - Port size (8) does not match connection size (9) for port 'Wdat'. The port definition is at: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/RegFile.sv(8).
-#    Time: 0 ps  Iteration: 0  Instance: /Top_tb/t1/register_file File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/RegFile.sv
-# ** Error: (vsim-8378) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(81): Port size (8) does not match connection size (9) for implicit .name connection port 'RdatA'. The port definition is at: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/RegFile.sv(9).
-#    Time: 0 ps  Iteration: 0  Instance: /Top_tb/t1/register_file File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/RegFile.sv
-# ** Error: (vsim-8378) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(81): Port size (8) does not match connection size (9) for implicit .name connection port 'RdatB'. The port definition is at: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/RegFile.sv(10).
-#    Time: 0 ps  Iteration: 0  Instance: /Top_tb/t1/register_file File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/RegFile.sv
-# ** Warning: (vsim-3722) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(81): [TFMPC] - Missing connection for port 'Rst'.
-# ** Warning: (vsim-3015) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(92): [PCDPC] - Port size (8) does not match connection size (9) for port 'acc'. The port definition is at: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/ALU.sv(3).
-#    Time: 0 ps  Iteration: 0  Instance: /Top_tb/t1/alu_one File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/ALU.sv
-# ** Warning: (vsim-3015) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(92): [PCDPC] - Port size (8) does not match connection size (9) for port 'inputReg'. The port definition is at: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/ALU.sv(4).
-#    Time: 0 ps  Iteration: 0  Instance: /Top_tb/t1/alu_one File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/ALU.sv
-# ** Warning: (vsim-3015) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(92): [PCDPC] - Port size (8) does not match connection size (9) for port 'Rslt'. The port definition is at: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/ALU.sv(5).
-#    Time: 0 ps  Iteration: 0  Instance: /Top_tb/t1/alu_one File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/ALU.sv
-# ** Warning: (vsim-3015) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(102): [PCDPC] - Port size (8) does not match connection size (9) for port 'acc'. The port definition is at: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/ALU2.sv(2).
-#    Time: 0 ps  Iteration: 0  Instance: /Top_tb/t1/alu_two File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/ALU2.sv
-# ** Warning: (vsim-3015) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(102): [PCDPC] - Port size (8) does not match connection size (9) for port 'inputReg'. The port definition is at: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/ALU2.sv(3).
-#    Time: 0 ps  Iteration: 0  Instance: /Top_tb/t1/alu_two File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/ALU2.sv
-# ** Warning: (vsim-3015) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(110): [PCDPC] - Port size (8) does not match connection size (9) for port 'WDat'. The port definition is at: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/DMem.sv(4).
-#    Time: 0 ps  Iteration: 0  Instance: /Top_tb/t1/data_mem File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/DMem.sv
-# ** Warning: (vsim-3015) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(110): [PCDPC] - Port size (4) does not match connection size (9) for port 'Addr'. The port definition is at: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/DMem.sv(5).
-#    Time: 0 ps  Iteration: 0  Instance: /Top_tb/t1/data_mem File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/DMem.sv
-# ** Warning: (vsim-3015) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(110): [PCDPC] - Port size (8) does not match connection size (9) for port 'Rdat'. The port definition is at: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/DMem.sv(6).
-#    Time: 0 ps  Iteration: 0  Instance: /Top_tb/t1/data_mem File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/DMem.sv
-# Error loading design
-# End time: 13:28:37 on Dec 07,2025, Elapsed time: 0:00:00
-# Errors: 3, Warnings: 19
-# Compile of Top_tb.sv was successful.
-# Compile of ALU.sv was successful.
-# Compile of Ctrl.sv was successful.
-# Compile of DMem.sv was successful.
-# Compile of InstROM.sv was successful.
-# Compile of JLUT.sv was successful.
-# Compile of ProgCtr.sv was successful.
-# Compile of RegFile.sv was successful.
-# Compile of ALU2.sv was successful.
-# Compile of Top.sv was successful.
-# Compile of Mux.sv was successful.
-# 11 compiles, 0 failed with no errors.
-vsim -gui work.Top_tb
-# vsim -gui work.Top_tb 
-# Start time: 13:37:19 on Dec 07,2025
-# Loading sv_std.std
-# Loading work.Top_tb
-# Loading work.Top
-# Loading work.JLUT
-# Loading work.ProgCtr
-# Loading work.InstROM
-# Loading work.Ctrl
-# Loading work.RegFile
-# Loading work.ALU
-# Loading work.ALU2
-# Loading work.DMem
-# Loading work.Mux
-# ** Warning: (vsim-3017) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(66): [TFMPC] - Too few port connections. Expected 20, found 17.
-#    Time: 0 ps  Iteration: 0  Instance: /Top_tb/t1/control_unit File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Ctrl.sv
-# ** Warning: (vsim-3722) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(66): [TFMPC] - Missing connection for port 'Alu2op'.
-# ** Warning: (vsim-3722) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(66): [TFMPC] - Missing connection for port 'Ra2'.
-# ** Warning: (vsim-3722) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(66): [TFMPC] - Missing connection for port 'Rb2'.
-# ** Warning: (vsim-3017) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(86): [TFMPC] - Too few port connections. Expected 9, found 8.
-#    Time: 0 ps  Iteration: 0  Instance: /Top_tb/t1/register_file File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/RegFile.sv
-# ** Warning: (vsim-3722) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(86): [TFMPC] - Missing connection for port 'Rst'.
-# ** Warning: (vsim-3015) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(115): [PCDPC] - Port size (4) does not match connection size (8) for port 'Addr'. The port definition is at: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/DMem.sv(5).
-#    Time: 0 ps  Iteration: 0  Instance: /Top_tb/t1/data_mem File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/DMem.sv
-# ** Warning: (vsim-3015) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(124): [PCDPC] - Port size (9) does not match connection size (8) for port 'in0'. The port definition is at: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Mux.sv(2).
-#    Time: 0 ps  Iteration: 0  Instance: /Top_tb/t1/alu_to_reg File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Mux.sv
-# ** Warning: (vsim-3015) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(124): [PCDPC] - Port size (9) does not match connection size (8) for port 'in1'. The port definition is at: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Mux.sv(3).
-#    Time: 0 ps  Iteration: 0  Instance: /Top_tb/t1/alu_to_reg File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Mux.sv
-# ** Warning: (vsim-3015) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(124): [PCDPC] - Port size (9) does not match connection size (8) for port 'out'. The port definition is at: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Mux.sv(5).
-#    Time: 0 ps  Iteration: 0  Instance: /Top_tb/t1/alu_to_reg File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Mux.sv
-add wave -position insertpoint sim:/Top_tb/t1/*
-run
-run
-run
-run
-run
-run
-run
-run
+# 16 compiles, 0 failed with no errors.
 run -all
-# ** Note: $stop    : C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top_tb.sv(22)
-#    Time: 2020 ns  Iteration: 0  Instance: /Top_tb
-# Break in Module Top_tb at C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top_tb.sv line 22
+#           0:  11111111
+#           1:  11111111
+#           2:  00000000
+#           3:  00000000
+#           4:  11110000
+#           5:  00001111
+#           6:  10101010
+#           7:  01010101
+#           8:  10000000
+#           9:  00000000
+#          10:  00000000
+#          11:  00000001
+#          12:  11111111
+#          13:  11111111
+#          14:  00000000
+#          15:  00000000
+#  
+# j,kj = [          0,          1] dist= 0
+# j,kj = [          0,          2] dist= 8
+# j,kj = [          0,          3] dist= 8
+# j,kj = [          0,          4] dist= 4
+# j,kj = [          0,          5] dist= 4
+# j,kj = [          0,          6] dist= 4
+# j,kj = [          0,          7] dist= 4
+# j,kj = [          0,          8] dist= 7
+# j,kj = [          0,          9] dist= 8
+# j,kj = [          0,         10] dist= 8
+# j,kj = [          0,         11] dist= 7
+# j,kj = [          0,         12] dist= 0
+# j,kj = [          0,         13] dist= 0
+# j,kj = [          0,         14] dist= 8
+# j,kj = [          0,         15] dist= 8
+# j,kj = [          1,          2] dist= 8
+# j,kj = [          1,          3] dist= 8
+# j,kj = [          1,          4] dist= 4
+# j,kj = [          1,          5] dist= 4
+# j,kj = [          1,          6] dist= 4
+# j,kj = [          1,          7] dist= 4
+# j,kj = [          1,          8] dist= 7
+# j,kj = [          1,          9] dist= 8
+# j,kj = [          1,         10] dist= 8
+# j,kj = [          1,         11] dist= 7
+# j,kj = [          1,         12] dist= 0
+# j,kj = [          1,         13] dist= 0
+# j,kj = [          1,         14] dist= 8
+# j,kj = [          1,         15] dist= 8
+# j,kj = [          2,          3] dist= 0
+# j,kj = [          2,          4] dist= 4
+# j,kj = [          2,          5] dist= 4
+# j,kj = [          2,          6] dist= 4
+# j,kj = [          2,          7] dist= 4
+# j,kj = [          2,          8] dist= 1
+# j,kj = [          2,          9] dist= 0
+# j,kj = [          2,         10] dist= 0
+# j,kj = [          2,         11] dist= 1
+# j,kj = [          2,         12] dist= 8
+# j,kj = [          2,         13] dist= 8
+# j,kj = [          2,         14] dist= 0
+# j,kj = [          2,         15] dist= 0
+# j,kj = [          3,          4] dist= 4
+# j,kj = [          3,          5] dist= 4
+# j,kj = [          3,          6] dist= 4
+# j,kj = [          3,          7] dist= 4
+# j,kj = [          3,          8] dist= 1
+# j,kj = [          3,          9] dist= 0
+# j,kj = [          3,         10] dist= 0
+# j,kj = [          3,         11] dist= 1
+# j,kj = [          3,         12] dist= 8
+# j,kj = [          3,         13] dist= 8
+# j,kj = [          3,         14] dist= 0
+# j,kj = [          3,         15] dist= 0
+# j,kj = [          4,          5] dist= 8
+# j,kj = [          4,          6] dist= 4
+# j,kj = [          4,          7] dist= 4
+# j,kj = [          4,          8] dist= 3
+# j,kj = [          4,          9] dist= 4
+# j,kj = [          4,         10] dist= 4
+# j,kj = [          4,         11] dist= 5
+# j,kj = [          4,         12] dist= 4
+# j,kj = [          4,         13] dist= 4
+# j,kj = [          4,         14] dist= 4
+# j,kj = [          4,         15] dist= 4
+# j,kj = [          5,          6] dist= 4
+# j,kj = [          5,          7] dist= 4
+# j,kj = [          5,          8] dist= 5
+# j,kj = [          5,          9] dist= 4
+# j,kj = [          5,         10] dist= 4
+# j,kj = [          5,         11] dist= 3
+# j,kj = [          5,         12] dist= 4
+# j,kj = [          5,         13] dist= 4
+# j,kj = [          5,         14] dist= 4
+# j,kj = [          5,         15] dist= 4
+# j,kj = [          6,          7] dist= 8
+# j,kj = [          6,          8] dist= 3
+# j,kj = [          6,          9] dist= 4
+# j,kj = [          6,         10] dist= 4
+# j,kj = [          6,         11] dist= 5
+# j,kj = [          6,         12] dist= 4
+# j,kj = [          6,         13] dist= 4
+# j,kj = [          6,         14] dist= 4
+# j,kj = [          6,         15] dist= 4
+# j,kj = [          7,          8] dist= 5
+# j,kj = [          7,          9] dist= 4
+# j,kj = [          7,         10] dist= 4
+# j,kj = [          7,         11] dist= 3
+# j,kj = [          7,         12] dist= 4
+# j,kj = [          7,         13] dist= 4
+# j,kj = [          7,         14] dist= 4
+# j,kj = [          7,         15] dist= 4
+# j,kj = [          8,          9] dist= 1
+# j,kj = [          8,         10] dist= 1
+# j,kj = [          8,         11] dist= 2
+# j,kj = [          8,         12] dist= 7
+# j,kj = [          8,         13] dist= 7
+# j,kj = [          8,         14] dist= 1
+# j,kj = [          8,         15] dist= 1
+# j,kj = [          9,         10] dist= 0
+# j,kj = [          9,         11] dist= 1
+# j,kj = [          9,         12] dist= 8
+# j,kj = [          9,         13] dist= 8
+# j,kj = [          9,         14] dist= 0
+# j,kj = [          9,         15] dist= 0
+# j,kj = [         10,         11] dist= 1
+# j,kj = [         10,         12] dist= 8
+# j,kj = [         10,         13] dist= 8
+# j,kj = [         10,         14] dist= 0
+# j,kj = [         10,         15] dist= 0
+# j,kj = [         11,         12] dist= 7
+# j,kj = [         11,         13] dist= 7
+# j,kj = [         11,         14] dist= 1
+# j,kj = [         11,         15] dist= 1
+# j,kj = [         12,         13] dist= 0
+# j,kj = [         12,         14] dist= 8
+# j,kj = [         12,         15] dist= 8
+# j,kj = [         13,         14] dist= 8
+# j,kj = [         13,         15] dist= 8
+# j,kj = [         14,         15] dist= 0
+add wave -position insertpoint sim:/test_bench/D1/*
+run -all
+restart
+# ** Warning: (vsim-3017) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(67): [TFMPC] - Too few port connections. Expected 20, found 17.
+#    Time: 0 ps  Iteration: 0  Instance: /test_bench/D1/control_unit File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Ctrl.sv
+# ** Warning: (vsim-3722) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(67): [TFMPC] - Missing connection for port 'Alu2op'.
+# ** Warning: (vsim-3722) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(67): [TFMPC] - Missing connection for port 'Ra2'.
+# ** Warning: (vsim-3722) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(67): [TFMPC] - Missing connection for port 'Rb2'.
+# ** Warning: (vsim-3017) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(87): [TFMPC] - Too few port connections. Expected 9, found 8.
+#    Time: 0 ps  Iteration: 0  Instance: /test_bench/D1/register_file File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/RegFile.sv
+# ** Warning: (vsim-3722) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(87): [TFMPC] - Missing connection for port 'Rst'.
+# ** Warning: (vsim-3015) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(116): [PCDPC] - Port size (4) does not match connection size (8) for port 'Addr'. The port definition is at: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/DMem.sv(5).
+#    Time: 0 ps  Iteration: 0  Instance: /test_bench/D1/data_mem File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/DMem.sv
+# ** Warning: (vsim-3015) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(125): [PCDPC] - Port size (9) does not match connection size (8) for port 'in0'. The port definition is at: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Mux.sv(2).
+#    Time: 0 ps  Iteration: 0  Instance: /test_bench/D1/alu_to_reg File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Mux.sv
+# ** Warning: (vsim-3015) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(125): [PCDPC] - Port size (9) does not match connection size (8) for port 'in1'. The port definition is at: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Mux.sv(3).
+#    Time: 0 ps  Iteration: 0  Instance: /test_bench/D1/alu_to_reg File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Mux.sv
+# ** Warning: (vsim-3015) C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv(125): [PCDPC] - Port size (9) does not match connection size (8) for port 'out'. The port definition is at: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Mux.sv(5).
+#    Time: 0 ps  Iteration: 0  Instance: /test_bench/D1/alu_to_reg File: C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Mux.sv
+run
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+run -all
+#           0:  11111111
+#           1:  11111111
+#           2:  00000000
+#           3:  00000000
+#           4:  11110000
+#           5:  00001111
+#           6:  10101010
+#           7:  01010101
+#           8:  10000000
+#           9:  00000000
+#          10:  00000000
+#          11:  00000001
+#          12:  11111111
+#          13:  11111111
+#          14:  00000000
+#          15:  00000000
+#  
+# j,kj = [          0,          1] dist= 0
+# j,kj = [          0,          2] dist= 8
+# j,kj = [          0,          3] dist= 8
+# j,kj = [          0,          4] dist= 4
+# j,kj = [          0,          5] dist= 4
+# j,kj = [          0,          6] dist= 4
+# j,kj = [          0,          7] dist= 4
+# j,kj = [          0,          8] dist= 7
+# j,kj = [          0,          9] dist= 8
+# j,kj = [          0,         10] dist= 8
+# j,kj = [          0,         11] dist= 7
+# j,kj = [          0,         12] dist= 0
+# j,kj = [          0,         13] dist= 0
+# j,kj = [          0,         14] dist= 8
+# j,kj = [          0,         15] dist= 8
+# j,kj = [          1,          2] dist= 8
+# j,kj = [          1,          3] dist= 8
+# j,kj = [          1,          4] dist= 4
+# j,kj = [          1,          5] dist= 4
+# j,kj = [          1,          6] dist= 4
+# j,kj = [          1,          7] dist= 4
+# j,kj = [          1,          8] dist= 7
+# j,kj = [          1,          9] dist= 8
+# j,kj = [          1,         10] dist= 8
+# j,kj = [          1,         11] dist= 7
+# j,kj = [          1,         12] dist= 0
+# j,kj = [          1,         13] dist= 0
+# j,kj = [          1,         14] dist= 8
+# j,kj = [          1,         15] dist= 8
+# j,kj = [          2,          3] dist= 0
+# j,kj = [          2,          4] dist= 4
+# j,kj = [          2,          5] dist= 4
+# j,kj = [          2,          6] dist= 4
+# j,kj = [          2,          7] dist= 4
+# j,kj = [          2,          8] dist= 1
+# j,kj = [          2,          9] dist= 0
+# j,kj = [          2,         10] dist= 0
+# j,kj = [          2,         11] dist= 1
+# j,kj = [          2,         12] dist= 8
+# j,kj = [          2,         13] dist= 8
+# j,kj = [          2,         14] dist= 0
+# j,kj = [          2,         15] dist= 0
+# j,kj = [          3,          4] dist= 4
+# j,kj = [          3,          5] dist= 4
+# j,kj = [          3,          6] dist= 4
+# j,kj = [          3,          7] dist= 4
+# j,kj = [          3,          8] dist= 1
+# j,kj = [          3,          9] dist= 0
+# j,kj = [          3,         10] dist= 0
+# j,kj = [          3,         11] dist= 1
+# j,kj = [          3,         12] dist= 8
+# j,kj = [          3,         13] dist= 8
+# j,kj = [          3,         14] dist= 0
+# j,kj = [          3,         15] dist= 0
+# j,kj = [          4,          5] dist= 8
+# j,kj = [          4,          6] dist= 4
+# j,kj = [          4,          7] dist= 4
+# j,kj = [          4,          8] dist= 3
+# j,kj = [          4,          9] dist= 4
+# j,kj = [          4,         10] dist= 4
+# j,kj = [          4,         11] dist= 5
+# j,kj = [          4,         12] dist= 4
+# j,kj = [          4,         13] dist= 4
+# j,kj = [          4,         14] dist= 4
+# j,kj = [          4,         15] dist= 4
+# j,kj = [          5,          6] dist= 4
+# j,kj = [          5,          7] dist= 4
+# j,kj = [          5,          8] dist= 5
+# j,kj = [          5,          9] dist= 4
+# j,kj = [          5,         10] dist= 4
+# j,kj = [          5,         11] dist= 3
+# j,kj = [          5,         12] dist= 4
+# j,kj = [          5,         13] dist= 4
+# j,kj = [          5,         14] dist= 4
+# j,kj = [          5,         15] dist= 4
+# j,kj = [          6,          7] dist= 8
+# j,kj = [          6,          8] dist= 3
+# j,kj = [          6,          9] dist= 4
+# j,kj = [          6,         10] dist= 4
+# j,kj = [          6,         11] dist= 5
+# j,kj = [          6,         12] dist= 4
+# j,kj = [          6,         13] dist= 4
+# j,kj = [          6,         14] dist= 4
+# j,kj = [          6,         15] dist= 4
+# j,kj = [          7,          8] dist= 5
+# j,kj = [          7,          9] dist= 4
+# j,kj = [          7,         10] dist= 4
+# j,kj = [          7,         11] dist= 3
+# j,kj = [          7,         12] dist= 4
+# j,kj = [          7,         13] dist= 4
+# j,kj = [          7,         14] dist= 4
+# j,kj = [          7,         15] dist= 4
+# j,kj = [          8,          9] dist= 1
+# j,kj = [          8,         10] dist= 1
+# j,kj = [          8,         11] dist= 2
+# j,kj = [          8,         12] dist= 7
+# j,kj = [          8,         13] dist= 7
+# j,kj = [          8,         14] dist= 1
+# j,kj = [          8,         15] dist= 1
+# j,kj = [          9,         10] dist= 0
+# j,kj = [          9,         11] dist= 1
+# j,kj = [          9,         12] dist= 8
+# j,kj = [          9,         13] dist= 8
+# j,kj = [          9,         14] dist= 0
+# j,kj = [          9,         15] dist= 0
+# j,kj = [         10,         11] dist= 1
+# j,kj = [         10,         12] dist= 8
+# j,kj = [         10,         13] dist= 8
+# j,kj = [         10,         14] dist= 0
+# j,kj = [         10,         15] dist= 0
+# j,kj = [         11,         12] dist= 7
+# j,kj = [         11,         13] dist= 7
+# j,kj = [         11,         14] dist= 1
+# j,kj = [         11,         15] dist= 1
+# j,kj = [         12,         13] dist= 0
+# j,kj = [         12,         14] dist= 8
+# j,kj = [         12,         15] dist= 8
+# j,kj = [         13,         14] dist= 8
+# j,kj = [         13,         15] dist= 8
+# j,kj = [         14,         15] dist= 0

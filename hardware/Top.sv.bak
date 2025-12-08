@@ -35,7 +35,7 @@ output logic Done);
 logic pair, zero, sc_0;
 logic pairQ, zeroQ, carry_in;
 logic carry_clr, carry_en;
-logic [8:0] WdatR_mux; 
+logic [7:0] WdatR_mux; 
 assign  DatA = RdatA;
 assign  DatB = RdatB; 
 assign  WdatR = Rslt; 
