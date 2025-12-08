@@ -9,8 +9,8 @@ module Ctrl(
   output logic [3:0] Ra,             // acc address
                      Rb,             // input reg address
                      Wd,             // writing address
-		     Ra2,
-		     Rb2,
+		             Ra2,
+		             Rb2,
   output logic       WenR,           // data register write enable
                      WenImm,         // data mem write imm enable
                      WenD,           // data mem load enable
@@ -38,28 +38,29 @@ module Ctrl(
    localparam SHR_OP  = 4'b1101;
 
   always_comb begin
-	Aluop = 4'b1100;		// ddefault ALU operaion (LSH)
+	Aluop = 4'b1100;		// default ALU operation (LSH)
 	Jptr  = 8'b0;		// jump pointer
-	Ra    = acc_add;		// accumlator as default
-	Rb    = acc_add;		//placeholder    
-	Wd    = acc_add;		//placeholder
+	Ra    = acc_add;		// accumulator as default
+	Rb    = acc_add;		// placeholder    
+	Wd    = acc_add;		// placeholder
 	WenR  = 1'b0;		// no reg file load enable by default
 	WenD  = 1'b0;		// no data mem write enable by default
 	WenImm = 1'b0;		// no imm op by default
-	Ldr   =	acc_add;		// load placeholder
-    	Str	  = acc_add;		// store placeholder
+	Ldr   = 4'b0000;		// load placeholder
+    	Str	  = 1'b0;		// store placeholder
 	ALU_IMM = 1'b0;
-	ALU_IMM_VAL = 5'b00000;  //ALU imm value = 0
+	ALU_IMM_VAL = 5'b00000;  // ALU imm value = 0
 	Alu2op = 4'b0000;
-	EnAlu2 = 1'b0; //not using alu2 by default
+	EnAlu2 = 1'b0; // not using alu2 by default
 	Ra2    = acc_add;
 	Rb2    = acc_add;
-	Cond        = 2'b00;
+	Cond   = 2'b00;
 
-	if(mach_code[8:7] == 2'b11) begin// if j type
-	Ra = acc_add;
-	Aluop = SUB_OP;
-	Jptr = {3'b000, mach_code[4:0]}; //zero extend to 8 bit to match PC
+	// J-type instructions (bits [8:7] == 2'b11)
+	if(mach_code[8:7] == 2'b11) begin
+	    Ra = acc_add;
+	    Aluop = SUB_OP;
+	    Jptr = {3'b000, mach_code[4:0]}; // zero extend to 8 bit to match PC
 		case (mach_code[6:5])
             	2'b00: Cond = 2'b00; // J  
             	2'b01: Cond = 2'b01; // JE - ACC == 0
@@ -67,131 +68,158 @@ module Ctrl(
             	2'b11: Cond = 2'b11; // JL - ACC < 0
         	endcase
 	end
-	else if (mach_code[8] == 1'b0) begin // if R-type
+	// R-type instructions (bit [8] == 0)
+	else if (mach_code[8] == 1'b0) begin
     	case (mach_code[7:4])
-        4'b0000: begin
+        4'b0000: begin // AND
             Aluop = AND_OP;
-	    Wd   = acc_add;
+            Ra    = acc_add;
+            Rb    = mach_code[3:0];
+	    Wd    = acc_add;
 	    WenR  = 1'b1; 
         end
-        4'b0001: begin
+        4'b0001: begin // ADD
             Aluop = ADD_OP;
-            Wd   = acc_add;
+            Ra    = acc_add;
+            Rb    = mach_code[3:0];
+            Wd    = acc_add;
             WenR  = 1'b1; 
         end
-        4'b0010: begin
+        4'b0010: begin // SUB
             Aluop = SUB_OP;
-            Wd   = acc_add;
+            Ra    = acc_add;
+            Rb    = mach_code[3:0];
+            Wd    = acc_add;
 	    WenR  = 1'b1; 
         end
-        4'b0110: begin //load
-	    Rb   = mach_code[3:0];   // Rn holds memory address
-	    WenR = 1'b1;//enable load
-	    Wd   = acc_add;          // ACC is destination register
-	    WenD = 1'b0;             // NOT a store
+        4'b0110: begin // LOAD - load from memory[Rb] to ACC
+	    Ra    = acc_add;
+	    Rb    = mach_code[3:0];   // Rb holds memory address
+	    WenR  = 1'b1;              // enable write to register
+	    Wd    = acc_add;           // ACC is destination register
+	    WenD  = 1'b0;              // NOT a store
+	    Ldr   = 1'b1;              // This is a load operation
         end
-        4'b0101: begin //store
-  	    WenR = 1'b1;//enable store to reg
-	    Wd = mach_code[3:0];
+        4'b0101: begin // STORE - store ACC to register Rn
+            Ra    = acc_add;           // Read from ACC
+  	    WenR  = 1'b1;              // enable store to reg
+	    Wd    = mach_code[3:0];    // Destination register
+	    Aluop = ADD_OP;            // Pass through ACC (ACC + 0)
+	    ALU_IMM = 1'b1;
+	    ALU_IMM_VAL = 5'b00000;
         end
-        4'b0011: begin //store_m
-	    WenD = 1'b1;//enable store to mem
-	    Rb =  mach_code[3:0];
+        4'b0011: begin // STORE_M - store ACC to memory[Rb]
+            Ra    = acc_add;           // Read from ACC
+	    WenD  = 1'b1;              // enable store to mem
+	    Rb    = mach_code[3:0];    // Memory address in Rb
         end
-       	4'b1010: begin
+       	4'b1010: begin // OR
             Aluop = OR_OP;
-            Wd   = acc_add;
+            Ra    = acc_add;
+            Rb    = mach_code[3:0];
+            Wd    = acc_add;
 	    WenR  = 1'b1; 
         end
-        4'b1011: begin
+        4'b1011: begin // NOT
             Aluop = NOT_OP;
-	    Wd   = acc_add;
+            Ra    = acc_add;
+	    Wd    = acc_add;
 	    WenR  = 1'b1; 
         end
-        4'b1100: begin
+        4'b1100: begin // LSL
             Aluop = SHL_OP;
-	    Wd   = acc_add;
+            Ra    = acc_add;
+	    Wd    = acc_add;
 	    WenR  = 1'b1; 
         end
-        4'b1101: begin
+        4'b1101: begin // LSR
             Aluop = SHR_OP;
-            Wd   = acc_add;
+            Ra    = acc_add;
+            Wd    = acc_add;
 	    WenR  = 1'b1; 
         end
 	4'b1001: begin // RESET
-    	Wd    = acc_add;   // destination is accumulator
-    	WenR  = 1'b1;      // enable register write
-    	ALU_IMM = 1'b1;    // use immediate value (since we're writing constant 0)
-    	ALU_IMM_VAL = 4'b0000; // value = 0
-	end
+    	    Wd    = acc_add;       // destination is accumulator
+    	    WenR  = 1'b1;          // enable register write
+    	    ALU_IMM = 1'b1;        // use immediate value
+    	    ALU_IMM_VAL = 5'b00000; // value = 0
+    	    Aluop = ADD_OP;        // Use ADD to pass through the immediate
+        end
 	4'b1000: begin // FILL
-    	Wd    = acc_add;   // destination is accumulator
-    	WenR  = 1'b1;      // enable register write
-    	ALU_IMM = 1'b1;    // use immediate value (since we're writing constant 0)
-    	ALU_IMM_VAL = 4'b1111; // value = 0
+    	    Wd    = acc_add;       // destination is accumulator
+    	    WenR  = 1'b1;          // enable register write
+    	    ALU_IMM = 1'b1;        // use immediate value
+    	    ALU_IMM_VAL = 5'b11111; // value = 15 (0x0F)
+    	    Aluop = ADD_OP;        // Use ADD to pass through the immediate
 	end
-        4'b0111: begin //TST
+        4'b0111: begin // TST
             Aluop = AND_OP;
+            Ra    = acc_add;
+            Rb    = mach_code[3:0];
     	    EnAlu2 = 1'b1;     // enable ALU2
     	    Ra2    = acc_add;  // ACC as input A
     	    Rb2    = mach_code[3:0]; // operand register
         end
-        4'b1110: begin //MOV
+        4'b1110: begin // MOV - move from Rn to ACC
             Aluop = ADD_OP;
-	    Wd   = acc_add;
-	    WenR = 1'b1;//enable write to register
-	    Ldr = mach_code[3:0];
+            Ra    = mach_code[3:0]; // Source register
+            Rb    = acc_add;
+	    Wd    = acc_add;
+	    WenR  = 1'b1;           // enable write to register
+	    ALU_IMM = 1'b1;
+	    ALU_IMM_VAL = 5'b00000; // Add 0 to pass through
         end
-	4'b1111: begin //ADDNE
+	4'b1111: begin // ADDNE
             Aluop = ADD_OP;
-	    Wd   = acc_add;
-	    WenR = Zero; // write only if Zero flag is set to 1 
+            Ra    = acc_add;
+            Rb    = mach_code[3:0];
+	    Wd    = acc_add;
+	    WenR  = ~Zero; // write only if Zero flag is NOT set
         end
     	endcase
    end
-	else if (mach_code[8] == 1'b1) begin //if i type
-	ALU_IMM = 1'b1;
-	ALU_IMM_VAL = mach_code[4:0];
-	case (mach_code[7:5])
-        3'b000: begin
+	// I-type instructions (bit [8] == 1 and bit [7] == 0)
+	else if (mach_code[8:7] == 2'b10) begin
+	    ALU_IMM = 1'b1;
+	    ALU_IMM_VAL = mach_code[4:0];
+	    Ra = acc_add;
+	    case (mach_code[7:5])
+        3'b000: begin // ANDI
             Aluop = AND_OP;
 	    Wd   = acc_add;
 	    WenR = 1'b1;
         end
-        3'b001: begin
+        3'b001: begin // ADDI
             Aluop = ADD_OP;
 	    Wd   = acc_add;
 	    WenR = 1'b1;
         end
-        3'b010: begin
+        3'b010: begin // SUBI
             Aluop = SUB_OP;
 	    Wd   = acc_add;
 	    WenR = 1'b1;
         end
-        3'b011: begin //MOVI
+        3'b011: begin // MOVI
             Aluop = ADD_OP;
 	    Wd   = acc_add;
-	    WenR = 1'b1;//enable load
+	    WenR = 1'b1;
         end
-       	3'b100: begin //LSLI
+       	3'b100: begin // LSLI
             Aluop = SHL_OP;
 	    Wd   = acc_add;
 	    WenR = 1'b1;
         end
-       	3'b110: begin //RSLI
+       	3'b110: begin // RSLI
             Aluop = SHR_OP;
 	    Wd   = acc_add;
 	    WenR = 1'b1;
         end
-        3'b101: begin //ORI
+        3'b101: begin // ORI
             Aluop = OR_OP;
-	    ALU_IMM = 1'b1;
 	    Wd   = acc_add;
 	    WenR = 1'b1;
-	    ALU_IMM_VAL = mach_code[4:0];
         end
-
-	endcase
-  end
- end
+	    endcase
+      end
+   end
 endmodule
