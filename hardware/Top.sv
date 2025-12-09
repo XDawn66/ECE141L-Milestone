@@ -3,7 +3,7 @@ module Top(
 		       Reset,
   output logic Done);
 
-  wire[5:0] Jump,
+  wire[15:0] Jump,
 	        PC;
   wire[3:0]		Aluop,
             		Ra,
@@ -40,12 +40,18 @@ module Top(
   logic carry_clr, carry_en;
   
   wire [1:0] Cond;
-  wire [4:0] ALU_IMM_VAL;
+  wire [3:0] ALU_IMM_VAL;
   wire       WenImm, ALU_IMM, EnAlu2;
+  wire       is_fill;  // Signal to detect FILL instruction
+
+  // Detect FILL instruction (opcode 1000)
+  assign is_fill = (mach_code[8:4] == 5'b0_1000);
 
   // Data path connections
   assign  DatA = RdatA;
-  assign  DatB = (ALU_IMM) ? {3'b000, ALU_IMM_VAL} : RdatB;
+  // For FILL, sign-extend the immediate to get 0xFF from 0xF
+  // For other instructions, zero-extend as normal
+  assign  DatB = (ALU_IMM) ? (is_fill ? {4'b1111, ALU_IMM_VAL} : {4'b0000, ALU_IMM_VAL}) : RdatB;
   assign  WdatD = RdatA;   // Data to write to memory comes from ACC
   assign  Addr = Rb[3:0];  // Memory address from Rb register
   
@@ -54,7 +60,7 @@ module Top(
 
   // jump lookup table
   JLUT lookup_table(
-    .Jptr(Jptr[1:0]),
+    .Jptr(Jptr[7:0]),
     .Jump(Jump));
 
   ProgCtr Porgram_counter(
