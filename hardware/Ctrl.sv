@@ -46,10 +46,10 @@ module Ctrl(
 	WenR  = 1'b0;		// no reg file load enable by default
 	WenD  = 1'b0;		// no data mem write enable by default
 	WenImm = 1'b0;		// no imm op by default
-	Ldr   = 4'b0000;		// load placeholder
+	Ldr   = 1'b0;		// load placeholder
     	Str	  = 1'b0;		// store placeholder
 	ALU_IMM = 1'b0;
-	ALU_IMM_VAL = 5'b00000;  // ALU imm value = 0
+	ALU_IMM_VAL = 4'b0000;  // ALU imm value = 0
 	Alu2op = 4'b0000;
 	EnAlu2 = 1'b0; // not using alu2 by default
 	Ra2    = acc_add;
@@ -106,7 +106,7 @@ module Ctrl(
 	    Wd    = mach_code[3:0];    // Destination register
 	    Aluop = ADD_OP;            // Pass through ACC (ACC + 0)
 	    ALU_IMM = 1'b1;
-	    ALU_IMM_VAL = 5'b00000;
+	    ALU_IMM_VAL = 4'b0000;
         end
         4'b0011: begin // STORE_M - store ACC to memory[Rb]
             Ra    = acc_add;           // Read from ACC
@@ -143,7 +143,7 @@ module Ctrl(
     	    WenR  = 1'b1;          // enable register write
     	    ALU_IMM = 1'b1;        // use immediate value
     	    ALU_IMM_VAL = 5'b00000; // value = 0
-    	    Aluop = ADD_OP;        // Use ADD to pass through the immediate
+    	    Aluop = AND_OP;        // Use ADD to pass through the immediate
         end
 	4'b1000: begin // FILL
     	    Wd    = acc_add;       // destination is accumulator
@@ -181,9 +181,9 @@ module Ctrl(
 	// I-type instructions (bit [8] == 1 and bit [7] == 0)
 	else if (mach_code[8:7] == 2'b10) begin
 	    ALU_IMM = 1'b1;
-	    ALU_IMM_VAL = mach_code[4:0];
+	    ALU_IMM_VAL = mach_code[3:0];
 	    Ra = acc_add;
-	    case (mach_code[7:5])
+	    case (mach_code[6:4])
         3'b000: begin // ANDI
             Aluop = AND_OP;
 	    Wd   = acc_add;

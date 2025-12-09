@@ -5,12 +5,12 @@ module DMem(
   input[3:0] Addr,
   output logic[7:0] Rdat);
 
-  logic[7:0] core[256];
+  logic[7:0] Core[256];
 
   always_ff @(posedge Clk)
-    if(Wen) core[Addr] <= WDat;
+    if(Wen) Core[Addr] <= WDat;
 
-  assign Rdat = core[Addr];
+  assign Rdat = Core[Addr];
 
 endmodule
 
