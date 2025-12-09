@@ -19,7 +19,7 @@ module Ctrl(
                      ALU_IMM,        // ALU imm enable
                      EnAlu2,         // enable secondary ALU
 
-  output logic [4:0] ALU_IMM_VAL     // ALU imm value
+  output logic [3:0] ALU_IMM_VAL     // ALU imm value (FIXED: changed from [4:0] to [3:0])
 );
 
 
@@ -36,6 +36,7 @@ module Ctrl(
    localparam NOT_OP  = 4'b1011;
    localparam SHL_OP  = 4'b1100;
    localparam SHR_OP  = 4'b1101;
+   localparam PASS_OP = 4'b1110;
 
   always_comb begin
 	Aluop = 4'b1100;		// default ALU operation (LSH)
@@ -45,7 +46,7 @@ module Ctrl(
 	Wd    = acc_add;		// placeholder
 	WenR  = 1'b0;		// no reg file load enable by default
 	WenD  = 1'b0;		// no data mem write enable by default
-	WenImm = 1'b0;		// no imm op by default
+	WenImm  = 1'b0;		// no imm op by default
 	Ldr   = 1'b0;		// load placeholder
     	Str	  = 1'b0;		// store placeholder
 	ALU_IMM = 1'b0;
@@ -92,7 +93,7 @@ module Ctrl(
             Wd    = acc_add;
 	    WenR  = 1'b1; 
         end
-        4'b0110: begin // LOAD - load from memory[Rb] to ACC
+        4'b0011: begin // LOAD - load from memory[Rb] to ACC
 	    Ra    = acc_add;
 	    Rb    = mach_code[3:0];   // Rb holds memory address
 	    WenR  = 1'b1;              // enable write to register
@@ -108,7 +109,7 @@ module Ctrl(
 	    ALU_IMM = 1'b1;
 	    ALU_IMM_VAL = 4'b0000;
         end
-        4'b0011: begin // STORE_M - store ACC to memory[Rb]
+        4'b0100: begin // STORE_M - store ACC to memory[Rb]
             Ra    = acc_add;           // Read from ACC
 	    WenD  = 1'b1;              // enable store to mem
 	    Rb    = mach_code[3:0];    // Memory address in Rb
@@ -120,6 +121,13 @@ module Ctrl(
             Wd    = acc_add;
 	    WenR  = 1'b1; 
         end
+        4'b0110: begin //XOR
+	    Aluop = XOR_OP;
+	    Ra = acc_add;
+            Rb = mach_code[3:0];
+            Wd = acc_add;
+            WenR = 1'b1;
+        end 
         4'b1011: begin // NOT
             Aluop = NOT_OP;
             Ra    = acc_add;
@@ -142,15 +150,15 @@ module Ctrl(
     	    Wd    = acc_add;       // destination is accumulator
     	    WenR  = 1'b1;          // enable register write
     	    ALU_IMM = 1'b1;        // use immediate value
-    	    ALU_IMM_VAL = 5'b00000; // value = 0
-    	    Aluop = AND_OP;        // Use ADD to pass through the immediate
+    	    ALU_IMM_VAL = 4'b0000; // value = 0
+    	    Aluop = AND_OP;        // Use AND to clear (0 & anything = 0)
         end
-	4'b1000: begin // FILL
+	4'b1000: begin // FILL - Fill ACC with all 1s (0xFF)
     	    Wd    = acc_add;       // destination is accumulator
     	    WenR  = 1'b1;          // enable register write
     	    ALU_IMM = 1'b1;        // use immediate value
-    	    ALU_IMM_VAL = 5'b11111; // value = 15 (0x0F)
-    	    Aluop = ADD_OP;        // Use ADD to pass through the immediate
+    	    ALU_IMM_VAL = 4'b1111; // all 1s in 4-bit field
+    	    Aluop = PASS_OP;       // Pass through: will extend to 8'b11111111 = 0xFF
 	end
         4'b0111: begin // TST
             Aluop = AND_OP;
@@ -167,7 +175,7 @@ module Ctrl(
 	    Wd    = acc_add;
 	    WenR  = 1'b1;           // enable write to register
 	    ALU_IMM = 1'b1;
-	    ALU_IMM_VAL = 5'b00000; // Add 0 to pass through
+	    ALU_IMM_VAL = 4'b0000; // Add 0 to pass through
         end
 	4'b1111: begin // ADDNE
             Aluop = ADD_OP;
