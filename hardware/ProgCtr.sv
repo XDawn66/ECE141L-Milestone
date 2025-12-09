@@ -3,8 +3,8 @@ module ProgCtr( // Program Counter
   input        Reset,   // Active-high Reset
   input        ALUCondT, // True when the ALU condition (Zero/Greater/Less) is met
   input  [8:0] MCcurr,  // Current instruction (for branch/jump decoding)
-  input  [5:0] Jump,    // Jump address (from JLUT)
-  output logic [5:0] PC // Current Program Counter
+  input  [15:0] Jump,    // Jump address (from JLUT)
+  output logic [15:0] PC // Current Program Counter
 );
 
   // Decode signals for control flow instructions
