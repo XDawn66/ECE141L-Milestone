@@ -10,12 +10,16 @@ always_comb begin
   Rslt = 8'b0;
   SCo  = 1'b0;
   case(Aluop)
- 	4'b0000:  begin
+ 	4'b0000: begin
 	Rslt = acc & inputReg;   // and
 	SCo = 1'b0;
 	end
-    4'b0001: {SCo,Rslt} = acc + inputReg;   // add
-	4'b0010: {SCo,Rslt} = acc - inputReg;   // sub
+        4'b0001: begin
+        {SCo,Rslt} = acc + inputReg;   // add
+        end
+	4'b0010: begin
+        {SCo,Rslt} = acc - inputReg;   // sub
+        end
 	4'b1010: begin
 	Rslt= acc | inputReg;   // or
 	SCo = 1'b0;
@@ -32,8 +36,16 @@ always_comb begin
     	Rslt = ~acc;  //not
     	SCo = 1'b0;     
 	end
-    	4'b1100: {SCo,Rslt} = acc<<1'b1;    // left shift
-    	4'b1101: {SCo,Rslt} = acc>>1'b1;    // right shift
+    	4'b1100: begin 
+        {SCo,Rslt} = acc<<1'b1;    // left shift
+        end
+    	4'b1101: begin
+        {SCo,Rslt} = acc>>1'b1;    // right shift
+        end
+	4'b1110: begin
+	Rslt = inputReg;  // Pass through inputReg (for FILL and MOVI)
+	SCo = 1'b0;
+	end
   endcase
 end
 
