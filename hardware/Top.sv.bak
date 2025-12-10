@@ -1,6 +1,7 @@
 module Top(
   input   		Clk,
 		       Reset,
+                       start,
   output logic Done);
 
   wire[15:0] Jump,
@@ -152,6 +153,6 @@ module Top(
   end
 
   // DONE signal
-  assign Done = (mach_code == 9'b111111111);
+  assign Done = (mach_code == 9'b111111111 || Rslt == 8'b11111111);
   
 endmodule

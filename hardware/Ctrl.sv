@@ -37,6 +37,8 @@ module Ctrl(
    localparam SHL_OP  = 4'b1100;
    localparam SHR_OP  = 4'b1101;
    localparam PASS_OP = 4'b1110;
+   localparam FILL_OP = 4'b1000;
+   localparam PASS_ACC_OP = 4'b1111;
 
   always_comb begin
 	Aluop = 4'b1100;		// default ALU operation (LSH)
@@ -101,15 +103,17 @@ module Ctrl(
 	    WenD  = 1'b0;              // NOT a store
 	    Ldr   = 1'b1;              // This is a load operation
         end
-        4'b0101: begin // STORE - store ACC to register Rn
+        4'b0100: begin // STORE - store ACC to register Rn
             Ra    = acc_add;           // Read from ACC
   	    WenR  = 1'b1;              // enable store to reg
 	    Wd    = mach_code[3:0];    // Destination register
-	    Aluop = ADD_OP;            // Pass through ACC (ACC + 0)
-	    ALU_IMM = 1'b1;
-	    ALU_IMM_VAL = 4'b0000;
+	    Aluop = PASS_ACC_OP;            // reg = acc
+	    ALU_IMM = 1'b0;
+            Ldr  = 1'b0;
+	    WenD = 1'b0;
+	    Str  = 1'b0;
         end
-        4'b0100: begin // STORE_M - store ACC to memory[Rb]
+        4'b0101: begin // STORE_M - store ACC to memory[Rb]
             Ra    = acc_add;           // Read from ACC
 	    WenD  = 1'b1;              // enable store to mem
 	    Rb    = mach_code[3:0];    // Memory address in Rb
@@ -156,9 +160,7 @@ module Ctrl(
 	4'b1000: begin // FILL - Fill ACC with all 1s (0xFF)
     	    Wd    = acc_add;       // destination is accumulator
     	    WenR  = 1'b1;          // enable register write
-    	    ALU_IMM = 1'b1;        // use immediate value
-    	    ALU_IMM_VAL = 4'b1111; // all 1s in 4-bit field
-    	    Aluop = PASS_OP;       // Pass through: will extend to 8'b11111111 = 0xFF
+    	    Aluop = FILL_OP;       // Pass through: will extend to 8'b11111111 = 0xFF
 	end
         4'b0111: begin // TST
             Aluop = AND_OP;
@@ -169,13 +171,11 @@ module Ctrl(
     	    Rb2    = mach_code[3:0]; // operand register
         end
         4'b1110: begin // MOV - move from Rn to ACC
-            Aluop = ADD_OP;
+            Aluop = PASS_OP;
             Ra    = mach_code[3:0]; // Source register
             Rb    = acc_add;
 	    Wd    = acc_add;
 	    WenR  = 1'b1;           // enable write to register
-	    ALU_IMM = 1'b1;
-	    ALU_IMM_VAL = 4'b0000; // Add 0 to pass through
         end
 	4'b1111: begin // ADDNE
             Aluop = ADD_OP;
@@ -208,7 +208,7 @@ module Ctrl(
 	    WenR = 1'b1;
         end
         3'b011: begin // MOVI
-            Aluop = ADD_OP;
+            Aluop = PASS_OP;
 	    Wd   = acc_add;
 	    WenR = 1'b1;
         end
