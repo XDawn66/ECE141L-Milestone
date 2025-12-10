@@ -1,6 +1,7 @@
 module Top(
   input   		Clk,
 		       Reset,
+                       start,
   output logic Done);
 
   wire[15:0] Jump,
@@ -35,8 +36,8 @@ module Top(
 			Greater2,
 			Less2;		
 
-  logic pair, zero, sc_0;
-  logic pairQ, zeroQ, carry_in;
+  logic pair, zero, sc_0, neg;
+  logic pairQ, zeroQ, carry_in, negQ;
   logic carry_clr, carry_en;
   
   wire [1:0] Cond;
@@ -60,13 +61,14 @@ module Top(
 
   // jump lookup table
   JLUT lookup_table(
-    .Jptr(Jptr[7:0]),
+    .Jptr(Jptr[4:0]),
     .Jump(Jump));
 
   ProgCtr Porgram_counter(
       .Clk      (Clk),
       .Reset    (Reset),
-      .ALUCondT (Zero),      
+      .Zero   (Zero),
+      .Neg (neg),	       
       .MCcurr   (mach_code), 
       .Jump     (Jump),    
       .PC       (PC)
@@ -118,7 +120,8 @@ module Top(
       .Rslt    (Rslt),
       .Zero    (Zero),
       .Par     (Par),
-      .SCo     (SCo)
+      .SCo     (SCo),
+      .neg (neg)
   );
 
   ALU2 alu_two (
@@ -142,6 +145,7 @@ module Top(
     //pair flag and zero flags for later
     pairQ <= pair;
     zeroQ <= zero;
+    negQ <= neg;
     if(carry_clr)
       carry_in <= 'b0;
     else if(carry_en)

@@ -1,16 +1,12 @@
 module JLUT(
-    input  logic [1:0] Jptr,       // 2-bit jump type from Ctrl
-    output logic [5:0] Jump        // 6-bit jump address
+    input  logic [4:0] Jptr, // since we only have 5 bit for imm      
+    output logic [15:0] Jump      
 );
 
-    always_comb begin
-        case (Jptr)
-            2'b00: Jump = 6'd10;  // J   -> unconditional jump to address 10
-            2'b01: Jump = 6'd12;  // JE  -> jump if ACC == 0
-            2'b10: Jump = 6'd8;   // JG  -> jump if ACC > 0
-            2'b11: Jump = 6'd5;   // JL  -> jump if ACC < 0
-            default: Jump = 6'd0; // default safe
-        endcase
-    end
+  logic [15:0] Core [0:31];    // 32 entries, 16-bit each
+
+  initial $readmemb("d_lut_p1.txt", Core);
+  
+  always_comb Jump = Core[Jptr];
 
 endmodule
