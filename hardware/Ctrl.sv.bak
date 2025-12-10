@@ -102,8 +102,14 @@ module Ctrl(
 	    Wd    = acc_add;           // ACC is destination register
 	    WenD  = 1'b0;              // NOT a store
 	    Ldr   = 1'b1;              // This is a load operation
+	
+	    Ra         = acc_add;
+	    Aluop      = PASS_A_OP;
+	    ALU_IMM    = 1'b0;
+            ALU_IMM_VAL= 4'b0000;
+            EnAlu2     = 1'b0;
         end
-        4'b0101: begin // STORE - store ACC to register Rn
+        4'b0100: begin // STORE - store ACC to register Rn
             Ra    = acc_add;           // Read from ACC
   	    WenR  = 1'b1;              // enable store to reg
 	    Wd    = mach_code[3:0];    // Destination register
@@ -113,7 +119,7 @@ module Ctrl(
 	    WenD = 1'b0;
 	    Str  = 1'b0;
         end
-        4'b0100: begin // STORE_M - store ACC to memory[Rb]
+        4'b0101: begin // STORE_M - store ACC to memory[Rb]
             Ra    = acc_add;           // Read from ACC
 	    WenD  = 1'b1;              // enable store to mem
 	    Rb    = mach_code[3:0];    // Memory address in Rb

@@ -59,6 +59,6 @@ always_comb begin
  end
 assign Zero = ~|Rslt;
 assign Par  = ^Rslt;
-assign Neg  = Rslt[7]; //1 if result is negative
+assign neg  = Rslt[7]; //1 if result is negative
 
 endmodule

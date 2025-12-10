@@ -51,7 +51,7 @@ always_comb begin
     	Rslt = 8'hFF;
     	SCo  = 1'b0;
 	end
-	4'b1111: begin     // PASS_A_OP
+	4'b1111: begin     // PASS_ACC_OP
     	Rslt = acc;    // pass accumulator input
     	SCo = 1'b0;
 	end

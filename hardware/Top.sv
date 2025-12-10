@@ -67,8 +67,8 @@ module Top(
   ProgCtr Porgram_counter(
       .Clk      (Clk),
       .Reset    (Reset),
-      .Zero   (Zero),
-      .Neg (neg),	       
+      .Zero   (ZeroQ),
+      .Neg (negQ),	       
       .MCcurr   (mach_code), 
       .Jump     (Jump),    
       .PC       (PC)

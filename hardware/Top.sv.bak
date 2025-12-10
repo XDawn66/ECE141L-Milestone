@@ -153,6 +153,6 @@ module Top(
   end
 
   // DONE signal
-  assign Done = (mach_code == 9'b111111111 || Rslt == 8'b11111111);
+  assign Done = (mach_code == 9'b111111111);
   
 endmodule

@@ -102,6 +102,12 @@ module Ctrl(
 	    Wd    = acc_add;           // ACC is destination register
 	    WenD  = 1'b0;              // NOT a store
 	    Ldr   = 1'b1;              // This is a load operation
+	
+	    Ra         = acc_add;
+	    Aluop      = PASS_ACC_OP;
+	    ALU_IMM    = 1'b0;
+            ALU_IMM_VAL= 4'b0000;
+            EnAlu2     = 1'b0;
         end
         4'b0100: begin // STORE - store ACC to register Rn
             Ra    = acc_add;           // Read from ACC
