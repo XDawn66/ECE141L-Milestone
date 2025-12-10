@@ -9,20 +9,20 @@ module RegFile(
   output logic [7:0] RdatA,	 // read data out A
   output logic [7:0] RdatB); // read data out B
 
-  logic[7:0] core[0:15]; 
+  logic[7:0] Core[0:15]; 
 
   always_ff @(posedge Clk or posedge Rst) begin
       if (Rst) begin
           integer i;
           for (i = 0; i < 15; i++) begin
-                core[i] <= '0;        // clear registers on reset
+                Core[i] <= '0;        // clear registers on reset
           end
       end else if (Wen) begin
-            core[Wd] <= Wdat;         // synchronous write
+            Core[Wd] <= Wdat;         // synchronous write
       end
   end
 
-  assign RdatA = core[Ra];
-  assign RdatB = core[Rb];
+  assign RdatA = Core[Ra];
+  assign RdatB = Core[Rb];
 
 endmodule

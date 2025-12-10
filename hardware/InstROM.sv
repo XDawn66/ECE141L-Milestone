@@ -2,11 +2,11 @@ module InstROM(
   input[15:0] PC,
   output logic[8:0] mach_code);
 
-  logic[8:0] Core[2**9];
+  logic[8:0] core[2**9];
 
   initial 
-	$readmemb("mach_code.txt",Core);
+	$readmemb("d_machine_p1.txt",core);
 
-  always_comb mach_code = Core[PC-1];
+  always_comb mach_code = core[PC-1];
 
 endmodule

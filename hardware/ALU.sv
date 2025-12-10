@@ -5,7 +5,8 @@ module ALU(
   output logic[7:0] Rslt, 
   output logic      Zero,
                     Par,
-		    SCo );//carry out
+		    SCo,
+		    neg );//carry out
 always_comb begin
   Rslt = 8'b0;
   SCo  = 1'b0;
@@ -51,5 +52,6 @@ end
 
 assign Zero = ~|Rslt;
 assign Par  = ^Rslt;
+assign Neg  = Rslt[7]; //1 if result is negative
 
 endmodule
