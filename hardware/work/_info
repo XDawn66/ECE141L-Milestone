@@ -10,7 +10,7 @@ cModel Technology
 Z0 dC:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware
 vALU
 Z1 DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
-Z2 !s110 1765505085
+Z2 !s110 1765518296
 !i10b 1
 !s100 khf]f0CYgcF596?e4WB2[3
 I@:S<C>6A^FIVX<e7`eCOd0
@@ -26,7 +26,7 @@ Z4 OV;L;10.5b;63
 r1
 !s85 0
 31
-Z5 !s108 1765505085.000000
+Z5 !s108 1765518296.000000
 !s107 C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/ALU.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/ALU.sv|
 !i113 1
@@ -93,7 +93,7 @@ R3
 !s105 Ctrl_sv_unit
 S1
 R0
-w1765373260
+w1765518075
 8C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Ctrl.sv
 FC:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Ctrl.sv
 L0 1
@@ -382,15 +382,15 @@ R6
 R7
 vTop
 R1
-R2
+Z9 !s110 1765518297
 !i10b 1
-!s100 JI>MX::9X:=i9dL4YAFmf0
-I<OZKF6[d`71l@czWfBzNj2
+!s100 @k1`LO`kcFkd1AM^^nPNB2
+IKiMKfh4ZJKS>iid8NnflZ1
 R3
 !s105 Top_sv_unit
 S1
 R0
-w1765503541
+w1765518283
 8C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv
 FC:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv
 L0 1
@@ -398,7 +398,7 @@ R4
 r1
 !s85 0
 31
-R5
+Z10 !s108 1765518297.000000
 !s107 C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv|
 !i113 1
@@ -407,7 +407,7 @@ R7
 n@top
 vTop_tb
 R1
-R2
+R9
 !i10b 1
 !s100 c;G0_]F9916:MlVZ4Nhkn2
 IMSZW`5ccZG7@44H6PAC=I3
@@ -423,7 +423,7 @@ R4
 r1
 !s85 0
 31
-R5
+R10
 !s107 C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top_tb.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top_tb.sv|
 !i113 1
