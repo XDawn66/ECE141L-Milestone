@@ -5,7 +5,7 @@ STORE R3 //max
 STORE R4 //i
 MOVI 8
 STORE R2 //min
-MOVI 1
+MOVI 0
 STORE R5 //j
 STORE R7 //hold_1
 MOVI 0 //array_base_address (100)???

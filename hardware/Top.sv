@@ -126,8 +126,7 @@ module Top(
   );
 
   ALU2 alu_two (
-      .acc     (RdatA),
-      .inputReg(RdatB),
+      .acc     (Rslt),
       .Zero    (Zero2),
       .Greater (Greater2),
       .Less    (Less2)

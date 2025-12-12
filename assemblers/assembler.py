@@ -33,7 +33,7 @@ def convert(inFile, outFile1, outFile2):
     # collect labels
     lut = {}
     pc = 0
-
+    pc_emit = 0 
     for line in assembly:
         instr = line.split("//")[0].strip() # also strip comments
         if len(instr) == 0:
@@ -45,11 +45,20 @@ def convert(inFile, outFile1, outFile2):
             lut[label] = pc # if we get a jump label
         else:
             pc += 1
-    
-    lut_entries = [0] * 32        # 32-entry jump table
-    target_to_index = {}          # PC target to LUT index
-    next_lut_index = 0
+    print("\n=== Label → PC mapping ===")
+    for label, pc_val in lut.items():
+        print(f"{label:<15} PC = {pc_val}")
+    # Build LUT entries in label order
+    label_list = list(lut.keys())  # preserves original insertion order
+    lut_entries = [0] * 32
+    for i, label in enumerate(label_list):
+        lut_entries[i] = lut[label]
 
+    print("\n=== Label → PC → LUT index ===")
+    print("Label            PC    LUT_index")
+    print("--------------------------------")
+    for i, label in enumerate(label_list):
+        print(f"{label:<15} {lut[label]:<5} {i}")
     # convert assembly to machine code
     for line in assembly:
         line = line.split("//")[0].strip()
@@ -107,14 +116,7 @@ def convert(inFile, outFile1, outFile2):
                 except ValueError:
                     raise ValueError(f"Unknown label or invalid target: {arg}")
 
-            if pc_target not in target_to_index:
-                if next_lut_index >= 32:
-                    raise ValueError("Too many distinct jump targets; LUT size exceeded (32).")
-                target_to_index[pc_target] = next_lut_index
-                lut_entries[next_lut_index] = pc_target
-                next_lut_index += 1
-            
-            lut_index = target_to_index[pc_target]
+            lut_index = label_list.index(arg)
             imm_bin = format(lut_index & 0x1F, '05b')
             output += imm_bin               # 5-bit immediate
 
@@ -122,9 +124,12 @@ def convert(inFile, outFile1, outFile2):
             continue  # ignore unknown lines or blanks
 
         #machine_file.write(output + "\n") # output without comments
-        machine_file.write(output + "\t// " + line + "\n") #output with comments
+        #machine_file.write(output + "\t// " + line + "\n") #output with comments
+        machine_file.write(f"[PC={pc_emit:02d}] {output}\t// {line}\n")
+        pc_emit += 1
     for entry in lut_entries:
         lut_file.write(format(entry & 0xFFFF, '016b') + "\n")
+
     assembly_file.close()
     machine_file.close()
     lut_file.close()
@@ -134,3 +139,4 @@ def convert(inFile, outFile1, outFile2):
 # convert("cordic.txt", "c_machine.txt", "c_lut.txt")
 # convert("division.txt", "d_machine.txt", "d_lut.txt")
 convert("closetest.txt", "d_machine_p1_comm.txt", "d_lut_p1.txt")
+#convert("closetest.txt", "d_machine_p1.txt", "d_lut_p1.txt")

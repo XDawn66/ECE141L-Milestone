@@ -178,8 +178,8 @@ module Ctrl(
         end
         4'b1110: begin // MOV - move from Rn to ACC
             Aluop = PASS_OP;
-            Ra    = mach_code[3:0]; // Source register
-            Rb    = acc_add;
+            Ra    = acc_add; // Source register
+            Rb    = mach_code[3:0];
 	    Wd    = acc_add;
 	    WenR  = 1'b1;           // enable write to register
         end
