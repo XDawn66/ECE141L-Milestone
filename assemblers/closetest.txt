@@ -8,7 +8,7 @@ STORE R2 //min
 MOVI 1
 STORE R5 //j
 STORE R7 //hold_1
-MOVI 100 //array_base_address (100)
+MOVI 0 //array_base_address (100)???
 STORE R6 //array
 
 outer_loop:
@@ -44,7 +44,7 @@ count_bit_loop:
     MOV R0
     RSL //shift 1 bit to the right
     STORE R0
-    J count_bit_loop
+    J count_bit_loop 
 
 update_min_max:
     MOV R1 //current_diff
