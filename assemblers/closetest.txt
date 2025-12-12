@@ -1,5 +1,5 @@
 MOVI 0
-STORE R0 //current_val
+STORE R8 //current_val
 STORE R1 //current_diff
 STORE R3 //max
 STORE R4 //i
@@ -16,7 +16,7 @@ outer_loop:
     SUBI 15 //When i < 16
     JG done_outer
     LOAD R6 //current_val = array[i] or acc = array[R6]
-    STORE R0 //current_val = array[i]
+    STORE R8 //current_val = array[i]
     MOV R5
     ADDI 1 //j = i + 1
     STORE R5  //j = i + 1
@@ -27,12 +27,12 @@ inner_loop:
     JG done_inner
 
     LOAD R5
-    XOR R0 //current_val XOR array[j]
-    STORE R0  //current_val = current_val XOR array[j]
+    XOR R8 //current_val XOR array[j]
+    STORE R8  //current_val = current_val XOR array[j]
     RESET R1 //current_diff = 0
 
 count_bit_loop:
-    MOV R0
+    MOV R8
     SUBI 1
     JL update_min_max //when current_val = 0, means done counting
 
@@ -41,9 +41,9 @@ count_bit_loop:
     MOV R1
     ADDI 1
     STORE R1 //current_diff++;
-    MOV R0
+    MOV R8
     RSL //shift 1 bit to the right
-    STORE R0
+    STORE R8
     J count_bit_loop 
 
 update_min_max:

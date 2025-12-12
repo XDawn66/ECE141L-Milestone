@@ -97,7 +97,7 @@ module Ctrl(
         end
         4'b0011: begin // LOAD - load from memory[Rb] to ACC
 	    Ra    = acc_add;
-	    Rb    = acc_add;   // Rb holds memory address
+	    Rb    = mach_code[3:0];   // Rb holds memory address
 	    WenR  = 1'b1;              // enable write to register
 	    Wd    = acc_add;           // ACC is destination register
 	    WenD  = 1'b0;              // NOT a store
