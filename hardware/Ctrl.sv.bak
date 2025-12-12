@@ -59,17 +59,17 @@ module Ctrl(
 	Rb2    = acc_add;
 	Cond   = 2'b00;
 
-	// J-type instructions (bits [8:7] == 2'b11)
-	if(mach_code[8:7] == 2'b11) begin
-	    Ra = acc_add;
-	    Aluop = SUB_OP;
-	    Jptr = {3'b000, mach_code[4:0]}; // zero extend to 8 bit to match PC
-		case (mach_code[6:5])
-            	2'b00: Cond = 2'b00; // J  
-            	2'b01: Cond = 2'b01; // JE - ACC == 0
-            	2'b10: Cond = 2'b10; // JG - ACC > 0
-            	2'b11: Cond = 2'b11; // JL - ACC < 0
-        	endcase
+	// J-type instruction
+	if (mach_code[8:7] == 2'b11) begin
+    	Jptr = mach_code[4:0]; // 5-bit index
+
+    	// Choose branch type
+    	Cond = mach_code[6:5]; // 00=J, 01=JE, 10=JG, 11=JL
+
+    	WenR = 1'b0;
+    	WenD = 1'b0;
+    	Ldr  = 1'b0;
+    	Str  = 1'b0;
 	end
 	// R-type instructions (bit [8] == 0)
 	else if (mach_code[8] == 1'b0) begin

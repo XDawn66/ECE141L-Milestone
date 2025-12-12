@@ -43,7 +43,7 @@ module ProgCtr( // Program Counter
     if (Reset)
       PC <= 16'd0;
     else if (take_branch)
-      PC <= Jump;
+      PC <= Jump + 16'd1;
     else
       PC <= PC + 16'd1;
   end

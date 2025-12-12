@@ -10,6 +10,7 @@ module ProgCtr( // Program Counter
   // Decode signals for control flow instructions
   logic is_jump_instr;
   logic       take_branch;
+  logic [1:0] cond;  
 
   // Detect J-type instructions (bits [8:7] == 2'b11)
   assign is_jump_instr = (MCcurr[8:7] == 2'b11);

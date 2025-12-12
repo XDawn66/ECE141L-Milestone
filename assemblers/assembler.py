@@ -123,9 +123,9 @@ def convert(inFile, outFile1, outFile2):
         else:
             continue  # ignore unknown lines or blanks
 
-        #machine_file.write(output + "\n") # output without comments
+        machine_file.write(output + "\n") # output without comments
         #machine_file.write(output + "\t// " + line + "\n") #output with comments
-        machine_file.write(f"[PC={pc_emit:02d}] {output}\t// {line}\n")
+        #machine_file.write(f"[PC={pc_emit:02d}] {output}\t// {line}\n")
         pc_emit += 1
     for entry in lut_entries:
         lut_file.write(format(entry & 0xFFFF, '016b') + "\n")
@@ -138,5 +138,5 @@ def convert(inFile, outFile1, outFile2):
 # convert("stringmatch.txt", "sm_machine.txt", "sm_lut.txt")
 # convert("cordic.txt", "c_machine.txt", "c_lut.txt")
 # convert("division.txt", "d_machine.txt", "d_lut.txt")
-convert("closetest.txt", "d_machine_p1_comm.txt", "d_lut_p1.txt")
-#convert("closetest.txt", "d_machine_p1.txt", "d_lut_p1.txt")
+#convert("closetest.txt", "d_machine_p1_comm.txt", "d_lut_p1.txt")
+convert("closetest.txt", "d_machine_p1.txt", "d_lut_p1.txt")
