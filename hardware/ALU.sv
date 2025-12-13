@@ -44,14 +44,21 @@ always_comb begin
         {SCo,Rslt} = acc>>1'b1;    // right shift
         end
 	4'b1110: begin
-	Rslt = inputReg;  // Pass through inputReg (for FILL and MOVI)
+	Rslt = inputReg;  // Pass through inputReg (for MOVI)
 	SCo = 1'b0;
 	end
-  endcase
-end
-
+	4'b1000: begin //for fill
+    	Rslt = 8'hFF;
+    	SCo  = 1'b0;
+	end
+	4'b1111: begin     // PASS_ACC_OP
+    	Rslt = acc;    // pass accumulator input
+    	SCo = 1'b0;
+	end
+   endcase
+ end
 assign Zero = ~|Rslt;
 assign Par  = ^Rslt;
-assign Neg  = Rslt[7]; //1 if result is negative
+assign neg  = Rslt[7]; //1 if result is negative
 
 endmodule

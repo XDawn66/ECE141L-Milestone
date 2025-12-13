@@ -58,8 +58,8 @@ module test_bench;
         end
 	  end
     end   
-	D1.data_mem.core[16] = Min;
-	D1.data_mem.core[17] = Max;
+	//D1.data_mem.core[16] = Min;
+	//D1.data_mem.core[17] = Max;
 	#200ns reset = 'b0;
 	#200ns start = 'b0; 
     #200ns wait (done);						 // avoid false done signals on startup

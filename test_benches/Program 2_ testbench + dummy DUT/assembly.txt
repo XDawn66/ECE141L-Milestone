@@ -1,0 +1,126 @@
+// Registers:
+// R1 = |B| (loop counter)
+// R2 = |A|
+// R3 = result low
+// R4 = result high
+// R5 = sign flag
+// R7 = address temp
+
+start:
+    // Load A
+    RESET
+    STORE R7
+    LOAD R7
+    STORE R2
+
+    // Load B
+    MOVI 1
+    STORE R7
+    LOAD R7
+    STORE R1
+
+    // Init result + sign
+    RESET
+    STORE R3
+    STORE R4
+    STORE R5
+
+    // Check sign of A
+    MOV R2
+    JL neg_A
+    J check_B
+
+neg_A:
+    MOVI 1
+    STORE R5
+    RESET
+    SUB R2
+    STORE R2
+
+check_B:
+    MOV R1
+    JL neg_B
+    J multiply_start
+
+neg_B:
+    MOVI 1
+    STORE R7
+    MOV R5
+    XOR R7
+    STORE R5
+    RESET
+    SUB R1
+    STORE R1
+
+multiply_start:
+    MOV R1
+    JE finish
+
+multiply_loop:
+    // R3 += R2
+    MOV R3
+    ADD R2
+    STORE R3
+
+    // if result went negative -> carry
+    JL carry
+
+    J no_carry
+
+carry:
+    MOV R4
+    ADDI 1
+    STORE R4
+
+no_carry:
+    // decrement multiplier
+    MOV R1
+    SUBI 1
+    STORE R1
+
+    MOV R1
+    JG multiply_loop
+
+finish:
+    // apply sign if needed
+    MOV R5
+    JE store
+
+    // negate 16-bit result
+    MOV R3
+    NOT
+    STORE R3
+
+    MOV R4
+    NOT
+    STORE R4
+
+    MOV R3
+    ADDI 1
+    STORE R3
+
+    MOV R3
+    JE neg_hi
+    J store
+
+neg_hi:
+    MOV R4
+    ADDI 1
+    STORE R4
+
+store:
+    // MEM[2] = low
+    MOVI 2
+    STORE R7
+    MOV R3
+    STORE_M R7
+
+    // MEM[3] = high
+    MOVI 3
+    STORE R7
+    MOV R4
+    STORE_M R7
+
+end:
+
+    DONE

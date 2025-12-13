@@ -1,0 +1,528 @@
+# Reading C:/intelFPGA/18.1/modelsim_ase/tcl/vsim/pref.tcl
+# OpenFile {C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/test_benches/Program 1/test_bench_hamming.sv}
+# Loading project P1test
+# Compile of dat_mem.sv was successful.
+# Compile of DUT.sv was successful.
+# Compile of test_bench_hamming.sv was successful.
+# Compile of ALU.sv was successful.
+# Compile of ALU_tb.sv was successful.
+# Compile of ALU2.sv was successful.
+# Compile of Ctrl.sv was successful.
+# Compile of ctrl_tb.sv was successful.
+# Compile of DMem.sv was successful.
+# Compile of InstROM.sv was successful.
+# Compile of JLUT.sv was successful.
+# Compile of Mux.sv was successful.
+# Compile of ProgCtr.sv was successful.
+# Compile of RegFile.sv was successful.
+# Compile of Top.sv was successful.
+# Compile of Top_tb.sv was successful.
+# 16 compiles, 0 failed with no errors.
+vsim -gui work.test_bench
+# vsim -gui work.test_bench 
+# Start time: 23:31:21 on Dec 12,2025
+# Loading sv_std.std
+# Loading work.test_bench
+# Loading work.Top
+# Loading work.JLUT
+# Loading work.ProgCtr
+# Loading work.InstROM
+# Loading work.Ctrl
+# Loading work.RegFile
+# Loading work.ALU
+# Loading work.ALU2
+# Loading work.DMem
+add wave -position insertpoint sim:/test_bench/D1/*
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by: Zhenyu  Hostname: DESKTOP-A2BVPQG  ProcessID: 16440
+#           Attempting to use alternate WLF file "./wlftavch1z".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlftavch1z
+run -all
+#           0:  00000000
+#           1:  00000001
+#           2:  00000010
+#           3:  00000011
+#           4:  00000101
+#           5:  00000110
+#           6:  00000111
+#           7:  00001011
+#           8:  11110000
+#           9:  11110001
+#          10:  11110010
+#          11:  11110011
+#          12:  11110101
+#          13:  11110110
+#          14:  11110111
+#          15:  11111011
+#  
+# j,kj = [          0,          1] dist= 1
+# j,kj = [          0,          2] dist= 1
+# j,kj = [          0,          3] dist= 2
+# j,kj = [          0,          4] dist= 2
+# j,kj = [          0,          5] dist= 2
+# j,kj = [          0,          6] dist= 3
+# j,kj = [          0,          7] dist= 3
+# j,kj = [          0,          8] dist= 4
+# j,kj = [          0,          9] dist= 5
+# j,kj = [          0,         10] dist= 5
+# j,kj = [          0,         11] dist= 6
+# j,kj = [          0,         12] dist= 6
+# j,kj = [          0,         13] dist= 6
+# j,kj = [          0,         14] dist= 7
+# j,kj = [          0,         15] dist= 7
+# j,kj = [          1,          2] dist= 2
+# j,kj = [          1,          3] dist= 1
+# j,kj = [          1,          4] dist= 1
+# j,kj = [          1,          5] dist= 3
+# j,kj = [          1,          6] dist= 2
+# j,kj = [          1,          7] dist= 2
+# j,kj = [          1,          8] dist= 5
+# j,kj = [          1,          9] dist= 4
+# j,kj = [          1,         10] dist= 6
+# j,kj = [          1,         11] dist= 5
+# j,kj = [          1,         12] dist= 5
+# j,kj = [          1,         13] dist= 7
+# j,kj = [          1,         14] dist= 6
+# j,kj = [          1,         15] dist= 6
+# j,kj = [          2,          3] dist= 1
+# j,kj = [          2,          4] dist= 3
+# j,kj = [          2,          5] dist= 1
+# j,kj = [          2,          6] dist= 2
+# j,kj = [          2,          7] dist= 2
+# j,kj = [          2,          8] dist= 5
+# j,kj = [          2,          9] dist= 6
+# j,kj = [          2,         10] dist= 4
+# j,kj = [          2,         11] dist= 5
+# j,kj = [          2,         12] dist= 7
+# j,kj = [          2,         13] dist= 5
+# j,kj = [          2,         14] dist= 6
+# j,kj = [          2,         15] dist= 6
+# j,kj = [          3,          4] dist= 2
+# j,kj = [          3,          5] dist= 2
+# j,kj = [          3,          6] dist= 1
+# j,kj = [          3,          7] dist= 1
+# j,kj = [          3,          8] dist= 6
+# j,kj = [          3,          9] dist= 5
+# j,kj = [          3,         10] dist= 5
+# j,kj = [          3,         11] dist= 4
+# j,kj = [          3,         12] dist= 6
+# j,kj = [          3,         13] dist= 6
+# j,kj = [          3,         14] dist= 5
+# j,kj = [          3,         15] dist= 5
+# j,kj = [          4,          5] dist= 2
+# j,kj = [          4,          6] dist= 1
+# j,kj = [          4,          7] dist= 3
+# j,kj = [          4,          8] dist= 6
+# j,kj = [          4,          9] dist= 5
+# j,kj = [          4,         10] dist= 7
+# j,kj = [          4,         11] dist= 6
+# j,kj = [          4,         12] dist= 4
+# j,kj = [          4,         13] dist= 6
+# j,kj = [          4,         14] dist= 5
+# j,kj = [          4,         15] dist= 7
+# j,kj = [          5,          6] dist= 1
+# j,kj = [          5,          7] dist= 3
+# j,kj = [          5,          8] dist= 6
+# j,kj = [          5,          9] dist= 7
+# j,kj = [          5,         10] dist= 5
+# j,kj = [          5,         11] dist= 6
+# j,kj = [          5,         12] dist= 6
+# j,kj = [          5,         13] dist= 4
+# j,kj = [          5,         14] dist= 5
+# j,kj = [          5,         15] dist= 7
+# j,kj = [          6,          7] dist= 2
+# j,kj = [          6,          8] dist= 7
+# j,kj = [          6,          9] dist= 6
+# j,kj = [          6,         10] dist= 6
+# j,kj = [          6,         11] dist= 5
+# j,kj = [          6,         12] dist= 5
+# j,kj = [          6,         13] dist= 5
+# j,kj = [          6,         14] dist= 4
+# j,kj = [          6,         15] dist= 6
+# j,kj = [          7,          8] dist= 7
+# j,kj = [          7,          9] dist= 6
+# j,kj = [          7,         10] dist= 6
+# j,kj = [          7,         11] dist= 5
+# j,kj = [          7,         12] dist= 7
+# j,kj = [          7,         13] dist= 7
+# j,kj = [          7,         14] dist= 6
+# j,kj = [          7,         15] dist= 4
+# j,kj = [          8,          9] dist= 1
+# j,kj = [          8,         10] dist= 1
+# j,kj = [          8,         11] dist= 2
+# j,kj = [          8,         12] dist= 2
+# j,kj = [          8,         13] dist= 2
+# j,kj = [          8,         14] dist= 3
+# j,kj = [          8,         15] dist= 3
+# j,kj = [          9,         10] dist= 2
+# j,kj = [          9,         11] dist= 1
+# j,kj = [          9,         12] dist= 1
+# j,kj = [          9,         13] dist= 3
+# j,kj = [          9,         14] dist= 2
+# j,kj = [          9,         15] dist= 2
+# j,kj = [         10,         11] dist= 1
+# j,kj = [         10,         12] dist= 3
+# j,kj = [         10,         13] dist= 1
+# j,kj = [         10,         14] dist= 2
+# j,kj = [         10,         15] dist= 2
+# j,kj = [         11,         12] dist= 2
+# j,kj = [         11,         13] dist= 2
+# j,kj = [         11,         14] dist= 1
+# j,kj = [         11,         15] dist= 1
+# j,kj = [         12,         13] dist= 2
+# j,kj = [         12,         14] dist= 1
+# j,kj = [         12,         15] dist= 3
+# j,kj = [         13,         14] dist= 1
+# j,kj = [         13,         15] dist= 3
+# j,kj = [         14,         15] dist= 2
+# good Min =  1
+# Min addr =  1,  0
+# Min valu = 00000001, 00000000
+# good Max =  7
+# Max pair = 14,  0
+# Max valu = 11110111, 00000000
+# ** Note: $stop    : C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/test_benches/Program 1/test_bench_hamming.sv(77)
+#    Time: 977960 ns  Iteration: 0  Instance: /test_bench
+# Break in Module test_bench at C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/test_benches/Program 1/test_bench_hamming.sv line 77
+# Compile of dat_mem.sv was successful.
+# Compile of DUT.sv was successful.
+# Compile of test_bench_hamming.sv was successful.
+# Compile of ALU.sv was successful.
+# Compile of ALU_tb.sv was successful.
+# Compile of ALU2.sv was successful.
+# Compile of Ctrl.sv was successful.
+# Compile of ctrl_tb.sv was successful.
+# Compile of DMem.sv was successful.
+# Compile of InstROM.sv was successful.
+# Compile of JLUT.sv was successful.
+# Compile of Mux.sv was successful.
+# Compile of ProgCtr.sv was successful.
+# Compile of RegFile.sv was successful.
+# Compile of Top.sv was successful.
+# Compile of Top_tb.sv was successful.
+# 16 compiles, 0 failed with no errors.
+restart
+# Loading work.test_bench
+# Loading work.Top
+# Loading work.JLUT
+# Loading work.ProgCtr
+# Loading work.InstROM
+# Loading work.Ctrl
+# Loading work.RegFile
+# Loading work.ALU
+# Loading work.ALU2
+# Loading work.DMem
+run -all
+#           0:  00000000
+#           1:  00000001
+#           2:  00000010
+#           3:  00000011
+#           4:  00000101
+#           5:  00000110
+#           6:  00000111
+#           7:  00001011
+#           8:  11110000
+#           9:  11110001
+#          10:  11110010
+#          11:  11110011
+#          12:  11110101
+#          13:  11110110
+#          14:  11110111
+#          15:  11111011
+#  
+# j,kj = [          0,          1] dist= 1
+# j,kj = [          0,          2] dist= 1
+# j,kj = [          0,          3] dist= 2
+# j,kj = [          0,          4] dist= 2
+# j,kj = [          0,          5] dist= 2
+# j,kj = [          0,          6] dist= 3
+# j,kj = [          0,          7] dist= 3
+# j,kj = [          0,          8] dist= 4
+# j,kj = [          0,          9] dist= 5
+# j,kj = [          0,         10] dist= 5
+# j,kj = [          0,         11] dist= 6
+# j,kj = [          0,         12] dist= 6
+# j,kj = [          0,         13] dist= 6
+# j,kj = [          0,         14] dist= 7
+# j,kj = [          0,         15] dist= 7
+# j,kj = [          1,          2] dist= 2
+# j,kj = [          1,          3] dist= 1
+# j,kj = [          1,          4] dist= 1
+# j,kj = [          1,          5] dist= 3
+# j,kj = [          1,          6] dist= 2
+# j,kj = [          1,          7] dist= 2
+# j,kj = [          1,          8] dist= 5
+# j,kj = [          1,          9] dist= 4
+# j,kj = [          1,         10] dist= 6
+# j,kj = [          1,         11] dist= 5
+# j,kj = [          1,         12] dist= 5
+# j,kj = [          1,         13] dist= 7
+# j,kj = [          1,         14] dist= 6
+# j,kj = [          1,         15] dist= 6
+# j,kj = [          2,          3] dist= 1
+# j,kj = [          2,          4] dist= 3
+# j,kj = [          2,          5] dist= 1
+# j,kj = [          2,          6] dist= 2
+# j,kj = [          2,          7] dist= 2
+# j,kj = [          2,          8] dist= 5
+# j,kj = [          2,          9] dist= 6
+# j,kj = [          2,         10] dist= 4
+# j,kj = [          2,         11] dist= 5
+# j,kj = [          2,         12] dist= 7
+# j,kj = [          2,         13] dist= 5
+# j,kj = [          2,         14] dist= 6
+# j,kj = [          2,         15] dist= 6
+# j,kj = [          3,          4] dist= 2
+# j,kj = [          3,          5] dist= 2
+# j,kj = [          3,          6] dist= 1
+# j,kj = [          3,          7] dist= 1
+# j,kj = [          3,          8] dist= 6
+# j,kj = [          3,          9] dist= 5
+# j,kj = [          3,         10] dist= 5
+# j,kj = [          3,         11] dist= 4
+# j,kj = [          3,         12] dist= 6
+# j,kj = [          3,         13] dist= 6
+# j,kj = [          3,         14] dist= 5
+# j,kj = [          3,         15] dist= 5
+# j,kj = [          4,          5] dist= 2
+# j,kj = [          4,          6] dist= 1
+# j,kj = [          4,          7] dist= 3
+# j,kj = [          4,          8] dist= 6
+# j,kj = [          4,          9] dist= 5
+# j,kj = [          4,         10] dist= 7
+# j,kj = [          4,         11] dist= 6
+# j,kj = [          4,         12] dist= 4
+# j,kj = [          4,         13] dist= 6
+# j,kj = [          4,         14] dist= 5
+# j,kj = [          4,         15] dist= 7
+# j,kj = [          5,          6] dist= 1
+# j,kj = [          5,          7] dist= 3
+# j,kj = [          5,          8] dist= 6
+# j,kj = [          5,          9] dist= 7
+# j,kj = [          5,         10] dist= 5
+# j,kj = [          5,         11] dist= 6
+# j,kj = [          5,         12] dist= 6
+# j,kj = [          5,         13] dist= 4
+# j,kj = [          5,         14] dist= 5
+# j,kj = [          5,         15] dist= 7
+# j,kj = [          6,          7] dist= 2
+# j,kj = [          6,          8] dist= 7
+# j,kj = [          6,          9] dist= 6
+# j,kj = [          6,         10] dist= 6
+# j,kj = [          6,         11] dist= 5
+# j,kj = [          6,         12] dist= 5
+# j,kj = [          6,         13] dist= 5
+# j,kj = [          6,         14] dist= 4
+# j,kj = [          6,         15] dist= 6
+# j,kj = [          7,          8] dist= 7
+# j,kj = [          7,          9] dist= 6
+# j,kj = [          7,         10] dist= 6
+# j,kj = [          7,         11] dist= 5
+# j,kj = [          7,         12] dist= 7
+# j,kj = [          7,         13] dist= 7
+# j,kj = [          7,         14] dist= 6
+# j,kj = [          7,         15] dist= 4
+# j,kj = [          8,          9] dist= 1
+# j,kj = [          8,         10] dist= 1
+# j,kj = [          8,         11] dist= 2
+# j,kj = [          8,         12] dist= 2
+# j,kj = [          8,         13] dist= 2
+# j,kj = [          8,         14] dist= 3
+# j,kj = [          8,         15] dist= 3
+# j,kj = [          9,         10] dist= 2
+# j,kj = [          9,         11] dist= 1
+# j,kj = [          9,         12] dist= 1
+# j,kj = [          9,         13] dist= 3
+# j,kj = [          9,         14] dist= 2
+# j,kj = [          9,         15] dist= 2
+# j,kj = [         10,         11] dist= 1
+# j,kj = [         10,         12] dist= 3
+# j,kj = [         10,         13] dist= 1
+# j,kj = [         10,         14] dist= 2
+# j,kj = [         10,         15] dist= 2
+# j,kj = [         11,         12] dist= 2
+# j,kj = [         11,         13] dist= 2
+# j,kj = [         11,         14] dist= 1
+# j,kj = [         11,         15] dist= 1
+# j,kj = [         12,         13] dist= 2
+# j,kj = [         12,         14] dist= 1
+# j,kj = [         12,         15] dist= 3
+# j,kj = [         13,         14] dist= 1
+# j,kj = [         13,         15] dist= 3
+# j,kj = [         14,         15] dist= 2
+# Compile of dat_mem.sv was successful.
+# Compile of DUT.sv was successful.
+# Compile of test_bench_hamming.sv was successful.
+# Compile of ALU.sv was successful.
+# Compile of ALU_tb.sv was successful.
+# Compile of ALU2.sv was successful.
+# Compile of Ctrl.sv was successful.
+# Compile of ctrl_tb.sv was successful.
+# Compile of DMem.sv was successful.
+# Compile of InstROM.sv was successful.
+# Compile of JLUT.sv was successful.
+# Compile of Mux.sv was successful.
+# Compile of ProgCtr.sv was successful.
+# Compile of RegFile.sv was successful.
+# Compile of Top.sv was successful.
+# Compile of Top_tb.sv was successful.
+# 16 compiles, 0 failed with no errors.
+restart
+# Loading work.test_bench
+# Loading work.Top
+# Loading work.JLUT
+# Loading work.ProgCtr
+# Loading work.InstROM
+# Loading work.Ctrl
+# Loading work.RegFile
+# Loading work.ALU
+# Loading work.ALU2
+# Loading work.DMem
+run -continue
+#           0:  00000000
+#           1:  00000001
+#           2:  00000010
+#           3:  00000011
+#           4:  00000101
+#           5:  00000110
+#           6:  00000111
+#           7:  00001011
+#           8:  11110000
+#           9:  11110001
+#          10:  11110010
+#          11:  11110011
+#          12:  11110101
+#          13:  11110110
+#          14:  11110111
+#          15:  11111011
+#  
+# j,kj = [          0,          1] dist= 1
+# j,kj = [          0,          2] dist= 1
+# j,kj = [          0,          3] dist= 2
+# j,kj = [          0,          4] dist= 2
+# j,kj = [          0,          5] dist= 2
+# j,kj = [          0,          6] dist= 3
+# j,kj = [          0,          7] dist= 3
+# j,kj = [          0,          8] dist= 4
+# j,kj = [          0,          9] dist= 5
+# j,kj = [          0,         10] dist= 5
+# j,kj = [          0,         11] dist= 6
+# j,kj = [          0,         12] dist= 6
+# j,kj = [          0,         13] dist= 6
+# j,kj = [          0,         14] dist= 7
+# j,kj = [          0,         15] dist= 7
+# j,kj = [          1,          2] dist= 2
+# j,kj = [          1,          3] dist= 1
+# j,kj = [          1,          4] dist= 1
+# j,kj = [          1,          5] dist= 3
+# j,kj = [          1,          6] dist= 2
+# j,kj = [          1,          7] dist= 2
+# j,kj = [          1,          8] dist= 5
+# j,kj = [          1,          9] dist= 4
+# j,kj = [          1,         10] dist= 6
+# j,kj = [          1,         11] dist= 5
+# j,kj = [          1,         12] dist= 5
+# j,kj = [          1,         13] dist= 7
+# j,kj = [          1,         14] dist= 6
+# j,kj = [          1,         15] dist= 6
+# j,kj = [          2,          3] dist= 1
+# j,kj = [          2,          4] dist= 3
+# j,kj = [          2,          5] dist= 1
+# j,kj = [          2,          6] dist= 2
+# j,kj = [          2,          7] dist= 2
+# j,kj = [          2,          8] dist= 5
+# j,kj = [          2,          9] dist= 6
+# j,kj = [          2,         10] dist= 4
+# j,kj = [          2,         11] dist= 5
+# j,kj = [          2,         12] dist= 7
+# j,kj = [          2,         13] dist= 5
+# j,kj = [          2,         14] dist= 6
+# j,kj = [          2,         15] dist= 6
+# j,kj = [          3,          4] dist= 2
+# j,kj = [          3,          5] dist= 2
+# j,kj = [          3,          6] dist= 1
+# j,kj = [          3,          7] dist= 1
+# j,kj = [          3,          8] dist= 6
+# j,kj = [          3,          9] dist= 5
+# j,kj = [          3,         10] dist= 5
+# j,kj = [          3,         11] dist= 4
+# j,kj = [          3,         12] dist= 6
+# j,kj = [          3,         13] dist= 6
+# j,kj = [          3,         14] dist= 5
+# j,kj = [          3,         15] dist= 5
+# j,kj = [          4,          5] dist= 2
+# j,kj = [          4,          6] dist= 1
+# j,kj = [          4,          7] dist= 3
+# j,kj = [          4,          8] dist= 6
+# j,kj = [          4,          9] dist= 5
+# j,kj = [          4,         10] dist= 7
+# j,kj = [          4,         11] dist= 6
+# j,kj = [          4,         12] dist= 4
+# j,kj = [          4,         13] dist= 6
+# j,kj = [          4,         14] dist= 5
+# j,kj = [          4,         15] dist= 7
+# j,kj = [          5,          6] dist= 1
+# j,kj = [          5,          7] dist= 3
+# j,kj = [          5,          8] dist= 6
+# j,kj = [          5,          9] dist= 7
+# j,kj = [          5,         10] dist= 5
+# j,kj = [          5,         11] dist= 6
+# j,kj = [          5,         12] dist= 6
+# j,kj = [          5,         13] dist= 4
+# j,kj = [          5,         14] dist= 5
+# j,kj = [          5,         15] dist= 7
+# j,kj = [          6,          7] dist= 2
+# j,kj = [          6,          8] dist= 7
+# j,kj = [          6,          9] dist= 6
+# j,kj = [          6,         10] dist= 6
+# j,kj = [          6,         11] dist= 5
+# j,kj = [          6,         12] dist= 5
+# j,kj = [          6,         13] dist= 5
+# j,kj = [          6,         14] dist= 4
+# j,kj = [          6,         15] dist= 6
+# j,kj = [          7,          8] dist= 7
+# j,kj = [          7,          9] dist= 6
+# j,kj = [          7,         10] dist= 6
+# j,kj = [          7,         11] dist= 5
+# j,kj = [          7,         12] dist= 7
+# j,kj = [          7,         13] dist= 7
+# j,kj = [          7,         14] dist= 6
+# j,kj = [          7,         15] dist= 4
+# j,kj = [          8,          9] dist= 1
+# j,kj = [          8,         10] dist= 1
+# j,kj = [          8,         11] dist= 2
+# j,kj = [          8,         12] dist= 2
+# j,kj = [          8,         13] dist= 2
+# j,kj = [          8,         14] dist= 3
+# j,kj = [          8,         15] dist= 3
+# j,kj = [          9,         10] dist= 2
+# j,kj = [          9,         11] dist= 1
+# j,kj = [          9,         12] dist= 1
+# j,kj = [          9,         13] dist= 3
+# j,kj = [          9,         14] dist= 2
+# j,kj = [          9,         15] dist= 2
+# j,kj = [         10,         11] dist= 1
+# j,kj = [         10,         12] dist= 3
+# j,kj = [         10,         13] dist= 1
+# j,kj = [         10,         14] dist= 2
+# j,kj = [         10,         15] dist= 2
+# j,kj = [         11,         12] dist= 2
+# j,kj = [         11,         13] dist= 2
+# j,kj = [         11,         14] dist= 1
+# j,kj = [         11,         15] dist= 1
+# j,kj = [         12,         13] dist= 2
+# j,kj = [         12,         14] dist= 1
+# j,kj = [         12,         15] dist= 3
+# j,kj = [         13,         14] dist= 1
+# j,kj = [         13,         15] dist= 3
+# j,kj = [         14,         15] dist= 2
+# good Min =  1
+# Min addr =  1,  0
+# Min valu = 00000001, 00000000
+# good Max =  7
+# Max pair = 14,  0
+# Max valu = 11110111, 00000000
+# ** Note: $stop    : C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/test_benches/Program 1/test_bench_hamming.sv(77)
+#    Time: 977960 ns  Iteration: 0  Instance: /test_bench
+# Break in Module test_bench at C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/test_benches/Program 1/test_bench_hamming.sv line 77

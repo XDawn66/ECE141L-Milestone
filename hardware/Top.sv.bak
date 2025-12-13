@@ -1,6 +1,7 @@
 module Top(
   input   		Clk,
 		       Reset,
+                       start,
   output logic Done);
 
   wire[15:0] Jump,
@@ -22,7 +23,7 @@ module Top(
 			WdatR,		 // RF data in
 			WdatD,		 // DM data in
 			Rdat;		 // DM data out
-  wire[3:0] Addr;		 // DM address (4-bit)
+  wire[7:0] Addr;		 // DM address (4-bit)
   wire      Jen,		 // PC jump enable
             Par,         // ALU parity flag
 			SCo,         // ALU shift/carry out
@@ -53,7 +54,7 @@ module Top(
   // For other instructions, zero-extend as normal
   assign  DatB = (ALU_IMM) ? (is_fill ? {4'b1111, ALU_IMM_VAL} : {4'b0000, ALU_IMM_VAL}) : RdatB;
   assign  WdatD = RdatA;   // Data to write to memory comes from ACC
-  assign  Addr = Rb[3:0];  // Memory address from Rb register
+  assign  Addr = RdatB;  // Memory address from Rb register
   
   // Write data to register file: use memory data if loading, otherwise use ALU result
   assign  WdatR = Ldr ? Rdat : Rslt;
@@ -66,8 +67,9 @@ module Top(
   ProgCtr Porgram_counter(
       .Clk      (Clk),
       .Reset    (Reset),
-      .Zero   (Zero),
-      .Neg (neg),	       
+      .Zero   (Zero2),
+      .Greater (Greater2),
+      .Less (Less2),	       
       .MCcurr   (mach_code), 
       .Jump     (Jump),    
       .PC       (PC)
@@ -124,8 +126,7 @@ module Top(
   );
 
   ALU2 alu_two (
-      .acc     (RdatA),
-      .inputReg(RdatB),
+      .acc     (Rslt),
       .Zero    (Zero2),
       .Greater (Greater2),
       .Less    (Less2)

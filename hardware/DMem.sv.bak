@@ -8,7 +8,7 @@ module DMem(
   logic[7:0] core[256];
 
   always_ff @(posedge Clk)
-    if(Wen) Core[Addr] <= WDat;
+    if(Wen) core[Addr] <= WDat;
 
   assign Rdat = core[Addr];
 

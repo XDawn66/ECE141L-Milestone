@@ -23,10 +23,10 @@ module Top(
 			WdatR,		 // RF data in
 			WdatD,		 // DM data in
 			Rdat;		 // DM data out
-  wire[3:0] Addr;		 // DM address (4-bit)
+  wire[7:0] Addr;		 // DM address (4-bit)
   wire      Jen,		 // PC jump enable
             Par,         // ALU parity flag
-			SCo,         // ALU shift/carry out
+			SCo,         // ALU shift/carry out (current cycle)
             Zero,        // ALU zero flag
 			WenR,		 // RF write enable
 			WenD,		 // DM write enable
@@ -36,9 +36,9 @@ module Top(
 			Greater2,
 			Less2;		
 
-  logic pair, zero, sc_0, neg;
-  logic pairQ, zeroQ, carry_in, negQ;
-  logic carry_clr, carry_en;
+  logic pair, zero, neg;
+  logic pairQ, zeroQ, negQ;
+  logic SCoQ;  // Registered carry out for next cycle
   
   wire [1:0] Cond;
   wire [3:0] ALU_IMM_VAL;
@@ -54,7 +54,7 @@ module Top(
   // For other instructions, zero-extend as normal
   assign  DatB = (ALU_IMM) ? (is_fill ? {4'b1111, ALU_IMM_VAL} : {4'b0000, ALU_IMM_VAL}) : RdatB;
   assign  WdatD = RdatA;   // Data to write to memory comes from ACC
-  assign  Addr = Rb[3:0];  // Memory address from Rb register
+  assign  Addr = RdatB;  // Memory address from Rb register
   
   // Write data to register file: use memory data if loading, otherwise use ALU result
   assign  WdatR = Ldr ? Rdat : Rslt;
@@ -67,8 +67,10 @@ module Top(
   ProgCtr Porgram_counter(
       .Clk      (Clk),
       .Reset    (Reset),
-      .Zero   (Zero),
-      .Neg (neg),	       
+      .Start (start),
+      .Zero   (Zero2),
+      .Greater (Greater2),
+      .Less (Less2),	       
       .MCcurr   (mach_code), 
       .Jump     (Jump),    
       .PC       (PC)
@@ -80,7 +82,7 @@ module Top(
 
   Ctrl control_unit (
       .mach_code    (mach_code),
-      .Sco          (carry_in),
+      .Sco          (SCoQ),      // Use REGISTERED carry from previous cycle
       .Zero         (Zero),
       .Aluop        (Aluop),
       .Alu2op       (Alu2op),
@@ -120,13 +122,12 @@ module Top(
       .Rslt    (Rslt),
       .Zero    (Zero),
       .Par     (Par),
-      .SCo     (SCo),
+      .SCo     (SCo),      // Current cycle carry out
       .neg (neg)
   );
 
   ALU2 alu_two (
-      .acc     (RdatA),
-      .inputReg(RdatB),
+      .acc     (Rslt),
       .Zero    (Zero2),
       .Greater (Greater2),
       .Less    (Less2)
@@ -140,16 +141,19 @@ module Top(
     .Rdat (Rdat)
   );
 
-  //register flags from alu
-  always_ff @(posedge Clk) begin
-    //pair flag and zero flags for later
-    pairQ <= pair;
-    zeroQ <= zero;
-    negQ <= neg;
-    if(carry_clr)
-      carry_in <= 'b0;
-    else if(carry_en)
-      carry_in <= sc_0;
+  // Register flags from ALU for use in next cycle
+  always_ff @(posedge Clk or posedge Reset) begin
+    if (Reset) begin
+      pairQ <= 1'b0;
+      zeroQ <= 1'b0;
+      negQ  <= 1'b0;
+      SCoQ  <= 1'b0;
+    end else begin
+      pairQ <= Par;
+      zeroQ <= Zero;
+      negQ  <= neg;
+      SCoQ  <= SCo;  // Register carry out for ADDCO to use next cycle
+    end
   end
 
   // DONE signal
