@@ -5,7 +5,7 @@ module InstROM(
   logic[8:0] core[2**9];
 
   initial 
-	$readmemb("d_machine_p1.txt",core);
+	$readmemb("machine.txt",core);
 
   always_comb mach_code = core[PC-1];
 

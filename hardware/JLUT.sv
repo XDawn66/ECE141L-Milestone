@@ -5,7 +5,7 @@ module JLUT(
 
   logic [15:0] core [0:31];    // 32 entries, 16-bit each
 
-  initial $readmemb("d_lut_p1.txt", core);
+  initial $readmemb("lut.txt", core);
   
   always_comb Jump = core[Jptr];
 
