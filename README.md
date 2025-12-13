@@ -16,7 +16,7 @@ cd ECE141L-Milestone
 ## To synthesize the hardware
 
 - Create a new project at Quartus, load all our hardware from the hardware folder
-- Set the top level as "TOP"
+- Set the top level as "Top"
 - Then complie
 - After complied, you can check our hardware at STL viewer
 
