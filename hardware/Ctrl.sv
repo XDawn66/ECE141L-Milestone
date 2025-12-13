@@ -188,12 +188,14 @@ module Ctrl(
 	    Wd    = acc_add;
 	    WenR  = 1'b1;           // enable write to register
         end
-	4'b1111: begin // ADDNE
+	4'b1111: begin // ADDCO - Add 1 to register if carry out is set
             Aluop = ADD_OP;
-            Ra    = acc_add;
-            Rb    = mach_code[3:0];
-	    Wd    = acc_add;
-	    WenR  = ~Zero; // write only if Zero flag is NOT set
+            Ra    = mach_code[3:0];    // Read from specified register
+            Rb    = mach_code[3:0];    // Not used (ALU_IMM is active)
+	    Wd    = mach_code[3:0];    // Write to same register
+	    WenR  = Sco;               // Write only if carry out flag is set
+	    ALU_IMM = 1'b1;            // Use immediate value
+	    ALU_IMM_VAL = 4'b0001;     // Add 1
         end
     	endcase
    end
