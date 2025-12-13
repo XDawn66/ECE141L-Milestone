@@ -1,0 +1,195 @@
+// R1 = multiplier (B, then C)
+// R2 = multiplicand (|A|)
+// R3 = result low byte
+// R4 = result mid byte
+// R5 = sign flag
+// R6 = result high byte
+// R7 = address temp
+// R8 = saved value for second multiplication
+
+start:
+    // Compute A * B → [R4:R3]
+    
+    // Load A
+    RESET
+    STORE R7
+    LOAD R7
+    STORE R2
+
+    // Load B
+    MOVI 1
+    STORE R7
+    LOAD R7
+    STORE R1
+
+    // Init results and sign
+    RESET
+    STORE R3
+    STORE R4
+    STORE R5
+
+    // Handle A sign
+    MOV R2
+    JL neg_A
+    J check_B
+
+neg_A:
+    MOVI 1
+    STORE R5
+    RESET
+    SUB R2
+    STORE R2
+
+check_B:
+    MOV R1
+    JL neg_B
+    J multiply_AB_start
+
+neg_B:
+    MOVI 1
+    STORE R7
+    MOV R5
+    XOR R7
+    STORE R5
+    RESET
+    SUB R1
+    STORE R1
+
+multiply_AB_start:
+    MOV R1
+    JE after_AB
+
+multiply_AB_loop:
+    // [R4:R3] += R2
+    MOV R3
+    ADD R2
+    ADDCO R4
+    STORE R3
+
+    MOV R1
+    SUBI 1
+    STORE R1
+
+    MOV R1
+    JG multiply_AB_loop
+
+after_AB:
+    // Compute [R4:R3] * C → [R6:R4:R3]
+    // Save R3 and R4 to R8 and R2 (reusing R2)
+    MOV R3
+    STORE R8    // R8 = low byte of A*B
+    MOV R4
+    STORE R2    // R2 = high byte of A*B
+    
+    // Load C
+    MOVI 2
+    STORE R7
+    LOAD R7
+    STORE R1
+
+    // Handle C sign
+    MOV R1
+    JL neg_C
+    J multiply_ABC_start
+
+neg_C:
+    MOVI 1
+    STORE R7
+    MOV R5
+    XOR R7
+    STORE R5
+    RESET
+    SUB R1
+    STORE R1
+
+multiply_ABC_start:
+    // Reset result [R6:R4:R3]
+    RESET
+    STORE R3
+    STORE R4
+    STORE R6
+    
+    MOV R1
+    JE finish
+
+multiply_ABC_loop:
+    // Add [R2:R8] to [R6:R4:R3] with carry
+    MOV R3
+    ADD R8
+    ADDCO R4
+    STORE R3
+    
+    MOV R4
+    ADD R2
+    ADDCO R6
+    STORE R4
+
+    MOV R1
+    SUBI 1
+    STORE R1
+
+    MOV R1
+    JG multiply_ABC_loop
+
+finish:
+    // Apply sign if needed
+    MOV R5
+    JE store_result
+
+    // Negate 24-bit result: ~[R6:R4:R3] + 1
+    MOV R3
+    NOT
+    STORE R3
+    
+    MOV R4
+    NOT
+    STORE R4
+    
+    MOV R6
+    NOT
+    STORE R6
+    
+    // Add 1 with carry propagation
+    MOV R3
+    ADDI 1
+    STORE R3
+    
+    MOV R3
+    JE carry_mid
+    J store_result
+
+carry_mid:
+    MOV R4
+    ADDI 1
+    STORE R4
+    
+    MOV R4
+    JE carry_high
+    J store_result
+
+carry_high:
+    MOV R6
+    ADDI 1
+    STORE R6
+
+store_result:
+    // MEM[6] = R3 (low byte)
+    MOVI 6
+    STORE R7
+    MOV R3
+    STORE_M R7
+    
+    // MEM[5] = R4 (mid byte)
+    MOVI 5
+    STORE R7
+    MOV R4
+    STORE_M R7
+    
+    // MEM[4] = R6 (high byte)
+    MOVI 4
+    STORE R7
+    MOV R6
+    STORE_M R7
+
+end:
+    DONE

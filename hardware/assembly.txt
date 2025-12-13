@@ -1,3 +1,7 @@
+// Signed Multiply using Repeated Addition
+// A = MEM[0], B = MEM[1]
+// Result: MEM[2] = low, MEM[3] = high
+
 // Registers:
 // R1 = |B| (loop counter)
 // R2 = |A|
@@ -62,7 +66,7 @@ multiply_loop:
     ADD R2
     STORE R3
 
-    // if result went negative -> carry
+    // if result went negative → carry
     JL carry
 
     J no_carry
@@ -122,5 +126,4 @@ store:
     STORE_M R7
 
 end:
-
     DONE

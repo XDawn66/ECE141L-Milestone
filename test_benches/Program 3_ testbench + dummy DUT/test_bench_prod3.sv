@@ -1,5 +1,5 @@
-// program 2    CSE141L   product C = OpA * OpB  
-// operands are 8-bit two's comp integers, product is 16-bit two's comp integer
+// program 3    CSE141L   product D = OpA * OpB * OpC  
+// operands are 8-bit two's comp integers, product is 24-bit two's comp integer
 `timescale 1ns/1ps
 module test_bench;
 
@@ -9,10 +9,10 @@ module test_bench;
   bit  start = 1;
   wire done;
 
-  logic signed[7:0] OpA, OpB;
-  logic signed[15:0] Prod;
+  logic signed[7:0] OpA, OpB, OpC;
+  logic signed[23:0] Prod;
   
-  logic [15:0] result;
+  logic [23:0] result;
   
   integer cycle_count = 0;
 
@@ -29,20 +29,23 @@ module test_bench;
 
   initial begin
     $display("\n========================================");
-    $display("MULTIPLICATION TEST CYCLE BY CYCLE DEBUG");
+    $display("TRIPLE MULTIPLICATION TEST - CYCLE BY CYCLE DEBUG");
     $display("========================================\n");
     
     // Initialize operands
-    OpA = -13;
-    OpB = -29;
-    Prod = OpA * OpB;
+    OpA = 19;
+    OpB = -17;
+    OpC = 23;
+    Prod = OpA * OpB * OpC;
     
-    $display("Test case: %0d * %0d = %0d", OpA, OpB, Prod);
-    $display("Expected: MEM[2]=0x%02h, MEM[3]=0x%02h\n", Prod[7:0], Prod[15:8]);
+    $display("Test case: %0d * %0d * %0d = %0d", OpA, OpB, OpC, Prod);
+    $display("Expected: MEM[3]=0x%02h, MEM[4]=0x%02h, MEM[5]=0x%02h\n", 
+             Prod[7:0], Prod[15:8], Prod[23:16]);
     
     // Load memory and programs BEFORE releasing reset
     D1.data_mem.core[0] = OpA;
     D1.data_mem.core[1] = OpB;
+    D1.data_mem.core[2] = OpC;
     
     $display("Loading program files...");
     $readmemb("machine.txt", D1.Instr_mem.core);
@@ -64,8 +67,8 @@ module test_bench;
     start = 0;
     
     $display("\n--- EXECUTION TRACE ---");
-    $display("Cycle | PC    |Instruction|ACC | R1 R2 R3 R4 R5 R6 R7 R8|  Mem[0-3]  | WenR WenD | Notes");
-    $display("------|-------|-----------|----|------------------------|------------|-----------|-------");
+    $display("Cycle | PC    |Instruction|ACC | R1 R2 R3 R4 R5 R6 R7 R8 R9 RA RB RC|    Mem[0-6]      | WenR WenD | Notes");
+    $display("------|-------|-----------|----|------------------------------------|------------------|-----------|-------");
     
     // Monitor execution
     fork
@@ -80,7 +83,7 @@ module test_bench;
             $write("%5d | ", D1.PC);
             $write("%b | ", D1.mach_code);
             $write("%02h | ", D1.register_file.core[0]);
-            $write("%02h %02h %02h %02h %02h %02h %02h %02h| ",
+            $write("%02h %02h %02h %02h %02h %02h %02h %02h %02h %02h %02h %02h| ",
                    D1.register_file.core[1],
                    D1.register_file.core[2],
                    D1.register_file.core[3],
@@ -88,12 +91,19 @@ module test_bench;
                    D1.register_file.core[5],
                    D1.register_file.core[6],
                    D1.register_file.core[7],
-                   D1.register_file.core[8]);
-            $write("%02h %02h %02h %02h | ",
+                   D1.register_file.core[8],
+		   D1.register_file.core[9],
+                   D1.register_file.core[10],
+                   D1.register_file.core[11],
+                   D1.register_file.core[12]);
+            $write("%02h %02h %02h %02h %02h %02h %02h | ",
                    D1.data_mem.core[0],
                    D1.data_mem.core[1],
                    D1.data_mem.core[2],
-                   D1.data_mem.core[3]);
+                   D1.data_mem.core[3],
+                   D1.data_mem.core[4],
+                   D1.data_mem.core[5],
+                   D1.data_mem.core[6]);
             $write("  %b    %b   | ", D1.WenR, D1.WenD);
             
             // Decode instruction type
@@ -122,9 +132,16 @@ module test_bench;
       end
       
       begin
-        // Done detector
+        // Done detector with timeout
         wait(done);
         #100ns;
+      end
+      
+      begin
+        // Timeout after 100000 cycles
+        repeat(100000) @(posedge clk);
+        $display("\n*** TIMEOUT: Simulation exceeded 100000 cycles ***");
+        disable fork;
       end
     join_any
     
@@ -137,17 +154,20 @@ module test_bench;
     $display("");
     
     $display("Memory contents:");
-    $display("  MEM[0] = 0x%02h (%3d) [OpA]", D1.data_mem.core[0], $signed(D1.data_mem.core[0]));
-    $display("  MEM[1] = 0x%02h (%3d) [OpB]", D1.data_mem.core[1], $signed(D1.data_mem.core[1]));
-    $display("  MEM[2] = 0x%02h (%3d) [Result LOW]", D1.data_mem.core[2], $signed(D1.data_mem.core[2]));
-    $display("  MEM[3] = 0x%02h (%3d) [Result HIGH]", D1.data_mem.core[3], $signed(D1.data_mem.core[3]));
+    $display("  MEM[0] = 0x%02h (%4d) [OpA]", D1.data_mem.core[0], $signed(D1.data_mem.core[0]));
+    $display("  MEM[1] = 0x%02h (%4d) [OpB]", D1.data_mem.core[1], $signed(D1.data_mem.core[1]));
+    $display("  MEM[2] = 0x%02h (%4d) [OpC]", D1.data_mem.core[2], $signed(D1.data_mem.core[2]));
+	$display("  MEM[6] = 0x%02h (%4d) [Result LOW]", D1.data_mem.core[6], $signed(D1.data_mem.core[6]));
+	$display("  MEM[5] = 0x%02h (%4d) [Result MID]", D1.data_mem.core[5], $signed(D1.data_mem.core[5]));
+	$display("  MEM[4] = 0x%02h (%4d) [Result HIGH]", D1.data_mem.core[4], $signed(D1.data_mem.core[4]));
     $display("");
     
-    result = {D1.data_mem.core[3], D1.data_mem.core[2]};
+    result = {D1.data_mem.core[4], D1.data_mem.core[5], D1.data_mem.core[6]};
     
-    $display("Expected: %0d * %0d = %0d (0x%04h)", OpA, OpB, Prod, Prod);
-    $display("Got:      {0x%02h, 0x%02h} = %0d (0x%04h)", 
-             D1.data_mem.core[3], D1.data_mem.core[2], $signed(result), result);
+    $display("Expected: %0d * %0d * %0d = %0d (0x%06h)", OpA, OpB, OpC, Prod, Prod);
+    $display("Got:      {0x%02h, 0x%02h, 0x%02h} = %0d (0x%06h)", 
+             D1.data_mem.core[4], D1.data_mem.core[5], D1.data_mem.core[6], 
+             $signed(result), result);
     $display("");
     
     if (result == Prod) begin
@@ -162,5 +182,6 @@ module test_bench;
     #100ns;
     $stop;
   end
+
 
 endmodule
