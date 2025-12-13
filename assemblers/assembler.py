@@ -138,5 +138,5 @@ def convert(inFile, outFile1, outFile2):
 # convert("stringmatch.txt", "sm_machine.txt", "sm_lut.txt")
 # convert("cordic.txt", "c_machine.txt", "c_lut.txt")
 # convert("division.txt", "d_machine.txt", "d_lut.txt")
-#convert("closetest.txt", "d_machine_p1_comm.txt", "d_lut_p1.txt")
+#convert("closetest.txt", "d_machine_p1_comm.txt", "d_lut_p1_com.txt")
 convert("closetest.txt", "d_machine_p1.txt", "d_lut_p1.txt")
