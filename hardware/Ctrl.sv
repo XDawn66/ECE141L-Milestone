@@ -123,6 +123,11 @@ module Ctrl(
             Ra    = acc_add;           // Read from ACC
 	    WenD  = 1'b1;              // enable store to mem
 	    Rb    = mach_code[3:0];    // Memory address in Rb
+    	    WenR  = 1'b0;            
+    	    Ldr   = 1'b0;
+    	    Str   = 1'b0;
+    	    ALU_IMM = 1'b0;
+    	    EnAlu2  = 1'b0;
         end
        	4'b1010: begin // OR
             Aluop = OR_OP;

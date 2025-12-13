@@ -30,23 +30,24 @@ inner_loop:
 
     LOAD R5
     XOR R8 //current_val XOR array[j]
-    STORE R8  //current_val = current_val XOR array[j]
-    RESET R1 //current_diff = 0
+    STORE R9  //current_val = current_val XOR array[j]
+    MOVI 0 //current_diff = 0
+    STORE R1
 
 count_bit_loop:
-    MOV R8
-    SUBI 1
-    STORE R8
-    JL after_count_bit //when current_val < 0, means done counting
+    MOV R9
+    JE after_count_bit
 
-    ADDI 1 //add the test value back
     ANDI 1 //AND current_val with 1 (EX 001101 AND 000001 = 000001)
+    JE skip_inc
     MOV R1
     ADDI 1
     STORE R1 //current_diff++;
-    MOV R8
+
+skip_inc:
+    MOV R9
     RSL //shift 1 bit to the right
-    STORE R8
+    STORE R9
     J count_bit_loop 
 
 after_count_bit:
@@ -63,7 +64,7 @@ check_max:
     MOV R1 //current_diff
     SUB R3 //max
     JG do_update_max
-    JL inner_loop //if current_diff < max, skip
+    J after_pair_done //if current_diff < max, skip
 
 do_update_max:
     MOV R1
@@ -81,8 +82,7 @@ done_inner:
     ADDI 1
     STORE R4 //i++
 
-    MOV R6
-    ADD R4 //array[100 + i]
+    MOV R4
     STORE R6
     J outer_loop
 
@@ -95,3 +95,8 @@ done_outer:
     STORE R6
     MOV R3
     STORE_M R6 
+
+
+    MEM[16] = R2 = 0//MIN
+    MEM[17] = R3 = 8//MAX
+ 

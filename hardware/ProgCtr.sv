@@ -1,6 +1,7 @@
 module ProgCtr( // Program Counter
   input        Clk,     // Clock
   input        Reset,   // Active-high Reset
+  input        Start,
   input		Zero, Greater, Less,
   input  [8:0] MCcurr,  // Current instruction (for branch/jump decoding)
   input  [15:0] Jump,    // Jump address (from JLUT)
@@ -11,6 +12,7 @@ module ProgCtr( // Program Counter
   logic is_jump_instr;
   logic       take_branch;
   logic [1:0] cond;  
+  logic running; 
 
   // Detect J-type instructions (bits [8:7] == 2'b11)
   assign is_jump_instr = (MCcurr[8:7] == 2'b11);
@@ -39,13 +41,21 @@ module ProgCtr( // Program Counter
   //assign CondT = BranchCond && ALUCondT;
   
   // Sequential PC update
+  always_ff @(posedge Clk or posedge Reset) begin
+    if (Reset)
+      running <= 1'b0;
+    else if (!Start)
+      running <= 1'b1;  
+  end
+
   always_ff @(posedge Clk) begin
     if (Reset)
       PC <= 16'd0;
+    else if (!running)
+      PC <= 16'd0;        
     else if (take_branch)
-      PC <= Jump + 16'd1;
+      PC <= Jump + 16'd1;         // ? NO +1
     else
       PC <= PC + 16'd1;
   end
-  
 endmodule

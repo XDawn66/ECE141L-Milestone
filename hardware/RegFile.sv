@@ -14,7 +14,7 @@ module RegFile(
   always_ff @(posedge Clk or posedge Rst) begin
       if (Rst) begin
           integer i;
-          for (i = 0; i < 15; i++) begin
+          for (i = 0; i < 16; i++) begin
                 core[i] <= '0;        // clear registers on reset
           end
       end else if (Wen) begin
