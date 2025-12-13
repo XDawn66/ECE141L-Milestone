@@ -33,8 +33,8 @@ module test_bench;
     $display("========================================\n");
     
     // Initialize operands
-    OpA = 20;
-    OpB = -4;
+    OpA = -13;
+    OpB = -29;
     Prod = OpA * OpB;
     
     $display("Test case: %0d * %0d = %0d", OpA, OpB, Prod);

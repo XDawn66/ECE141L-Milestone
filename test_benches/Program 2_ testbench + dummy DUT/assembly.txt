@@ -1,144 +1,125 @@
-// Fixed Signed Multiplication using Repeated Addition
-// Multiplies two 8-bit two's complement numbers
-// A in MEM[0], B in MEM[1] → 16-bit result in MEM[2] (low), MEM[3] (high)
+// Signed Multiply using Repeated Addition
+// A = MEM[0], B = MEM[1]
+// Result: MEM[2] = low, MEM[3] = high
 
-// Register usage:
-// R0 = ACC (accumulator)
-// R1 = |B| (absolute value of multiplier, used as loop counter)
-// R2 = |A| (absolute value of multiplicand, what we add each iteration)  
-// R3 = result_low (low byte of 16-bit result)
-// R4 = result_high (high byte of 16-bit result)
-// R5 = sign_flag (0=positive, 1=negative)
-// R6 = temp for calculations
-// R7 = address/temp
+// Registers:
+// R1 = |B| (loop counter)
+// R2 = |A|
+// R3 = result low
+// R4 = result high
+// R5 = sign flag
+// R7 = address temp
 
 start:
-    // Load A from MEM[0]
+    // Load A
     RESET
-    STORE R7            // R7 = 0
-    LOAD R7             // ACC = MEM[0] = A
-    STORE R2            // R2 = A
-    
-    // Load B from MEM[1]
+    STORE R7
+    LOAD R7
+    STORE R2
+
+    // Load B
     MOVI 1
-    STORE R7            // R7 = 1
-    LOAD R7             // ACC = MEM[1] = B
-    STORE R1            // R1 = B
-    
-    // Initialize result and sign
+    STORE R7
+    LOAD R7
+    STORE R1
+
+    // Init result + sign
     RESET
-    STORE R3            // R3 = 0 (result low)
-    STORE R4            // R4 = 0 (result high)
-    STORE R5            // R5 = 0 (sign flag)
-    
-    // Check if A < 0 using JL
+    STORE R3
+    STORE R4
+    STORE R5
+
+    // Check sign of A
     MOV R2
-    JL a_is_negative
-    J check_b_sign
+    JL neg_A
+    J check_B
 
-a_is_negative:
-    // A is negative: set sign flag and negate A
+neg_A:
     MOVI 1
-    STORE R5            // R5 = 1
-    RESET
-    SUB R2              // ACC = 0 - A = -A
-    STORE R2            // R2 = |A|
-
-check_b_sign:
-    // Check if B < 0 using JL
-    MOV R1
-    JL b_is_negative
-    J start_multiply
-
-b_is_negative:
-    // B is negative: flip sign flag and negate B
-    MOVI 1
-    STORE R7            // R7 = 1
-    MOV R5
-    XOR R7              // XOR with 1 to flip sign
     STORE R5
     RESET
-    SUB R1              // ACC = 0 - B = -B
-    STORE R1            // R1 = |B|
+    SUB R2
+    STORE R2
 
-start_multiply:
-    // Check if multiplier is zero
+check_B:
     MOV R1
-    JE finish_multiply
+    JL neg_B
+    J multiply_start
+
+neg_B:
+    MOVI 1
+    STORE R7
+    MOV R5
+    XOR R7
+    STORE R5
+    RESET
+    SUB R1
+    STORE R1
+
+multiply_start:
+    MOV R1
+    JE finish
 
 multiply_loop:
-    // Add |A| to result: R3:R4 += R2
+    // R3 += R2
     MOV R3
-    ADD R2              // ACC = R3 + R2
-    STORE R6            // R6 = temp result
-    
-    // Check for carry: did we wrap around?
-    // If (R3 + R2) < R3, then carry occurred
-    MOV R3
-    STORE R7            // R7 = old R3
-    MOV R6
-    STORE R3            // R3 = new low byte
-    
-    // Compare: is new R3 < old R7?
-    MOV R3
-    SUB R7              // ACC = new - old
-    JL carry_occurred   // If negative, new < old, so we wrapped
+    ADD R2
+    STORE R3
+
+    // if result went negative → carry
+    JL carry
+
     J no_carry
 
-carry_occurred:
+carry:
     MOV R4
     ADDI 1
-    STORE R4            // Increment high byte
+    STORE R4
 
 no_carry:
-    // Decrement multiplier
+    // decrement multiplier
     MOV R1
     SUBI 1
     STORE R1
-    
-    // Loop if R1 > 0
+
     MOV R1
     JG multiply_loop
 
-finish_multiply:
-    // Check if result should be negative
+finish:
+    // apply sign if needed
     MOV R5
-    JE store_final_result
-    
-    // Need to negate the 16-bit result
-    // Invert low byte
+    JE store
+
+    // negate 16-bit result
     MOV R3
     NOT
     STORE R3
-    
-    // Invert high byte
+
     MOV R4
     NOT
     STORE R4
-    
-    // Add 1 to low byte
+
     MOV R3
     ADDI 1
     STORE R3
-    
-    // Check if low byte wrapped to 0 (carry to high byte)
-    MOV R3
-    JE add_carry_to_high
-    J store_final_result
 
-add_carry_to_high:
+    MOV R3
+    JE neg_hi
+    J store
+
+neg_hi:
     MOV R4
     ADDI 1
     STORE R4
 
-store_final_result:
-    // Store low byte to MEM[2]
+store:
+    // MEM[2] = low
     MOVI 2
     STORE R7
     MOV R3
     STORE_M R7
-    
-    // Store high byte to MEM[3]
+
+    // MEM[3] = high
     MOVI 3
     STORE R7
     MOV R4
