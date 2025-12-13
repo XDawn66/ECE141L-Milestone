@@ -157,9 +157,9 @@ module test_bench;
     $display("  MEM[0] = 0x%02h (%4d) [OpA]", D1.data_mem.core[0], $signed(D1.data_mem.core[0]));
     $display("  MEM[1] = 0x%02h (%4d) [OpB]", D1.data_mem.core[1], $signed(D1.data_mem.core[1]));
     $display("  MEM[2] = 0x%02h (%4d) [OpC]", D1.data_mem.core[2], $signed(D1.data_mem.core[2]));
-    $display("  MEM[3] = 0x%02h (%4d) [Result LOW]", D1.data_mem.core[6], $signed(D1.data_mem.core[6]));
-    $display("  MEM[4] = 0x%02h (%4d) [Result MID]", D1.data_mem.core[5], $signed(D1.data_mem.core[5]));
-    $display("  MEM[5] = 0x%02h (%4d) [Result HIGH]", D1.data_mem.core[4], $signed(D1.data_mem.core[4]));
+	$display("  MEM[6] = 0x%02h (%4d) [Result LOW]", D1.data_mem.core[6], $signed(D1.data_mem.core[6]));
+	$display("  MEM[5] = 0x%02h (%4d) [Result MID]", D1.data_mem.core[5], $signed(D1.data_mem.core[5]));
+	$display("  MEM[4] = 0x%02h (%4d) [Result HIGH]", D1.data_mem.core[4], $signed(D1.data_mem.core[4]));
     $display("");
     
     result = {D1.data_mem.core[4], D1.data_mem.core[5], D1.data_mem.core[6]};
@@ -182,5 +182,6 @@ module test_bench;
     #100ns;
     $stop;
   end
+
 
 endmodule
