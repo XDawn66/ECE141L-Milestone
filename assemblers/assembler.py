@@ -10,7 +10,7 @@ def convert(inFile, outFile1, outFile2):
 
     R_ops = {
         'AND':'0000','ADD':'0001','SUB':'0010','LOAD':'0011',
-        'STORE':'0100','STORE_M':'0101','XOR':'0110','TST':'0111',
+        'STORE':'0101','STORE_M':'0100','XOR':'0110','TST':'0111',
         'FILL':'1000','RESET':'1001','OR':'1010','NOT':'1011',
         'LSL':'1100','RSL':'1101','MOV':'1110', 'ADDNE':'1111'
     }

@@ -29,12 +29,12 @@ module test_bench;
 
   initial begin
     $display("\n========================================");
-    $display("MULTIPLICATION TEST CYCLE BY CYCLE DEBUG");
+    $display("MULTIPLICATION TEST - DETAILED DEBUG");
     $display("========================================\n");
     
     // Initialize operands
-    OpA = -13;
-    OpB = -29;
+    OpA = 2;
+    OpB = -4;
     Prod = OpA * OpB;
     
     $display("Test case: %0d * %0d = %0d", OpA, OpB, Prod);
@@ -64,8 +64,8 @@ module test_bench;
     start = 0;
     
     $display("\n--- EXECUTION TRACE ---");
-    $display("Cycle | PC    |Instruction|ACC | R1 R2 R3 R4 R5 R6 R7 R8|  Mem[0-3]  | WenR WenD | Notes");
-    $display("------|-------|-----------|----|------------------------|------------|-----------|-------");
+    $display("Cycle | PC    |Instruction|ACC | R1 R2 R3 R4 R5 R6 |  Mem[0-3]  | WenR WenD | Notes");
+    $display("------|-------|-----------|----|-------------------|------------|-----------|-------");
     
     // Monitor execution
     fork
@@ -80,15 +80,13 @@ module test_bench;
             $write("%5d | ", D1.PC);
             $write("%b | ", D1.mach_code);
             $write("%02h | ", D1.register_file.core[0]);
-            $write("%02h %02h %02h %02h %02h %02h %02h %02h| ",
+            $write("%02h %02h %02h %02h %02h %02h | ",
                    D1.register_file.core[1],
                    D1.register_file.core[2],
                    D1.register_file.core[3],
                    D1.register_file.core[4],
                    D1.register_file.core[5],
-                   D1.register_file.core[6],
-                   D1.register_file.core[7],
-                   D1.register_file.core[8]);
+                   D1.register_file.core[6]);
             $write("%02h %02h %02h %02h | ",
                    D1.data_mem.core[0],
                    D1.data_mem.core[1],
