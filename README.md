@@ -21,5 +21,11 @@ cd ECE141L-Milestone
 - Then complie
 - After complied, you can check our hardware at STL viewer
 
-
-
+## To run the assember
+- open the assembler.py
+- at the bottom, change the conver function with the assembly program you want to convert to the machine code
+- put a name for you machine code and for the lookup table
+- run:
+  ```
+  python assembler.py
+  ```
