@@ -1,9 +1,3 @@
-// Three-way signed multiplication: A * B * C
-// Input: MEM[0]=A, MEM[1]=B, MEM[2]=C (8-bit two's complement)
-// Output: MEM[4]=high, MEM[5]=mid, MEM[6]=low (24-bit two's complement)
-//
-// Strategy: First compute A*B (16-bit), then multiply by C (24-bit)
-// Registers:
 // R1 = multiplier (B, then C)
 // R2 = multiplicand (|A|)
 // R3 = result low byte
@@ -14,7 +8,7 @@
 // R8 = saved value for second multiplication
 
 start:
-    // === PHASE 1: Compute A * B → [R4:R3] ===
+    // Compute A * B → [R4:R3]
     
     // Load A
     RESET
@@ -80,8 +74,7 @@ multiply_AB_loop:
     JG multiply_AB_loop
 
 after_AB:
-    // === PHASE 2: Compute [R4:R3] * C → [R6:R4:R3] ===
-    
+    // Compute [R4:R3] * C → [R6:R4:R3]
     // Save R3 and R4 to R8 and R2 (reusing R2)
     MOV R3
     STORE R8    // R8 = low byte of A*B
@@ -120,7 +113,7 @@ multiply_ABC_start:
     JE finish
 
 multiply_ABC_loop:
-    // Add [R2:R8] to [R6:R4:R3] with carry propagation
+    // Add [R2:R8] to [R6:R4:R3] with carry
     MOV R3
     ADD R8
     ADDCO R4
