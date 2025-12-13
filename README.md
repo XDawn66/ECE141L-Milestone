@@ -10,6 +10,7 @@ cd ECE141L-Milestone
 ```
 - Go to the folder for the program you want to run and copy 1. the look up table .txt 2.machine code .txt 3.testbench
 - Put them in to the hardware folder
+- Change the file names in the InstROM.sv and JLUT.sv to the matching .txt files
 - Next, Create a new project using Modelsim.
 - After you create the project, put all our hardware .sv into the project then complie.
 
