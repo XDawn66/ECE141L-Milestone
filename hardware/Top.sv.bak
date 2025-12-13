@@ -54,7 +54,7 @@ module Top(
   // For other instructions, zero-extend as normal
   assign  DatB = (ALU_IMM) ? (is_fill ? {4'b1111, ALU_IMM_VAL} : {4'b0000, ALU_IMM_VAL}) : RdatB;
   assign  WdatD = RdatA;   // Data to write to memory comes from ACC
-  assign  Addr = RdatB[7:0];  // Memory address from Rb register
+  assign  Addr = RdatB;  // Memory address from Rb register
   
   // Write data to register file: use memory data if loading, otherwise use ALU result
   assign  WdatR = Ldr ? Rdat : Rslt;

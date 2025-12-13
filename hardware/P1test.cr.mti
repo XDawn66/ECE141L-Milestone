@@ -12,13 +12,6 @@ Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  
 Top level modules:
 	ALU_tb
 
-} {} {}} {C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/ProgCtr.sv} {1 {vlog -work work -sv -stats=none {C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/ProgCtr.sv}
-Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
--- Compiling module ProgCtr
-
-Top level modules:
-	ProgCtr
-
 } {} {}} {C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/ALU.sv} {1 {vlog -work work -sv -stats=none {C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/ALU.sv}
 Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
 -- Compiling module ALU
@@ -32,6 +25,13 @@ Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  
 
 Top level modules:
 	Mux
+
+} {} {}} {C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/DMem.sv} {1 {vlog -work work -sv -stats=none {C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/DMem.sv}
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module DMem
+
+Top level modules:
+	DMem
 
 } {} {}} {C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv} {1 {vlog -work work -sv -stats=none {C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top.sv}
 Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
@@ -68,12 +68,12 @@ Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  
 Top level modules:
 	RegFile
 
-} {} {}} {C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top_tb.sv} {1 {vlog -work work -sv -stats=none {C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top_tb.sv}
+} {} {}} {C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/test_benches/Program 1/test_bench_hamming.sv} {1 {vlog -work work -sv -stats=none {C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/test_benches/Program 1/test_bench_hamming.sv}
 Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
--- Compiling module Top_tb
+-- Compiling module test_bench
 
 Top level modules:
-	Top_tb
+	test_bench
 
 } {} {}} {C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/test_benches/Program 1/dat_mem.sv} {1 {vlog -work work -sv -stats=none {C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/test_benches/Program 1/dat_mem.sv}
 Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
@@ -82,12 +82,12 @@ Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  
 Top level modules:
 	dat_mem
 
-} {} {}} {C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/test_benches/Program 1/test_bench_hamming.sv} {1 {vlog -work work -sv -stats=none {C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/test_benches/Program 1/test_bench_hamming.sv}
+} {} {}} {C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top_tb.sv} {1 {vlog -work work -sv -stats=none {C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/Top_tb.sv}
 Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
--- Compiling module test_bench
+-- Compiling module Top_tb
 
 Top level modules:
-	test_bench
+	Top_tb
 
 } {} {}} {C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/ctrl_tb.sv} {1 {vlog -work work -sv -stats=none {C:/Users/Zhenyu/Desktop/UCSD/fall 2025/CSE141L/ECE141L-Milestone1/hardware/ctrl_tb.sv}
 Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016

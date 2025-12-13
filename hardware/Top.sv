@@ -67,6 +67,7 @@ module Top(
   ProgCtr Porgram_counter(
       .Clk      (Clk),
       .Reset    (Reset),
+      .Start (start),
       .Zero   (Zero2),
       .Greater (Greater2),
       .Less (Less2),	       
