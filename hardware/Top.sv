@@ -4,8 +4,8 @@ module Top(
                        start,
   output logic Done);
 
-  wire[15:0] Jump,
-	        PC;
+	wire[15:0] Jump;
+  wire[11:0]     PC;
   wire[3:0]		Aluop,
             		Ra,
 			Rb,
@@ -160,3 +160,4 @@ module Top(
   assign Done = (mach_code == 9'b111111111);
   
 endmodule
+
