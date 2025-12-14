@@ -5,7 +5,7 @@ module ProgCtr( // Program Counter
   input		Zero, Greater, Less,
   input  [8:0] MCcurr,  // Current instruction (for branch/jump decoding)
   input  [15:0] Jump,    // Jump address (from JLUT)
-  output logic [15:0] PC // Current Program Counter
+  output logic [11:0] PC // Current Program Counter
 );
 
   // Decode signals for control flow instructions
@@ -50,12 +50,12 @@ module ProgCtr( // Program Counter
 
   always_ff @(posedge Clk) begin
     if (Reset)
-      PC <= 16'd0;
+      PC <= 11'd0;
     else if (!running)
-      PC <= 16'd0;        
+      PC <= 11'd0;        
     else if (take_branch)
-      PC <= Jump + 16'd1;         // ? NO +1
+      PC <= Jump + 11'd1;         // ? NO +1
     else
-      PC <= PC + 16'd1;
+      PC <= PC + 11'd1;
   end
 endmodule
