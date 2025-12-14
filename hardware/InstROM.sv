@@ -1,5 +1,5 @@
 module InstROM(
-  input[15:0] PC,
+  input[11:0] PC,
   output logic[8:0] mach_code);
 
   logic[8:0] core[2**9];
@@ -10,3 +10,4 @@ module InstROM(
   always_comb mach_code = core[PC-1];
 
 endmodule
+
